@@ -9,7 +9,9 @@ System::System()
 
 System::~System()
 {
-
+    delete user;
+    delete currentView;
+    delete dataInterface;
 }
 void System::update()
 {
@@ -34,6 +36,7 @@ void System::initVariables()
     this->isRun = true;
     this->instance = this;
     this->currentView = new LoginView();
+    this->dataInterface = new SQLite();
 }
 
 bool System::LoginUser(std::string username, std::string password)
@@ -54,4 +57,9 @@ System* System::getInstance()
 User* const System::getLoggedUser()
 {
     return getInstance()->user;
+}
+
+DataInterface* const System::getDataInterface()
+{
+    return getInstance()->dataInterface;
 }
