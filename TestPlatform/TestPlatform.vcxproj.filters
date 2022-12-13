@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Connection\Database.h">
+    <ClInclude Include="Data\SQLite.h">
       <Filter>Connection</Filter>
     </ClInclude>
-    <ClInclude Include="Connection\MailManager.h">
+    <ClInclude Include="Mail\MailManager.h">
       <Filter>Connection</Filter>
     </ClInclude>
     <ClInclude Include="System.h" />
@@ -44,12 +44,15 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
+    <ClInclude Include="Data\DataInterface.h" />
+    <ClInclude Include="TestData\Test.h" />
+    <ClInclude Include="TestData\Question.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Connection\Database.cpp">
+    <ClCompile Include="Data\SQLite.cpp">
       <Filter>Connection</Filter>
     </ClCompile>
-    <ClCompile Include="Connection\MailManager.cpp">
+    <ClCompile Include="Mail\MailManager.cpp">
       <Filter>Connection</Filter>
     </ClCompile>
     <ClCompile Include="EntryPoint.cpp" />
@@ -76,5 +79,9 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
+    <ClCompile Include="Data\DataInterface.cpp" />
+    <ClCompile Include="TestData\Test.cpp" />
+    <ClCompile Include="TestData\Question.cpp" />
+    <ClCompile Include="Data\Queries.cpp" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,8 @@
 #include <Views/LoginView.h>
 
 #include <users/user.h>
-#include <Connection/Database.h>
-#include <Connection/MailManager.h>
+#include <Data/SQLite.h>
+#include <Mail/MailManager.h>
 
 class System
 {
@@ -13,6 +13,8 @@ class System
 	static System* instance;
 	User* user;
 	View* currentView;
+	DataInterface* dataInterface;
+
 	bool isRun;
 	public:
 	System();
@@ -24,9 +26,10 @@ class System
 	void setView(View* view);
 	void initVariables();
 	bool LoginUser(std::string username, std::string password);
-
 	bool isRunning();
+
 	static System* getInstance();
-	User* const getLoggedUser();
+	static User* const getLoggedUser();
+	static DataInterface* const getDataInterface();
 };
 

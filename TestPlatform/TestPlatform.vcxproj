@@ -149,9 +149,12 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Connection\Database.h" />
-    <ClInclude Include="Connection\MailManager.h" />
+    <ClInclude Include="Data\DataInterface.h" />
+    <ClInclude Include="Data\SQLite.h" />
+    <ClInclude Include="Mail\MailManager.h" />
+    <ClInclude Include="TestData\Question.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="TestData\Test.h" />
     <ClInclude Include="Utilities\Logger.h" />
     <ClInclude Include="Views\LoginView.h" />
     <ClInclude Include="Views\View.h" />
@@ -162,10 +165,14 @@
     <ClInclude Include="users\user.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Connection\Database.cpp" />
-    <ClCompile Include="Connection\MailManager.cpp" />
+    <ClCompile Include="Data\DataInterface.cpp" />
+    <ClCompile Include="Data\Queries.cpp" />
+    <ClCompile Include="Data\SQLite.cpp" />
+    <ClCompile Include="Mail\MailManager.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
+    <ClCompile Include="TestData\Question.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="TestData\Test.cpp" />
     <ClCompile Include="Utilities\Logger.cpp" />
     <ClCompile Include="Views\LoginView.cpp" />
     <ClCompile Include="Views\View.cpp" />
