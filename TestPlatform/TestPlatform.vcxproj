@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\poco\Data\MySQL\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -102,7 +102,7 @@
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\poco\Data\MySQL\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -128,7 +128,7 @@
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\poco\Data\MySQL\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -150,11 +150,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Data\DataInterface.h" />
-    <ClInclude Include="Data\SQLite.h" />
+    <ClInclude Include="Data\SQL.h" />
     <ClInclude Include="Mail\MailManager.h" />
-    <ClInclude Include="TestData\Question.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="TestData\Answer.h" />
+    <ClInclude Include="TestData\Question.h" />
     <ClInclude Include="TestData\Test.h" />
+    <ClInclude Include="TestData\TestResult.h" />
     <ClInclude Include="Utilities\Logger.h" />
     <ClInclude Include="Views\LoginView.h" />
     <ClInclude Include="Views\View.h" />
@@ -167,12 +169,14 @@
   <ItemGroup>
     <ClCompile Include="Data\DataInterface.cpp" />
     <ClCompile Include="Data\Queries.cpp" />
-    <ClCompile Include="Data\SQLite.cpp" />
-    <ClCompile Include="Mail\MailManager.cpp" />
+    <ClCompile Include="Data\SQL.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
-    <ClCompile Include="TestData\Question.cpp" />
+    <ClCompile Include="Mail\MailManager.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="TestData\Answer.cpp" />
+    <ClCompile Include="TestData\Question.cpp" />
     <ClCompile Include="TestData\Test.cpp" />
+    <ClCompile Include="TestData\TestResult.cpp" />
     <ClCompile Include="Utilities\Logger.cpp" />
     <ClCompile Include="Views\LoginView.cpp" />
     <ClCompile Include="Views\View.cpp" />

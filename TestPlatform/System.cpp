@@ -36,7 +36,7 @@ void System::initVariables()
     this->isRun = true;
     this->instance = this;
     this->currentView = new LoginView();
-    this->dataInterface = new SQLite();
+    //this->dataInterface = new SQLite();
 }
 
 bool System::LoginUser(std::string username, std::string password)

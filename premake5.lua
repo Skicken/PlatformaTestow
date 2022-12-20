@@ -33,6 +33,8 @@ project "TestPlatform"
         POCO_LIB_DIR.."/Net/include",
         POCO_LIB_DIR.."/Data/include",
         POCO_LIB_DIR.."/Data/SQLite/include",
+        POCO_LIB_DIR.."/Data/MySQL/include",
+
 
     }
     link_raylib();
@@ -56,7 +58,8 @@ filter "configurations:Debug"
             "PocoFoundationd.lib",
             "PocoNetd.lib",
             "PocoDatad.lib",
-            "PocoDataSQLited.lib"
+            "PocoDataSQLited.lib",
+
             
         }
         prebuildcommands
@@ -80,7 +83,8 @@ filter "configurations:Release"
             "PocoFoundation.lib",
             "PocoNet.lib",
             "PocoData.lib",
-            "PocoDataSQLite.lib"
+            "PocoDataSQLite.lib",
+
 
         }
         prebuildcommands
@@ -103,7 +107,8 @@ filter "configurations:Dist"
         "PocoFoundation.lib",
         "PocoNet.lib",
         "PocoData.lib",
-        "PocoDataSQLite.lib"
+        "PocoDataSQLite.lib",
+
 
     }
     prebuildcommands

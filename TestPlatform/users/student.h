@@ -3,5 +3,8 @@
 class student :
     public User
 {
+	public:
+
+	void setMainView() override;
 };
 
