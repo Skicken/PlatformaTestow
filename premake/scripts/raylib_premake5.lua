@@ -1,6 +1,6 @@
 
 
-RAY_LIB_DIR = "vendor/raylib"
+RAY_LIB_DIR = "%{wks.location}/vendor/raylib"
 function platform_defines()
     defines{"PLATFORM_DESKTOP"}
 

@@ -8,10 +8,10 @@ workspace "TestPlatform"
     }
     startproject "TestPlatform"
 outputdir = "%{cfg.buildcfg}"
-include ("raylib_premake5.lua");
-include("poco_premake5.lua")
-include("spdlog_premake5.lua")
-
+include ("premake/scripts/raylib_premake5.lua");
+include("premake/scripts/spdlog_premake5.lua")
+include("premake/scripts/mysql_premake5.lua")
+include("premake/scripts/mailio_premake5.lua")
 project "TestPlatform"
     location "TestPlatform"
     kind "ConsoleApp"
@@ -29,16 +29,11 @@ project "TestPlatform"
     includedirs
     {
         "%{prj.name}",        
-        POCO_LIB_DIR.."/Foundation/include",
-        POCO_LIB_DIR.."/Net/include",
-        POCO_LIB_DIR.."/Data/include",
-        POCO_LIB_DIR.."/Data/SQLite/include",
-        POCO_LIB_DIR.."/Data/MySQL/include",
-
-
     }
     link_raylib();
     link_spdlog();
+    link_mysql();
+    link_mailio();
 
 filter "system:windows"
     cppdialect "C++17"
@@ -49,22 +44,9 @@ filter "configurations:Debug"
         runtime "Debug"
         defines "DEBUG"
         symbols "on"
-        libdirs
-        {
-            POCO_LIB_DIR.."/cmake-build/lib/Debug",
-        }
         links
         {
-            "PocoFoundationd.lib",
-            "PocoNetd.lib",
-            "PocoDatad.lib",
-            "PocoDataSQLited.lib",
-
-            
-        }
-        prebuildcommands
-        { 
-            ("{COPY} ../"..POCO_LIB_DIR.."/cmake-build/bin/Debug/**.dll       %{cfg.targetdir}"), 
+            "mysqlcppconn-staticd.lib"
         }
 
 filter "configurations:Release"
@@ -74,23 +56,11 @@ filter "configurations:Release"
         defines "RELEASE"
         defines "NDEBUG"
         optimize "on"
-        libdirs
-        {
-            POCO_LIB_DIR.."/cmake-build/lib/Release",
-        }
         links
         {
-            "PocoFoundation.lib",
-            "PocoNet.lib",
-            "PocoData.lib",
-            "PocoDataSQLite.lib",
-
-
+            "mysqlcppconn-static.lib"
         }
-        prebuildcommands
-        { 
-            ("{COPY} ../"..POCO_LIB_DIR.."/cmake-build/bin/Release/**.dll       %{cfg.targetdir}"), 
-        }
+
 filter "configurations:Dist"
     staticruntime "off"
     runtime "Release"
@@ -98,21 +68,74 @@ filter "configurations:Dist"
     defines "DIST"
     defines "NDEBUG"
     optimize "on"
-    libdirs
-    {
-        POCO_LIB_DIR.."/cmake-build/lib/Release",
-    }
     links
     {
-        "PocoFoundation.lib",
-        "PocoNet.lib",
-        "PocoData.lib",
-        "PocoDataSQLite.lib",
+        "mysqlcppconn-static.lib"
+    }
 
 
-    }
-    prebuildcommands
-    { 
-        ("{COPY} ../"..POCO_LIB_DIR.."/cmake-build/bin/Release/**.dll       %{cfg.targetdir}"), 
-    }
+
+
+
+-- project "UnitTests"
+--     location "UnitTests"
+--     kind "SharedLib"
+--     language "C++"
+--     targetdir ("build/bin/" .. outputdir .. "/%{prj.name}")
+--     objdir ("build/bin-int/" .. outputdir .. "/%{prj.name}")
+    
+--     pchheader "pch.h"
+--     pchsource "%{prj.name}/pch.cpp"
+--     files
+--     {
+--         "%{prj.name}/**.h",
+--         "%{prj.name}/**.cpp",
+
+--     }
+--     includedirs
+--     {
+--         "%{prj.name}",
+--         "TestPlatform",
+--         "%{VCInstallDir}UnitTest/include"   
+--     }
+--     libdirs
+--     {
+--         "%{VCInstallDir}UnitTest/lib",
+--     }
+--     links
+--     {
+--         "build/bin-int/" .. outputdir .. "/TestPlatform/*.obj",
+        
+--     }
+--     link_raylib();
+--     link_spdlog();
+--     link_mysql();
+--     link_mailio();
+    
+
+-- filter "system:windows"
+--     cppdialect "C++17"
+--     staticruntime "On"
+--     systemversion "latest"
+-- filter "configurations:Debug"
+--         staticruntime "off"
+--         runtime "Debug"
+--         defines "DEBUG"
+--         symbols "on"
+--         links
+--         {
+--             "mysqlcppconn-staticd.lib"
+--         }
+
+-- filter "configurations:Release"
+
+--         staticruntime "off"
+--         runtime "Release"
+--         defines "RELEASE"
+--         defines "NDEBUG"
+--         optimize "on"
+--         links
+--         {
+--             "mysqlcppconn-static.lib"
+--         }
 

@@ -4,6 +4,9 @@
     <Filter Include="Data">
       <UniqueIdentifier>{3F05847C-2B3C-850D-D428-6B10C03E010F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\MySQLInterface">
+      <UniqueIdentifier>{D5299AB4-418B-77C2-CAF8-BD743659AE81}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Mail">
       <UniqueIdentifier>{48F3887C-342A-8A0D-DD16-7010C92C060F}</UniqueIdentifier>
     </Filter>
@@ -24,8 +27,11 @@
     <ClInclude Include="Data\DataInterface.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Data\SQL.h">
-      <Filter>Data</Filter>
+    <ClInclude Include="Data\MySQLInterface\SQL.h">
+      <Filter>Data\MySQLInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\MySQLInterface\UserFactory.h">
+      <Filter>Data\MySQLInterface</Filter>
     </ClInclude>
     <ClInclude Include="Mail\MailManager.h">
       <Filter>Mail</Filter>
@@ -65,16 +71,20 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
+    <ClInclude Include="Data\MySQLInterface\TestFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data\DataInterface.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="Data\Queries.cpp">
-      <Filter>Data</Filter>
+    <ClCompile Include="Data\MySQLInterface\SQL.cpp">
+      <Filter>Data\MySQLInterface</Filter>
     </ClCompile>
-    <ClCompile Include="Data\SQL.cpp">
-      <Filter>Data</Filter>
+    <ClCompile Include="Data\MySQLInterface\UserFactory.cpp">
+      <Filter>Data\MySQLInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\userQueries.cpp">
+      <Filter>Data\MySQLInterface</Filter>
     </ClCompile>
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Mail\MailManager.cpp">
@@ -115,5 +125,7 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\testQueries.cpp" />
+    <ClCompile Include="Data\MySQLInterface\TestFactory.cpp" />
   </ItemGroup>
 </Project>

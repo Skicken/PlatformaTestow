@@ -9,9 +9,6 @@ System::System()
 
 System::~System()
 {
-    delete user;
-    delete currentView;
-    delete dataInterface;
 }
 void System::update()
 {
@@ -27,21 +24,21 @@ void System::render()
 
 void System::setView(View* view)
 {
-    delete this->currentView;
-    this->currentView = view;
+    this->currentView = std::unique_ptr<View>{ view };
 }
 
 void System::initVariables()
 {
     this->isRun = true;
     this->instance = this;
-    this->currentView = new LoginView();
-    //this->dataInterface = new SQLite();
+    this->currentView = std::make_unique<LoginView>();
+    this->dataInterface = std::make_unique<ExternalData::MySQL>();
 }
 
 bool System::LoginUser(std::string username, std::string password)
 {
-    return (username == "admin" && password == "admin");
+    this->user = std::unique_ptr<User>{ dataInterface->getUser(username,password) };
+    return this->user != nullptr;
 }
 
 bool System::isRunning()
@@ -54,12 +51,12 @@ System* System::getInstance()
     return instance;
 }
 
-User* const System::getLoggedUser()
+std::shared_ptr<User> const System::getLoggedUser()
 {
     return getInstance()->user;
 }
 
-DataInterface* const System::getDataInterface()
+std::shared_ptr <ExternalData::DataInterface> const System::getDataInterface()
 {
     return getInstance()->dataInterface;
 }

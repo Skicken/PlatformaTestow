@@ -1,11 +1,7 @@
 #include "ptpch.h"
 #include "user.h"
 
-User::UserType User::getType() const
-{
-	return type;
-}
-void User::setType(UserType type)
+void User::setType(const UserType type)
 {
 	this->type = type;
 }
@@ -26,15 +22,21 @@ bool User::setEmail(const std::string& email)
 	return true;
 }
 
-User::User(const std::string& name, const std::string& surname, const std::string& email, const std::string& uuid,
-           UserType type): name(name),
+User::User(const std::string& name, const std::string& surname, const std::string& 
+email, const std::string& uuid): name(name),
                            surname(surname),
                            email(email),
-                           uuid(uuid),
-                           type(type)
+                           uuid(uuid)
 {
 }
 
+User::User(const std::string& name, const std::string& surname, const std::string& email) :   name(name),
+							surname(surname),
+							email(email)
+
+{
+
+}
 std::string User::getUUID() const
 {
 	return uuid;
@@ -53,4 +55,9 @@ std::string User::getSurname() const
 std::string User::getEmail() const
 {
 	return email;
+}
+
+UserType User::getType() const
+{
+	return type;
 }

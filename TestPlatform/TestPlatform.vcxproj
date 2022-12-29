@@ -79,8 +79,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\poco\Data\MySQL\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -89,20 +89,17 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;PocoFoundationd.lib;PocoNetd.lib;PocoDatad.lib;PocoDataSQLited.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;..\vendor\poco\cmake-build\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-staticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PreBuildEvent>
-      <Command>IF EXIST ..\vendor\poco\cmake-build\bin\Debug\**.dll\ (xcopy /Q /E /Y /I ..\vendor\poco\cmake-build\bin\Debug\**.dll       ..\build\bin\Debug\TestPlatform &gt; nul) ELSE (xcopy /Q /Y /I ..\vendor\poco\cmake-build\bin\Debug\**.dll       ..\build\bin\Debug\TestPlatform &gt; nul)</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\poco\Data\MySQL\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -115,20 +112,17 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;PocoFoundation.lib;PocoNet.lib;PocoData.lib;PocoDataSQLite.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;..\vendor\poco\cmake-build\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PreBuildEvent>
-      <Command>IF EXIST ..\vendor\poco\cmake-build\bin\Release\**.dll\ (xcopy /Q /E /Y /I ..\vendor\poco\cmake-build\bin\Release\**.dll       ..\build\bin\Release\TestPlatform &gt; nul) ELSE (xcopy /Q /Y /I ..\vendor\poco\cmake-build\bin\Release\**.dll       ..\build\bin\Release\TestPlatform &gt; nul)</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\vendor\poco\Foundation\include;..\vendor\poco\Net\include;..\vendor\poco\Data\include;..\vendor\poco\Data\SQLite\include;..\vendor\poco\Data\MySQL\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -141,22 +135,21 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;PocoFoundation.lib;PocoNet.lib;PocoData.lib;PocoDataSQLite.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;..\vendor\poco\cmake-build\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PreBuildEvent>
-      <Command>IF EXIST ..\vendor\poco\cmake-build\bin\Release\**.dll\ (xcopy /Q /E /Y /I ..\vendor\poco\cmake-build\bin\Release\**.dll       ..\build\bin\Dist\TestPlatform &gt; nul) ELSE (xcopy /Q /Y /I ..\vendor\poco\cmake-build\bin\Release\**.dll       ..\build\bin\Dist\TestPlatform &gt; nul)</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Data\DataInterface.h" />
-    <ClInclude Include="Data\SQL.h" />
+    <ClInclude Include="Data\MySQLInterface\SQL.h" />
+    <ClInclude Include="Data\MySQLInterface\UserFactory.h" />
     <ClInclude Include="Mail\MailManager.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="TestData\Answer.h" />
     <ClInclude Include="TestData\Question.h" />
     <ClInclude Include="TestData\Test.h" />
     <ClInclude Include="TestData\TestResult.h" />
+    <ClInclude Include="Data\MySQLInterface\TestFactory.h" />
     <ClInclude Include="Utilities\Logger.h" />
     <ClInclude Include="Views\LoginView.h" />
     <ClInclude Include="Views\View.h" />
@@ -168,8 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data\DataInterface.cpp" />
-    <ClCompile Include="Data\Queries.cpp" />
-    <ClCompile Include="Data\SQL.cpp" />
+    <ClCompile Include="Data\MySQLInterface\SQL.cpp" />
+    <ClCompile Include="Data\MySQLInterface\testQueries.cpp" />
+    <ClCompile Include="Data\MySQLInterface\UserFactory.cpp" />
+    <ClCompile Include="Data\MySQLInterface\userQueries.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Mail\MailManager.cpp" />
     <ClCompile Include="System.cpp" />
@@ -177,6 +172,7 @@
     <ClCompile Include="TestData\Question.cpp" />
     <ClCompile Include="TestData\Test.cpp" />
     <ClCompile Include="TestData\TestResult.cpp" />
+    <ClCompile Include="Data\MySQLInterface\TestFactory.cpp" />
     <ClCompile Include="Utilities\Logger.cpp" />
     <ClCompile Include="Views\LoginView.cpp" />
     <ClCompile Include="Views\View.cpp" />

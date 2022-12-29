@@ -1,10 +1,14 @@
 
 #include <ptpch.h>
 #include <System.h>
+#include "System.h"
+
 #ifndef DIST 
+
 int main()
 {
-	Logger::INIT();
+	
+	Platform::Logger::INIT();
 	System* system = new System();
 	while (system->isRunning())
 	{
