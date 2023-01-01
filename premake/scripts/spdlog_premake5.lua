@@ -1,6 +1,5 @@
-
-
 SPDLOG_LIB_DIR = "%{wks.location}/vendor/spdlog"
+
 function force_build_spdlog ()
     print("Building spdlog! \n")
     os.mkdir("cmake-build");

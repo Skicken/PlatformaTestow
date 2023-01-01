@@ -1,54 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Data">
-      <UniqueIdentifier>{3F05847C-2B3C-850D-D428-6B10C03E010F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\MySQLInterface">
-      <UniqueIdentifier>{D5299AB4-418B-77C2-CAF8-BD743659AE81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mail">
-      <UniqueIdentifier>{48F3887C-342A-8A0D-DD16-7010C92C060F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TestData">
-      <UniqueIdentifier>{7F6CA274-6B39-FD7F-9452-EB27807E320E}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{010A8043-6D74-34BA-B6B2-E55F225C120F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Views">
       <UniqueIdentifier>{B38C4E0E-1FA1-76BF-E822-1A1F54F672F0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="users">
-      <UniqueIdentifier>{77FF8410-E313-ADC1-AC95-50211869A9F2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Data\DataInterface.h">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\MySQLInterface\SQL.h">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\MySQLInterface\UserFactory.h">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="Mail\MailManager.h">
-      <Filter>Mail</Filter>
-    </ClInclude>
     <ClInclude Include="System.h" />
-    <ClInclude Include="TestData\Answer.h">
-      <Filter>TestData</Filter>
-    </ClInclude>
-    <ClInclude Include="TestData\Question.h">
-      <Filter>TestData</Filter>
-    </ClInclude>
-    <ClInclude Include="TestData\Test.h">
-      <Filter>TestData</Filter>
-    </ClInclude>
-    <ClInclude Include="TestData\TestResult.h">
-      <Filter>TestData</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\Logger.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -59,50 +20,10 @@
       <Filter>Views</Filter>
     </ClInclude>
     <ClInclude Include="ptpch.h" />
-    <ClInclude Include="users\Admin.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="users\student.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="users\teacher.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="users\user.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\MySQLInterface\TestFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Data\DataInterface.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\SQL.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\UserFactory.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\userQueries.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
     <ClCompile Include="EntryPoint.cpp" />
-    <ClCompile Include="Mail\MailManager.cpp">
-      <Filter>Mail</Filter>
-    </ClCompile>
     <ClCompile Include="System.cpp" />
-    <ClCompile Include="TestData\Answer.cpp">
-      <Filter>TestData</Filter>
-    </ClCompile>
-    <ClCompile Include="TestData\Question.cpp">
-      <Filter>TestData</Filter>
-    </ClCompile>
-    <ClCompile Include="TestData\Test.cpp">
-      <Filter>TestData</Filter>
-    </ClCompile>
-    <ClCompile Include="TestData\TestResult.cpp">
-      <Filter>TestData</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities\Logger.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -113,19 +34,5 @@
       <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="ptpch.cpp" />
-    <ClCompile Include="users\Admin.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="users\student.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="users\teacher.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="users\user.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\testQueries.cpp" />
-    <ClCompile Include="Data\MySQLInterface\TestFactory.cpp" />
   </ItemGroup>
 </Project>

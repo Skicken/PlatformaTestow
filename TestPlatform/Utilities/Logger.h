@@ -13,7 +13,9 @@ namespace Platform
 		static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return coreLogger; }
 
 	};
+	
 }
+
 #ifndef DIST
 	#define ERROR(...)   Platform::Logger::GetCoreLogger()->warn(__VA_ARGS__);
 	#define INFO(...)    Platform::Logger::GetCoreLogger()->info(__VA_ARGS__);
@@ -27,4 +29,3 @@ namespace Platform
 	#define WARN(...)
 	#define FATAL(...)
 #endif
-

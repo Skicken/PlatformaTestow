@@ -3,10 +3,6 @@
 #include <Views/View.h>
 #include <Views/LoginView.h>
 
-#include <users/user.h>
-#include <Data/MySQLInterface/SQL.h>
-#include <Mail/MailManager.h>
-
 class System
 {
 	static System* instance;

@@ -6,7 +6,7 @@
 #include <cassert>
 #include <string>
 #include "Utilities/Logger.h"
-#include <mysql/jdbc.h>
+#include <ExternalConnection.h>
 namespace Raylib
 {
 	#include <raylib.h>

@@ -8,10 +8,19 @@ workspace "TestPlatform"
     }
     startproject "TestPlatform"
 outputdir = "%{cfg.buildcfg}"
+
+
 include ("premake/scripts/raylib_premake5.lua");
 include("premake/scripts/spdlog_premake5.lua")
 include("premake/scripts/mysql_premake5.lua")
 include("premake/scripts/mailio_premake5.lua")
+if not haveMailoDependencies() or not haveMysqlDependencies()
+then
+    error("Incorrect setup!")
+    exit(0)
+end
+
+
 project "TestPlatform"
     location "TestPlatform"
     kind "ConsoleApp"
@@ -28,16 +37,27 @@ project "TestPlatform"
     }
     includedirs
     {
-        "%{prj.name}",        
+        "%{prj.name}",  
+        "ExternalConnection",      
+    }
+    libdirs
+    {
+        "vendor/ExternalConnection"
+    }
+    links
+    {
+        "%{cfg.buildcfg}/ExternalConnection.lib"
     }
     link_raylib();
     link_spdlog();
     link_mysql();
     link_mailio();
 
+
+
+
 filter "system:windows"
     cppdialect "C++17"
-    staticruntime "On"
     systemversion "latest"
 filter "configurations:Debug"
         staticruntime "off"
@@ -46,11 +66,12 @@ filter "configurations:Debug"
         symbols "on"
         links
         {
-            "mysqlcppconn-staticd.lib"
+            "mysqlcppconn-staticd.lib",
+
         }
+        
 
 filter "configurations:Release"
-
         staticruntime "off"
         runtime "Release"
         defines "RELEASE"
@@ -58,9 +79,9 @@ filter "configurations:Release"
         optimize "on"
         links
         {
-            "mysqlcppconn-static.lib"
-        }
+            "mysqlcppconn-static.lib",
 
+        }
 filter "configurations:Dist"
     staticruntime "off"
     runtime "Release"
@@ -70,13 +91,12 @@ filter "configurations:Dist"
     optimize "on"
     links
     {
-        "mysqlcppconn-static.lib"
+        "mysqlcppconn-static.lib",
     }
 
-
-
-
-
+include("premake_external_connectionLib.lua")
+print("Everything is setup correctly!")
+    
 -- project "UnitTests"
 --     location "UnitTests"
 --     kind "SharedLib"
@@ -112,30 +132,4 @@ filter "configurations:Dist"
 --     link_mysql();
 --     link_mailio();
     
-
--- filter "system:windows"
---     cppdialect "C++17"
---     staticruntime "On"
---     systemversion "latest"
--- filter "configurations:Debug"
---         staticruntime "off"
---         runtime "Debug"
---         defines "DEBUG"
---         symbols "on"
---         links
---         {
---             "mysqlcppconn-staticd.lib"
---         }
-
--- filter "configurations:Release"
-
---         staticruntime "off"
---         runtime "Release"
---         defines "RELEASE"
---         defines "NDEBUG"
---         optimize "on"
---         links
---         {
---             "mysqlcppconn-static.lib"
---         }
 

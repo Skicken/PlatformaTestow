@@ -1,12 +1,48 @@
-
-MAILIO_DIR = "%{wks.location}/vendor/mailio"
+MAILIO_DIR = "vendor/mailio"
 BOOST_DIR = "C:/boost_1_81_0"
 OPENSSL_DIR = "C:/Program Files/OpenSSL-Win64"
-function link_mailio()
-    if os.isdir(MAILIO_DIR.."/Release")==nil then
-        print("mailio needs to be built")
-        defines "NO_MAIL"
+
+
+function haveMailoDependencies()
+
+    if os.getenv("BOOST_ROOT") ~= nil
+    then
+        BOOST_DIR = os.getenv("BOOST_ROOT")
     end
+
+    if os.getenv("OPENSSL_ROOT") ~= nil
+    then
+        OPENSSL_DIR = os.getenv("OPENSSL_ROOT")
+    end
+
+    
+    if not os.isdir(BOOST_DIR)
+    then
+        error("could not find Boost library")
+        return false
+    end
+    if not os.isdir(OPENSSL_DIR)
+    then
+        error("could not find OpenSSL library")
+        return false
+    end
+    if not os.isdir(MAILIO_DIR.."/Release")
+    then
+
+        os.chdir(MAILIO_DIR)    
+        os.mkdir("build")
+        os.chdir("build")
+        os.execute("cmake ..")
+        error("Open mailo.sln and build it!")
+        return false;
+    end
+    print(MAILIO_DIR)
+    print("mailio is Available!")
+    return true
+end
+
+function link_mailio()
+
     link_boost()
     link_openssl()
     includedirs
@@ -24,12 +60,6 @@ function link_mailio()
     }
 end
 function link_boost()
-
-    if os.isdir(BOOST_DIR)==nil 
-    then
-        print("could not find boost, mailing disabled")
-        defines "NO_MAIL"
-    end
     includedirs
     {
         BOOST_DIR
@@ -41,11 +71,6 @@ function link_boost()
 end
 function link_openssl()
 
-    if os.isdir(BOOST_DIR)==nil 
-    then
-        print("could not find opensll, mailing disabled")
-        defines "NO_MAIL"
-    end
     includedirs
     {
         OPENSSL_DIR.."/include"

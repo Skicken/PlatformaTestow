@@ -1,6 +1,5 @@
-
-
 RAY_LIB_DIR = "%{wks.location}/vendor/raylib"
+
 function platform_defines()
     defines{"PLATFORM_DESKTOP"}
 
@@ -61,7 +60,6 @@ project "raylib"
 
     filter{}
 
-    print ("Using raylib dir " .. RAY_LIB_DIR);
     includedirs {RAY_LIB_DIR .. "/src", RAY_LIB_DIR .. "/src/external/glfw/include" }
     vpaths
     {
@@ -73,3 +71,4 @@ project "raylib"
         compileas "Objective-C"
 
     filter{}
+    print ("Raylib is Available!");

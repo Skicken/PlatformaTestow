@@ -1,7 +1,6 @@
 
 #include <ptpch.h>
 #include <System.h>
-#include "System.h"
 
 #ifndef DIST 
 
