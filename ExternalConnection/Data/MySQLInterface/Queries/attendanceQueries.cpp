@@ -10,7 +10,7 @@ namespace ExternalData
 		connection_shared connection = getConnection();
 		statement_unique insertQuery(connection->prepareStatement(query));
 
-		for(auto user:list.getPresentUsers())
+		for(const auto& user:list.getPresentUsers())
 		{
 			insertQuery->setString(1, list.getGroup().getID());
 			insertQuery->setString(2, user.getID());
@@ -20,33 +20,31 @@ namespace ExternalData
 	}
 	void MySQL::deleteAttendanceList(AttendanceList& list)
 	{
-		const std::string query = "DELETE FROM `attendance_list` WHERE 0`GROUP_ID` = ? and `attendance_date` = ?;";
+		const std::string deleteQuery = "DELETE FROM `attendance_list` WHERE `GROUP_ID` = ? and `attendance_date` = ?;";
 		connection_shared connection = getConnection();
-		statement_unique deleteQuery(connection->prepareStatement(query));
-		deleteQuery->execute();
+		statement_unique deleteStatement(connection->prepareStatement(deleteQuery));
+		deleteStatement->setString(1, list.getGroup().getID());
+		deleteStatement->setString(2, list.getDate());
+		deleteStatement->execute();
 	}
 
-	std::vector<AttendanceList> MySQL::getAllAttendanceLists()
+	AttendanceList MySQL::getAttendanceList(Group& group, std::string& Date)
 	{
-		const std::string query = "SELECT `GROUP_ID`, `USER_ID`, `attendance_date` FROM `attendance_list` GROUP by `GROUP_ID` SORT by `attendance_date`";
 		connection_shared connection = getConnection();
-		statement_unique selectQuery(connection->prepareStatement(query));
-		result_unique result(selectQuery->executeQuery());
+		AttendanceList list(group, Date);
+		std::string query = "SELECT `USER_ID` FROM `attendance_list` WHERE `GROUP_ID` = ? and `attendance_date` = ?";
+		statement_unique statement(connection->prepareStatement(query));
+		statement->setString(1, group.getID());
+		statement->setString(2, Date);
 
-		std::vector<AttendanceList> lists;
-		std::vector<User> users;
-		std::string prevGroupID="";
+		result_shared result(statement->executeQuery());
 		while(result->next())
 		{
-			if (prevGroupID != result->getString(1))
-			{
-				users.clear();
-			}
-			prevGroupID = result->getString(1);
+			std::string userID = result->getString(1);
+			list.setUserPresent(userID);
 		}
-
-
-
-		return lists;
+		return list;
 	}
+
+
 }

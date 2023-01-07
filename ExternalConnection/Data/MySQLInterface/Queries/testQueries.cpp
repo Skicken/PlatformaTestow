@@ -39,7 +39,7 @@ namespace ExternalData
 	{
 		connection_shared connection = getConnection();
 
-		const std::string query = "INSERT INTO `tests`(`ID`, `OWNER_ID`, `name`, `randomize`, `description`) VALUES (UNHEX(REPLACE(UUID(), '-', '')),?,?,?,?)";
+		const std::string query = "INSERT INTO `tests`(`ID`, `OWNER_ID`, `name`, `randomize`, `description`) VALUES ("+ID_GEN+",?,?,?,?)";
 		statement_unique testQuery(connection->prepareStatement(query));
 
 		testQuery->setString(1, OWNER_ID);

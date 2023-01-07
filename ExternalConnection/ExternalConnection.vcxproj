@@ -143,6 +143,7 @@
     <ClCompile Include="Data\DataInterface.cpp" />
     <ClCompile Include="Data\MySQLInterface\Helpers\TestFactory.cpp" />
     <ClCompile Include="Data\MySQLInterface\Helpers\UserFactory.cpp" />
+    <ClCompile Include="Data\MySQLInterface\Queries\groupQueries.cpp" />
     <ClCompile Include="Data\MySQLInterface\Queries\TestResultQueries.cpp" />
     <ClCompile Include="Data\MySQLInterface\Queries\attendanceQueries.cpp" />
     <ClCompile Include="Data\MySQLInterface\Queries\testQueries.cpp" />

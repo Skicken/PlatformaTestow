@@ -1,10 +1,6 @@
 #pragma once
 class Answer
 {
-
-	private:
-		std::string ID;
-		std::string answer;
 	public:
 		std::string getID() const;
 		std::string getAnswer() const;
@@ -15,6 +11,8 @@ class Answer
 		Answer(Answer&& other) noexcept;
 		Answer& operator=(const Answer& other);
 		Answer& operator=(Answer&& other) noexcept;
-
+	private:
+		std::string ID;
+		std::string answer;
 };
 

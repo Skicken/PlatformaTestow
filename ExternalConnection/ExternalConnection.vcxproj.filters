@@ -122,5 +122,6 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\groupQueries.cpp" />
   </ItemGroup>
 </Project>

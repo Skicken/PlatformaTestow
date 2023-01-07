@@ -10,7 +10,7 @@ namespace ExternalData
 		public:
 			static UserType StringToEnum(std::string value);
 			static std::string EnumToString(UserType type);
-			User* createUserFrom(const std::string& name, const std::string& surname, const		std::string& email, const std::string& uuid,
+			User* createUserFrom(const std::string& name, const std::string& surname, const		std::string& email, const std::string& id,
 				const std::string& type);
 			User getUserFromRow(result_shared result);
 

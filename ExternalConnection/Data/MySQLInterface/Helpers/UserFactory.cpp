@@ -23,19 +23,19 @@ namespace ExternalData
 		}
 		return "";
 	}
-	User* UserFactory::createUserFrom(const std::string& name, const std::string& surname, const std::string& email, const std::string& uuid, const std::string& type)
+	User* UserFactory::createUserFrom(const std::string& name, const std::string& surname, const std::string& email, const std::string& id, const std::string& type)
 	{
 		UserType value = StringToEnum(type);
 		switch (value)
 		{
 			case UserType::STUDENT:
-				return new Student(name, surname, email, uuid);
+				return new Student(name, surname, email, id);
 			case UserType::TEACHER:
-				return new Teacher(name, surname, email, uuid);
+				return new Teacher(name, surname, email, id);
 			case UserType::ADMIN:
-				return new Admin(name, surname, email, uuid);
+				return new Admin(name, surname, email, id);
 			default:
-				return new Student(name, surname, email, uuid);
+				return new Student(name, surname, email, id);
 
 		}
 

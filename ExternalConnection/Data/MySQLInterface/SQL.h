@@ -2,6 +2,7 @@
 #include "../DataInterface.h"
 namespace ExternalData
 {
+	const std::string ID_GEN = "UNHEX(REPLACE(UUID(), '-', ''))";
 	using connection_shared = std::shared_ptr<sql::Connection>;
 	using statement_unique = std::unique_ptr<sql::PreparedStatement>;
 	using result_unique = std::unique_ptr<sql::ResultSet>;
@@ -17,7 +18,8 @@ namespace ExternalData
 		public:
 			MySQL();
 			~MySQL();
-
+			std::string getUniqueID();
+			std::string getCurrentDate();
 			virtual std::vector<Test> getAllTests() override;
 			virtual std::vector<Test> getTeacherTests(std::string OWNER_ID) override;
 			virtual void modifyTest(Test& test, std::string OWNER_ID) override;
@@ -38,6 +40,9 @@ namespace ExternalData
 			void deleteGroup(Group& group) override;
 			void addAttendanceList(AttendanceList& list) override;
 			void deleteAttendanceList(AttendanceList& list) override;
-			std::vector<AttendanceList> getAllAttendanceLists() override;
+			virtual AttendanceList getAttendanceList(Group& group, std::string& Date) override;
+
+			std::vector<User> getGroupUsers(std::string groupID);
+			void deleteTestResult(TestResult& result) override;
 	};
 }

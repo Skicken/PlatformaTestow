@@ -6,7 +6,7 @@ namespace ExternalData
 {
 	void MySQL::addUser(User& user, std::string login, std::string password)
 	{
-		const std::string query = "INSERT INTO users VALUES (UNHEX(REPLACE(UUID(), '-', '')), ?, MD5(?), ?,?,?,?)";
+		const std::string query = "INSERT INTO users VALUES ("+ID_GEN+", ?, MD5(?), ?,?,?,?)";
 
 		connection_shared connection = this->getConnection();
 		statement_unique stat(connection->prepareStatement(query));
@@ -69,7 +69,6 @@ namespace ExternalData
 		return nullptr;
 
 	}
-
 	void MySQL::modifyUser(User& user)
 	{
 		const std::string query = "UPDATE `users` SET name=?,surname=?,accountType=?,email=? WHERE ID = ?";
@@ -83,31 +82,19 @@ namespace ExternalData
 		stat->execute();
 
 	}
-
 	std::vector<User> MySQL::getAllUsers()
 	{
-		return std::vector<User>();
+		connection_shared connection = getConnection();
+		std::string query = "select name, surname, email, ID, accountType from users";
+		statement_unique statement(connection->prepareStatement(query));
+		result_shared result(statement->executeQuery());
+		std::vector<User> users;
+		std::unique_ptr<UserFactory> userFactory;
+		while(result->next())
+		{
+			users.push_back(userFactory->getUserFromRow(result));
+		}
+		return users;
 	}
 
-	void MySQL::addTestResult(TestResult& result, std::string STUDENT_ID)
-	{
-	}
-
-	std::vector<TestResult> MySQL::getTestResults(std::string STUDENT_ID)
-	{
-	}
-
-	void MySQL::addGroup(Group& group)
-	{
-	}
-
-	std::vector<Group> MySQL::getAllGroups()
-	{
-		return std::vector<Group>();
-	}
-
-	void MySQL::deleteGroup(Group& group)
-	{
-	}
-	
 }

@@ -35,6 +35,7 @@ namespace ExternalData
 
 			virtual void addTestResult(TestResult& result,std::string STUDENT_ID)=0;
 			virtual std::vector<TestResult> getTestResults(std::string STUDENT_ID) = 0;
+			virtual void deleteTestResult(TestResult& result) = 0;
 
 			virtual void addGroup(Group& group) = 0;
 			virtual std::vector<Group> getAllGroups() = 0;
@@ -42,7 +43,7 @@ namespace ExternalData
 
 			virtual void addAttendanceList(AttendanceList& list) = 0;
 			virtual void deleteAttendanceList(AttendanceList& list) = 0;
-			virtual std::vector<AttendanceList> getAllAttendanceLists() = 0;
+			virtual AttendanceList getAttendanceList(Group& group, std::string& Date) = 0;
 			
 		/*virtual std::map<std::string, std::string> getCorrectAnswers(std::string TEST_ID);*/
 	};

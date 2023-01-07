@@ -3,11 +3,6 @@
 class Question
 {
 
-	private:
-		std::string QuestionID;
-		std::string question;
-		std::vector<Answer> answers;
-		Answer correctAnswer;
 	public:
 
 		std::string getQuestionID() const;
@@ -27,7 +22,11 @@ class Question
 
 		Answer getCorrectAnswer() const;
 		void setCorrectAnswer(const Answer& correct_answer);
-
+	private:
+		std::string QuestionID;
+		std::string question;
+		std::vector<Answer> answers;
+		Answer correctAnswer;
 	
 };
 
