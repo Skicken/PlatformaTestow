@@ -15,27 +15,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6ACE08D8-5631-987C-FFB6-D032EBF863FF}</ProjectGuid>
+    <ProjectGuid>{F8411ACB-64AC-CE41-ADEA-7FE71994AC96}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TestPlatform</RootNamespace>
+    <RootNamespace>UnitTests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
@@ -55,74 +55,52 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\build\bin\Debug\TestPlatform\</OutDir>
-    <IntDir>..\build\bin-int\Debug\TestPlatform\</IntDir>
-    <TargetName>TestPlatform</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>..\build\bin\Debug\UnitTests\</OutDir>
+    <IntDir>..\build\bin-int\Debug\UnitTests\</IntDir>
+    <TargetName>UnitTests</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\build\bin\Release\TestPlatform\</OutDir>
-    <IntDir>..\build\bin-int\Release\TestPlatform\</IntDir>
-    <TargetName>TestPlatform</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>..\build\bin\Release\UnitTests\</OutDir>
+    <IntDir>..\build\bin-int\Release\UnitTests\</IntDir>
+    <TargetName>UnitTests</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\build\bin\Dist\TestPlatform\</OutDir>
-    <IntDir>..\build\bin-int\Dist\TestPlatform\</IntDir>
-    <TargetName>TestPlatform</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\build\bin\Dist\UnitTests\</OutDir>
+    <IntDir>..\build\bin-int\Dist\UnitTests\</IntDir>
+    <TargetName>UnitTests</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\ExternalConnection;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\TestPlatform;..\UnitTest\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Debug\ExternalConnection.lib;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-staticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\ExternalConnection;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\build\bin-int\Debug\TestPlatform\*.obj;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-staticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\UnitTest\lib;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\build\bin\Debug\UnitTests\UnitTests.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\ExternalConnection;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Release\ExternalConnection.lib;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\ExternalConnection;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\ExternalConnection;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\TestPlatform;..\UnitTest\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -135,24 +113,35 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Dist\ExternalConnection.lib;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\ExternalConnection;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\build\bin-int\Release\TestPlatform\*.obj;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\UnitTest\lib;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\build\bin\Release\UnitTests\UnitTests.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\TestPlatform;..\UnitTest\include;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>..\build\bin-int\Dist\TestPlatform\*.obj;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\UnitTest\lib;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\build\bin\Dist\UnitTests\UnitTests.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="System.h" />
-    <ClInclude Include="Utilities\Logger.h" />
-    <ClInclude Include="Views\LoginView.h" />
-    <ClInclude Include="Views\View.h" />
-    <ClInclude Include="ptpch.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EntryPoint.cpp" />
-    <ClCompile Include="System.cpp" />
-    <ClCompile Include="Utilities\Logger.cpp" />
-    <ClCompile Include="Views\LoginView.cpp" />
-    <ClCompile Include="Views\View.cpp" />
-    <ClCompile Include="ptpch.cpp">
+    <ClCompile Include="UnitTests.cpp" />
+    <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

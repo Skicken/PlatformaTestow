@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TestPlatform">
+      <UniqueIdentifier>{6ACE08D8-5631-987C-FFB6-D032EBF863FF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\Data">
+      <UniqueIdentifier>{13D6759E-7FEC-7334-C863-FF5534B944BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\Data\MySQLInterface">
+      <UniqueIdentifier>{295835A9-15A9-20EB-3E0D-0FAD2ABDB354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\Mail">
+      <UniqueIdentifier>{1CC47A9E-88DA-7834-D151-04563DA749BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\TestData">
+      <UniqueIdentifier>{5387F8E9-BFF3-B3E4-88E7-4B42F412D64C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\Utilities">
+      <UniqueIdentifier>{557F9963-4179-C2B5-2AE6-58C6167F2822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\Views">
+      <UniqueIdentifier>{07787A6E-F35B-3BC4-5CBC-351748BF2546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestPlatform\users">
+      <UniqueIdentifier>{CBEAB070-B7CE-71C6-202F-6C190C325C48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UnitTests.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+</Project>

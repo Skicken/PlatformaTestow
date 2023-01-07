@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Connection">
-      <UniqueIdentifier>{B5581051-A110-529E-0A18-2BFAF6EEEC8E}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{010A8043-6D74-34BA-B6B2-E55F225C120F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Views">
       <UniqueIdentifier>{B38C4E0E-1FA1-76BF-E822-1A1F54F672F0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="users">
-      <UniqueIdentifier>{77FF8410-E313-ADC1-AC95-50211869A9F2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Data\SQLite.h">
-      <Filter>Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="Mail\MailManager.h">
-      <Filter>Connection</Filter>
-    </ClInclude>
     <ClInclude Include="System.h" />
     <ClInclude Include="Utilities\Logger.h">
       <Filter>Utilities</Filter>
@@ -32,29 +20,8 @@
       <Filter>Views</Filter>
     </ClInclude>
     <ClInclude Include="ptpch.h" />
-    <ClInclude Include="users\Admin.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="users\student.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="users\teacher.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="users\user.h">
-      <Filter>users</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\DataInterface.h" />
-    <ClInclude Include="TestData\Test.h" />
-    <ClInclude Include="TestData\Question.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Data\SQLite.cpp">
-      <Filter>Connection</Filter>
-    </ClCompile>
-    <ClCompile Include="Mail\MailManager.cpp">
-      <Filter>Connection</Filter>
-    </ClCompile>
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Utilities\Logger.cpp">
@@ -67,21 +34,5 @@
       <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="ptpch.cpp" />
-    <ClCompile Include="users\Admin.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="users\student.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="users\teacher.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="users\user.cpp">
-      <Filter>users</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\DataInterface.cpp" />
-    <ClCompile Include="TestData\Test.cpp" />
-    <ClCompile Include="TestData\Question.cpp" />
-    <ClCompile Include="Data\Queries.cpp" />
   </ItemGroup>
 </Project>

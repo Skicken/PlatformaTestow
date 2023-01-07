@@ -2,9 +2,9 @@
 [submodule "vendor/raylib"]
 	path = vendor/raylib
 	url = https://github.com/raysan5/raylib
-[submodule "vendor/poco"]
-	path = vendor/poco
-	url = https://github.com/pocoproject/poco/
 [submodule "vendor/spdlog"]
 	path = vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "vendor/mailio"]
+	path = vendor/mailio
+	url = https://github.com/karastojko/mailio.git

@@ -3,20 +3,15 @@
 #include <Views/View.h>
 #include <Views/LoginView.h>
 
-#include <users/user.h>
-#include <Data/SQLite.h>
-#include <Mail/MailManager.h>
-
 class System
 {
-
 	static System* instance;
-	User* user;
-	View* currentView;
-	DataInterface* dataInterface;
+	std::shared_ptr<User> user;
+	std::unique_ptr<View> currentView;
+	std::shared_ptr <ExternalData::DataInterface> dataInterface;
 
 	bool isRun;
-	public:
+public:
 	System();
 	~System();
 
@@ -29,7 +24,6 @@ class System
 	bool isRunning();
 
 	static System* getInstance();
-	static User* const getLoggedUser();
-	static DataInterface* const getDataInterface();
+	static std::shared_ptr<User> const getLoggedUser();
+	static std::shared_ptr <ExternalData::DataInterface> const getDataInterface();
 };
-
