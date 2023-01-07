@@ -38,6 +38,8 @@ lub w sklonowanym projekcie w plikach w folderze "premake/scripts"
 ustawiamy odpowiednio zmienne
 
 Następnie uruchamiamy skrypt ```premake.bat``` który skompiluje wszystkie potrzebne biblioteki proces może trwać od kilku do kilkunastu minut.
+Należy pamiętać że w przypadku biblioteki mailio należy wejść do jej folderu
+otworzyć jej rozwiązanie i zbudować w RELEASE!
 
 Po uruchomieniu należy zbudować całe rozwiązanie. 
 
@@ -45,10 +47,10 @@ Po uruchomieniu należy zbudować całe rozwiązanie.
 ## Struktura Projektu
 Rozwiązanie TestPlatform posiada 5 projektów:
 
-* ExternalConnection - projekt służący do nawiązywania połączeń z bazą danych
-oraz obsługującą wysyłanie maili ("backend").
-* ExternalConnectionUnitTests - testy jednostkowe do ExternalConnection.
-* projekty raylib i spdlog są bibliotekami zewnętrznymi
+* ExternalConnection - własna biblioteka służący do nawiązywania połączeń z bazą danych
+oraz obsługującą wysyłanie maili ("backend" mimo wszystko jest wykonywany na kliencie).
+* ExternalConnectionUnitTests - testy jednostkowe do ExternalConnection. Testy można wykonywać tylko w release mode!
+* Projekty raylib,spdlog i mailio są bibliotekami zewnętrznymi
 * TestPlatform "frontend" aplikacji.
 
 

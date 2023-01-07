@@ -32,7 +32,7 @@ namespace ExternalData
 
 			std::vector<User> getAllUsers() override;
 			void addTestResult(TestResult& result, std::string STUDENT_ID) override;
-			void getTestResults(std::string STUDENT_ID) override;
+			virtual std::vector<TestResult> getTestResults(std::string STUDENT_ID) override;
 			void addGroup(Group& group) override;
 			std::vector<Group> getAllGroups() override;
 			void deleteGroup(Group& group) override;

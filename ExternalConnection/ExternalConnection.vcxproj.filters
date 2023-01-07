@@ -7,6 +7,12 @@
     <Filter Include="Data\MySQLInterface">
       <UniqueIdentifier>{D5299AB4-418B-77C2-CAF8-BD743659AE81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\MySQLInterface\Helpers">
+      <UniqueIdentifier>{97DF2E82-03ED-5C68-8CD3-5853F8DF281F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\MySQLInterface\Queries">
+      <UniqueIdentifier>{0209D05B-6E16-FE41-F7FC-F92C6309CAF8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="TestData">
       <UniqueIdentifier>{7F6CA274-6B39-FD7F-9452-EB27807E320E}</UniqueIdentifier>
     </Filter>
@@ -18,17 +24,23 @@
     <ClInclude Include="Data\DataInterface.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Data\MySQLInterface\SQL.h">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClInclude>
     <ClInclude Include="Data\MySQLInterface\Helpers\TestFactory.h">
-      <Filter>Data\MySQLInterface</Filter>
+      <Filter>Data\MySQLInterface\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Data\MySQLInterface\Helpers\UserFactory.h">
+      <Filter>Data\MySQLInterface\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\MySQLInterface\SQL.h">
       <Filter>Data\MySQLInterface</Filter>
     </ClInclude>
     <ClInclude Include="ExternalConnection.h" />
     <ClInclude Include="TestData\Answer.h">
+      <Filter>TestData</Filter>
+    </ClInclude>
+    <ClInclude Include="TestData\AttendanceList.h">
+      <Filter>TestData</Filter>
+    </ClInclude>
+    <ClInclude Include="TestData\Groups.h">
       <Filter>TestData</Filter>
     </ClInclude>
     <ClInclude Include="TestData\Question.h">
@@ -53,29 +65,39 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
-    <ClInclude Include="TestData\AttendanceList.h" />
-    <ClInclude Include="TestData\Groups.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data\DataInterface.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Helpers\TestFactory.cpp">
+      <Filter>Data\MySQLInterface\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Helpers\UserFactory.cpp">
+      <Filter>Data\MySQLInterface\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\TestResultQueries.cpp">
+      <Filter>Data\MySQLInterface\Queries</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\attendanceQueries.cpp">
+      <Filter>Data\MySQLInterface\Queries</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\testQueries.cpp">
+      <Filter>Data\MySQLInterface\Queries</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\userQueries.cpp">
+      <Filter>Data\MySQLInterface\Queries</Filter>
+    </ClCompile>
     <ClCompile Include="Data\MySQLInterface\SQL.cpp">
       <Filter>Data\MySQLInterface</Filter>
     </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\Helpers\TestFactory.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\Helpers\UserFactory.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\Queries\testQueries.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\Queries\userQueries.cpp">
-      <Filter>Data\MySQLInterface</Filter>
-    </ClCompile>
     <ClCompile Include="TestData\Answer.cpp">
+      <Filter>TestData</Filter>
+    </ClCompile>
+    <ClCompile Include="TestData\AttendanceList.cpp">
+      <Filter>TestData</Filter>
+    </ClCompile>
+    <ClCompile Include="TestData\Groups.cpp">
       <Filter>TestData</Filter>
     </ClCompile>
     <ClCompile Include="TestData\Question.cpp">
@@ -100,9 +122,5 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
-    <ClCompile Include="TestData\AttendanceList.cpp" />
-    <ClCompile Include="Data\MySQLInterface\Queries\attendanceQueries.cpp" />
-    <ClCompile Include="TestData\Groups.cpp" />
-    <ClCompile Include="Data\MySQLInterface\Queries\TestResultQueries.cpp" />
   </ItemGroup>
 </Project>

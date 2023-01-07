@@ -76,7 +76,7 @@
       <PrecompiledHeaderFile>ecpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STATIC_CONCPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
@@ -84,7 +84,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,7 +93,7 @@
       <PrecompiledHeaderFile>ecpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STATIC_CONCPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
@@ -101,7 +101,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -110,7 +110,7 @@
       <PrecompiledHeaderFile>ecpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STATIC_CONCPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
@@ -118,18 +118,18 @@
     </Link>
     <Lib>
       <AdditionalDependencies>mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="TestData\Groups.h" />
-    <ClInclude Include="TestData\AttendanceList.h" />
     <ClInclude Include="Data\DataInterface.h" />
-    <ClInclude Include="Data\MySQLInterface\SQL.h" />
     <ClInclude Include="Data\MySQLInterface\Helpers\TestFactory.h" />
     <ClInclude Include="Data\MySQLInterface\Helpers\UserFactory.h" />
+    <ClInclude Include="Data\MySQLInterface\SQL.h" />
     <ClInclude Include="ExternalConnection.h" />
     <ClInclude Include="TestData\Answer.h" />
+    <ClInclude Include="TestData\AttendanceList.h" />
+    <ClInclude Include="TestData\Groups.h" />
     <ClInclude Include="TestData\Question.h" />
     <ClInclude Include="TestData\Test.h" />
     <ClInclude Include="TestData\TestResult.h" />
@@ -140,17 +140,17 @@
     <ClInclude Include="users\user.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Data\MySQLInterface\Queries\attendanceQueries.cpp" />
-    <ClCompile Include="Data\MySQLInterface\Queries\TestResultQueries.cpp" />
-    <ClCompile Include="TestData\Groups.cpp" />
-    <ClCompile Include="TestData\AttendanceList.cpp" />
     <ClCompile Include="Data\DataInterface.cpp" />
-    <ClCompile Include="Data\MySQLInterface\SQL.cpp" />
     <ClCompile Include="Data\MySQLInterface\Helpers\TestFactory.cpp" />
     <ClCompile Include="Data\MySQLInterface\Helpers\UserFactory.cpp" />
+    <ClCompile Include="Data\MySQLInterface\Queries\TestResultQueries.cpp" />
+    <ClCompile Include="Data\MySQLInterface\Queries\attendanceQueries.cpp" />
     <ClCompile Include="Data\MySQLInterface\Queries\testQueries.cpp" />
     <ClCompile Include="Data\MySQLInterface\Queries\userQueries.cpp" />
+    <ClCompile Include="Data\MySQLInterface\SQL.cpp" />
     <ClCompile Include="TestData\Answer.cpp" />
+    <ClCompile Include="TestData\AttendanceList.cpp" />
+    <ClCompile Include="TestData\Groups.cpp" />
     <ClCompile Include="TestData\Question.cpp" />
     <ClCompile Include="TestData\Test.cpp" />
     <ClCompile Include="TestData\TestResult.cpp" />

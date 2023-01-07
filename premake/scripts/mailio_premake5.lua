@@ -30,13 +30,10 @@ function haveMailoDependencies()
     then
 
         os.chdir(MAILIO_DIR)    
-        os.mkdir("build")
-        os.chdir("build")
-        os.execute("cmake ..")
+        os.execute("cmake .")
         error("Open mailo.sln and build it!")
         return false;
     end
-    print(MAILIO_DIR)
     print("mailio is Available!")
     return true
 end

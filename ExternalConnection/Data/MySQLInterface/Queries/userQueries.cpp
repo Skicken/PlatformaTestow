@@ -93,7 +93,7 @@ namespace ExternalData
 	{
 	}
 
-	void MySQL::getTestResults(std::string STUDENT_ID)
+	std::vector<TestResult> MySQL::getTestResults(std::string STUDENT_ID)
 	{
 	}
 
@@ -109,6 +109,5 @@ namespace ExternalData
 	void MySQL::deleteGroup(Group& group)
 	{
 	}
-
 	
 }

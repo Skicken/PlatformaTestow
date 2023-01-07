@@ -34,7 +34,7 @@ namespace ExternalData
 			virtual void modifyUser(User& user) = 0;
 
 			virtual void addTestResult(TestResult& result,std::string STUDENT_ID)=0;
-			virtual void getTestResults(std::string STUDENT_ID) = 0;
+			virtual std::vector<TestResult> getTestResults(std::string STUDENT_ID) = 0;
 
 			virtual void addGroup(Group& group) = 0;
 			virtual std::vector<Group> getAllGroups() = 0;
