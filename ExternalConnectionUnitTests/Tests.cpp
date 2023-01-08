@@ -50,8 +50,8 @@ namespace UnitTests
 			try {
 				DataInterface* data = new MySQL();
 				std::vector<User> users = data->getAllUsers();
-				Group group("bak", users);
-				data->addGroup(group);
+				Group addGroup("bak", users);
+				data->addGroup(addGroup);
 				std::vector<Group> groups = data->getAllGroups();
 				Group* test = nullptr;
 				for(auto &group:groups)
@@ -129,19 +129,19 @@ namespace UnitTests
 				MySQL* data = new MySQL();
 				std::vector<Test> tests = data->getAllTests();
 				Test test = tests[0];
-				TestResult result(test);
+				TestCommit result(test);
 				Question q =  result.getCurrentQuestion();
 				result.setAnswerForQuestion(q.getAnswers()[0]);
 				User* user = data->getUser("admin", "admin");
-				data->addTestResult(result, user->getID());
-				TestResult dataResult = data->getTestResults(user->getID())[0];
+				data->commitTestResult(result, user->getID());
+				TestCommit dataResult = data->getTestResults(user->getID())[0];
 
 				Assert::IsFalse(dataResult.getTest().getQuestions().empty());
 				Assert::IsFalse(dataResult.getQuestionAnswer().empty());
 				Assert::AreEqual(std::string("Example Test"), dataResult.getTest().getTestName());
 
 				data->deleteTestResult(dataResult);
-				std::vector<TestResult> results = data->getTestResults(user->getID());
+				std::vector<TestCommit> results = data->getTestResults(user->getID());
 				Assert::IsTrue(results.empty());
 			}
 			catch (sql::SQLException& e)
@@ -152,6 +152,80 @@ namespace UnitTests
 
 			}
 		}
+
+		TEST_METHOD(HomeworkDA)
+		{
+			try {
+				MySQL* data = new MySQL();
+				Homework homework("What is 2+2?");
+				Group group = data->getAllGroups()[0];
+				data->addHomework(group, homework);
+				std::vector<Homework> dataHomework = data->getAllHomeworks();
+				Assert::IsFalse(dataHomework.empty());
+				Assert::AreEqual(std::string("What is 2+2?"), dataHomework[0].getQuestion());
+				Assert::IsFalse(dataHomework[0].getID().empty());
+
+				data->deleteHomework(dataHomework[0]);
+				dataHomework = data->getAllHomeworks();
+				Assert::IsTrue(dataHomework.empty());
+			}
+			catch (sql::SQLException& e)
+			{
+				std::string message = std::string(e.what());
+				Logger::WriteMessage(message.c_str());
+				Assert::Fail();
+
+			}
+		}
+		TEST_METHOD(HomeworkCommitDA)
+		{
+			try {
+				MySQL* data = new MySQL();
+				Homework homework("What is 2+2?");
+				Group group = data->getAllGroups()[0];
+				data->addHomework(group, homework);
+				std::vector<Homework> dataHomework = data->getAllHomeworks();
+
+				Assert::IsFalse(dataHomework.empty());
+				Assert::AreEqual(std::string("What is 2+2?"), dataHomework[0].getQuestion());
+				Assert::IsFalse(dataHomework[0].getID().empty());
+
+				HomeworkCommit commit(dataHomework[0], "I think it is 4");
+
+				User* user = data->getUser("user", "root");
+				data->commitHomework(user->getID(), commit);
+				std::vector<HomeworkCommit> dataCommit = data->getCommitedHomeworks(user->getID());
+
+				Assert::IsFalse(dataCommit.empty());
+				Assert::AreEqual(std::string("I think it is 4"), dataCommit[0].getAnswer());
+				Assert::IsFalse(dataCommit[0].getID().empty());
+
+				dataCommit = data->getCommitedHomeworks(dataHomework[0]);
+				Assert::IsFalse(dataCommit.empty());
+				Assert::AreEqual(std::string("I think it is 4"), dataCommit[0].getAnswer());
+				Assert::IsFalse(dataCommit[0].getID().empty());
+
+
+
+				data->deleteHomework(dataHomework[0]);
+				dataHomework = data->getAllHomeworks();
+				Assert::IsTrue(dataHomework.empty());
+
+				dataCommit = data->getCommitedHomeworks(user->getID());
+				Assert::IsTrue(dataHomework.empty());
+
+
+			}
+			catch (sql::SQLException& e)
+			{
+				std::string message = std::string(e.what());
+				Logger::WriteMessage(message.c_str());
+				Assert::Fail();
+
+			}
+		}
+
+
 	};
 
 }

@@ -1,22 +1,22 @@
 #include "ecpch.h"
-#include "TestResult.h"
+#include "TestCommit.h"
 
-std::string TestResult::getID() const
+std::string TestCommit::getID() const
 {
 	return ID;
 }
 
-Test TestResult::getTest() const
+Test TestCommit::getTest() const
 {
 	return test;
 }
 
-std::map<std::string, std::string> TestResult::getQuestionAnswer() const
+std::map<std::string, std::string> TestCommit::getQuestionAnswer() const
 {
 	return givenQuestionAnswer;
 }
 
-TestResult::TestResult(const Test& testRef) :test(testRef),questionList(test.getQuestions()),
+TestCommit::TestCommit(const Test& testRef) :test(testRef),questionList(test.getQuestions()),
 currentQuestion(questionList.begin())
 {
 
@@ -24,23 +24,23 @@ currentQuestion(questionList.begin())
 
 
 
-TestResult::TestResult(const Test& testRef, const std::map<std::string, std::string>& given_question_answer, const std::string& ID): ID(ID),test(testRef),
+TestCommit::TestCommit(const Test& testRef, const std::map<std::string, std::string>& given_question_answer, const std::string& ID): ID(ID),test(testRef),
                                                                                                               questionList(test.getQuestions()), givenQuestionAnswer(given_question_answer),
                                                                                                               currentQuestion(questionList.begin())
 {
 
 }
-Question TestResult::getCurrentQuestion() const
+Question TestCommit::getCurrentQuestion() const
 {
 	return *currentQuestion;
 }
 
-bool TestResult::getNextQuestion()
+bool TestCommit::getNextQuestion()
 {
 	++currentQuestion;
 	return currentQuestion != test.getQuestions().end();
 }
-void TestResult::setAnswerForQuestion(Answer& answer)
+void TestCommit::setAnswerForQuestion(Answer& answer)
 {
 	givenQuestionAnswer[(*currentQuestion).getQuestionID()] = answer.getID();
 }

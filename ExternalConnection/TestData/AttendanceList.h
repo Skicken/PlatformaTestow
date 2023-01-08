@@ -4,9 +4,10 @@
 
 class AttendanceList
 {
-public:
+	public:
 		AttendanceList(const Group& group, const std::string& date);
 		void setDate(const std::string& date);
+
 		AttendanceList(const AttendanceList& other);
 		AttendanceList(AttendanceList&& other) noexcept;
 		AttendanceList& operator=(const AttendanceList& other);

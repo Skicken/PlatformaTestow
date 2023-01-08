@@ -1,11 +1,14 @@
 #pragma once
 #include "TestData/AttendanceList.h"
 #include "TestData/Groups.h"
+#include "TestData/Homework.h"
 #include "users/user.h"
 #include "TestData/Test.h"
-#include "TestData/TestResult.h"
+#include "TestData/TestCommit.h"
 #include "users/teacher.h"
 #include "users/Admin.h"
+
+class Homework;
 
 namespace ExternalData
 {
@@ -13,11 +16,9 @@ namespace ExternalData
 	class DataInterface
 	{
 		public:
+		virtual ~DataInterface() = default;
 
-			 /**
-			 * \return All tests available in database
-			 */
-			virtual std::vector<Test> getAllTests() = 0;
+		virtual std::vector<Test> getAllTests() = 0;
 			virtual std::vector<Test> getTeacherTests(std::string OWNER_ID) = 0;
 
 			virtual std::vector<Test> getStudentAvailableTest(std::string STUDENT_ID) = 0;
@@ -33,9 +34,9 @@ namespace ExternalData
 			virtual void modifyUser(User& user, std::string login, std::string password) = 0;
 			virtual void modifyUser(User& user) = 0;
 
-			virtual void addTestResult(TestResult& result,std::string STUDENT_ID)=0;
-			virtual std::vector<TestResult> getTestResults(std::string STUDENT_ID) = 0;
-			virtual void deleteTestResult(TestResult& result) = 0;
+			virtual void commitTestResult(TestCommit& result,std::string STUDENT_ID)=0;
+			virtual std::vector<TestCommit> getTestResults(std::string STUDENT_ID) = 0;
+			virtual void deleteTestResult(TestCommit& result) = 0;
 
 			virtual void addGroup(Group& group) = 0;
 			virtual std::vector<Group> getAllGroups() = 0;
@@ -44,7 +45,15 @@ namespace ExternalData
 			virtual void addAttendanceList(AttendanceList& list) = 0;
 			virtual void deleteAttendanceList(AttendanceList& list) = 0;
 			virtual AttendanceList getAttendanceList(Group& group, std::string& Date) = 0;
-			
-		/*virtual std::map<std::string, std::string> getCorrectAnswers(std::string TEST_ID);*/
+
+			virtual void addHomework(Group& group, Homework& homework) = 0;
+			virtual std::vector<Homework> getAllHomeworks() = 0;
+			virtual void commitHomework(std::string StudentID, HomeworkCommit& homework) = 0;
+
+			virtual std::vector<HomeworkCommit> getCommitedHomeworks(std::string STUDENT_ID) = 0;
+			virtual std::vector<HomeworkCommit> getCommitedHomeworks(Homework homework) = 0;
+
+			virtual void deleteHomework(Homework& homework) = 0;
+
 	};
 }

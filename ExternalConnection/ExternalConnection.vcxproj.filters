@@ -34,6 +34,7 @@
       <Filter>Data\MySQLInterface</Filter>
     </ClInclude>
     <ClInclude Include="ExternalConnection.h" />
+    <ClInclude Include="MailSender.h" />
     <ClInclude Include="TestData\Answer.h">
       <Filter>TestData</Filter>
     </ClInclude>
@@ -43,13 +44,16 @@
     <ClInclude Include="TestData\Groups.h">
       <Filter>TestData</Filter>
     </ClInclude>
+    <ClInclude Include="TestData\Homework.h">
+      <Filter>TestData</Filter>
+    </ClInclude>
     <ClInclude Include="TestData\Question.h">
       <Filter>TestData</Filter>
     </ClInclude>
     <ClInclude Include="TestData\Test.h">
       <Filter>TestData</Filter>
     </ClInclude>
-    <ClInclude Include="TestData\TestResult.h">
+    <ClInclude Include="TestData\TestCommit.h">
       <Filter>TestData</Filter>
     </ClInclude>
     <ClInclude Include="ecpch.h" />
@@ -65,6 +69,8 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
+    <ClInclude Include="users\Sender.h" />
+    <ClInclude Include="TestData\SimplifiedMessage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data\DataInterface.cpp">
@@ -75,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="Data\MySQLInterface\Helpers\UserFactory.cpp">
       <Filter>Data\MySQLInterface\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\GroupQueries.cpp">
+      <Filter>Data\MySQLInterface\Queries</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MySQLInterface\Queries\HomeworkQueries.cpp">
+      <Filter>Data\MySQLInterface\Queries</Filter>
     </ClCompile>
     <ClCompile Include="Data\MySQLInterface\Queries\TestResultQueries.cpp">
       <Filter>Data\MySQLInterface\Queries</Filter>
@@ -91,6 +103,7 @@
     <ClCompile Include="Data\MySQLInterface\SQL.cpp">
       <Filter>Data\MySQLInterface</Filter>
     </ClCompile>
+    <ClCompile Include="MailSender.cpp" />
     <ClCompile Include="TestData\Answer.cpp">
       <Filter>TestData</Filter>
     </ClCompile>
@@ -100,13 +113,16 @@
     <ClCompile Include="TestData\Groups.cpp">
       <Filter>TestData</Filter>
     </ClCompile>
+    <ClCompile Include="TestData\Homework.cpp">
+      <Filter>TestData</Filter>
+    </ClCompile>
     <ClCompile Include="TestData\Question.cpp">
       <Filter>TestData</Filter>
     </ClCompile>
     <ClCompile Include="TestData\Test.cpp">
       <Filter>TestData</Filter>
     </ClCompile>
-    <ClCompile Include="TestData\TestResult.cpp">
+    <ClCompile Include="TestData\TestCommit.cpp">
       <Filter>TestData</Filter>
     </ClCompile>
     <ClCompile Include="ecpch.cpp" />
@@ -122,6 +138,7 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
-    <ClCompile Include="Data\MySQLInterface\Queries\groupQueries.cpp" />
+    <ClCompile Include="users\Sender.cpp" />
+    <ClCompile Include="TestData\SimplifiedMessage.cpp" />
   </ItemGroup>
 </Project>

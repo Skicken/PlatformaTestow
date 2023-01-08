@@ -19,7 +19,7 @@ namespace UnitTests
 					Assert::IsNotNull(user);
 					Assert::AreEqual(user->getName(), std::string("Jan"));
 					Assert::AreEqual(user->getSurname(), std::string("Nowak"));
-					Assert::AreEqual(user->getEmail(), std::string("kowalski@gmail.com.pl"));
+					Assert::AreEqual(user->getEmail(), std::string("test123abe@gmail.com"));
 					Assert::IsTrue(user->getType() == UserType::STUDENT);
 					delete user;
 					delete data;

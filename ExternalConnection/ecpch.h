@@ -5,5 +5,7 @@
 #include <cassert>
 #include <string>
 #include <set>
-#include <Windows.h>
 #include <mysql/jdbc.h>
+
+#include <mailio/message.hpp>
+#include <mailio/smtp.hpp>

@@ -33,8 +33,8 @@ namespace ExternalData
 			virtual void modifyUser(User& user) override;
 
 			std::vector<User> getAllUsers() override;
-			void addTestResult(TestResult& result, std::string STUDENT_ID) override;
-			virtual std::vector<TestResult> getTestResults(std::string STUDENT_ID) override;
+			void commitTestResult(TestCommit& result, std::string STUDENT_ID) override;
+			virtual std::vector<TestCommit> getTestResults(std::string STUDENT_ID) override;
 			void addGroup(Group& group) override;
 			std::vector<Group> getAllGroups() override;
 			void deleteGroup(Group& group) override;
@@ -43,6 +43,13 @@ namespace ExternalData
 			virtual AttendanceList getAttendanceList(Group& group, std::string& Date) override;
 
 			std::vector<User> getGroupUsers(std::string groupID);
-			void deleteTestResult(TestResult& result) override;
+			void deleteTestResult(TestCommit& result) override;
+
+			void addHomework(Group& group, Homework& homework) override;
+			std::vector<Homework> getAllHomeworks() override;
+			void commitHomework(std::string StudentID, HomeworkCommit& homework) override;
+			std::vector<HomeworkCommit> getCommitedHomeworks(std::string STUDENT_ID) override;
+			std::vector<HomeworkCommit> getCommitedHomeworks(Homework homework) override;
+			void deleteHomework(Homework& homework) override;
 	};
 }

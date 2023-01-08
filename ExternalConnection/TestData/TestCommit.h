@@ -2,15 +2,15 @@
 #include "Question.h"
 #include "Test.h"
 
-class TestResult
+class TestCommit
 {
 public:
 		std::string getID() const;
 		Test getTest() const;
 		std::map<std::string, std::string> getQuestionAnswer() const;
-		TestResult(const Test& testRef);
+		TestCommit(const Test& testRef);
 
-		TestResult(const Test& testRef, const std::map<std::string, std::string>& given_question_answer, const std::string& ID);
+		TestCommit(const Test& testRef, const std::map<std::string, std::string>& given_question_answer, const std::string& ID);
 		Question getCurrentQuestion() const;
 		bool getNextQuestion();
 		void setAnswerForQuestion(Answer& answer);

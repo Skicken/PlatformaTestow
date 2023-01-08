@@ -4,7 +4,7 @@
 
 namespace ExternalData
 {
-	void MySQL::addTestResult(TestResult& result, std::string STUDENT_ID)
+	void MySQL::commitTestResult(TestCommit& result, std::string STUDENT_ID)
 	{
 		connection_shared connection = getConnection();
 
@@ -26,14 +26,14 @@ namespace ExternalData
 			insertUserAnswer->execute();
 		}
 	}
-	std::vector<TestResult> MySQL::getTestResults(std::string STUDENT_ID)
+	std::vector<TestCommit> MySQL::getTestResults(std::string STUDENT_ID)
 	{
 		connection_shared connection = getConnection();
 		const std::string getTestResultQuery = "SELECT `ID`, `USER_ID`, `TEST_ID` FROM `users_test_taken`";
 		statement_unique getTestResult(connection->prepareStatement(getTestResultQuery));
 		result_shared testResult(getTestResult->executeQuery());
 		TestFactory testFactory(connection);
-		std::vector<TestResult> results;
+		std::vector<TestCommit> results;
 		while(testResult->next())
 		{
 			std::string testID = testResult->getString(1);
@@ -55,11 +55,11 @@ namespace ExternalData
 			{
 				givenQuestionAnswer[questionAnswerResult->getString(1)] = questionAnswerResult->getString(2);
 			}
-			results.push_back(TestResult(test, givenQuestionAnswer, testID));
+			results.push_back(TestCommit(test, givenQuestionAnswer, testID));
 		}
 		return results;
 	}
-	void MySQL::deleteTestResult(TestResult& result)
+	void MySQL::deleteTestResult(TestCommit& result)
 	{
 		connection_shared connection = getConnection();
 		const std::string deleteTestResultQuery = "DELETE FROM `users_test_taken` WHERE `ID` = ?";
@@ -69,4 +69,6 @@ namespace ExternalData
 
 
 	}
+
+	
 }
