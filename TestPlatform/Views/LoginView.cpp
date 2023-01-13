@@ -7,7 +7,7 @@ void LoginView::update()
 }
 
 void LoginView::render()
-{	
-
+{
+	
 	
 }

@@ -1,16 +1,18 @@
 #include "pch.h"
-#include "CppUnitTest.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 
 //Units tests should be run only in release mode.
 namespace UnitTests
 {
+
 	using namespace ExternalData;
 	TEST_CLASS(MYSQL_ATTENDANCE)
 	{
+
 		TEST_METHOD(getExampleGroup)
 		{
+			std::string message;
 			try {
 				DataInterface* data = new MySQL();
 				std::vector<Group> groups = data->getAllGroups();
@@ -21,14 +23,13 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
-
+				message = std::string(e.what());
 			}
+			failMessage(message);
 		}
 		TEST_METHOD(testUniqueID)
 		{
+			std::string message;
 			try {
 				MySQL* data = new MySQL();
 				for (int i = 0; i < 10; i++)
@@ -39,14 +40,15 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
+				message = std::string(e.what());
 
 			}
+			failMessage(message);
+
 		}
 		TEST_METHOD(groupDA)
 		{
+			std::string message;
 			try {
 				DataInterface* data = new MySQL();
 				std::vector<User> users = data->getAllUsers();
@@ -68,14 +70,13 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
-
+				message = std::string(e.what());
 			}
+			failMessage(message);
 		}
 		TEST_METHOD(getExampleAttendance)
 		{
+			std::string message;
 			try {
 				DataInterface* data = new MySQL();
 				std::vector<Group> groups = data->getAllGroups();
@@ -86,16 +87,14 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
-
+				message = std::string(e.what());
 			}
-
+			failMessage(message);
 		}
 
 		TEST_METHOD(AttendanceListDA)
 		{
+			std::string message;
 			try {
 				MySQL* data = new MySQL();
 				std::vector<Group> groups = data->getAllGroups();
@@ -116,15 +115,14 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
-
+				message = std::string(e.what());
 			}
+			failMessage(message);
 		}
 
 		TEST_METHOD(TestResultDA)
 		{
+			std::string message;
 			try {
 				MySQL* data = new MySQL();
 				std::vector<Test> tests = data->getAllTests();
@@ -146,15 +144,15 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
+				message = std::string(e.what());
 
 			}
+			failMessage(message);
 		}
 
 		TEST_METHOD(HomeworkDA)
 		{
+			std::string message;
 			try {
 				MySQL* data = new MySQL();
 				Homework homework("What is 2+2?");
@@ -171,14 +169,13 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
-
+				message = std::string(e.what());
 			}
+			failMessage(message);
 		}
 		TEST_METHOD(HomeworkCommitDA)
 		{
+			std::string message;
 			try {
 				MySQL* data = new MySQL();
 				Homework homework("What is 2+2?");
@@ -218,11 +215,9 @@ namespace UnitTests
 			}
 			catch (sql::SQLException& e)
 			{
-				std::string message = std::string(e.what());
-				Logger::WriteMessage(message.c_str());
-				Assert::Fail();
-
+				message = std::string(e.what());
 			}
+			failMessage(message);
 		}
 
 

@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "CppUnitTest.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 
@@ -11,6 +10,7 @@ namespace UnitTests
 	{
 			TEST_METHOD(LoginUserExample)
 			{
+				std::string message;
 				try
 				{
 					DataInterface* data = new MySQL();
@@ -26,14 +26,14 @@ namespace UnitTests
 				}
 				catch (sql::SQLException& e)
 				{
-					std::string message = std::string(e.what());
-					Logger::WriteMessage(message.c_str());
-					Assert::Fail();
+					message = std::string(e.what());
 				}
-
+				failMessage(message);
+				
 			}
 			TEST_METHOD(UserDAM)
 			{
+				std::string message;
 				try {
 					DataInterface* data = new MySQL();
 
@@ -75,14 +75,15 @@ namespace UnitTests
 				}
 				catch (sql::SQLException& e)
 				{
-					std::string message = std::string(e.what());
-					Logger::WriteMessage(message.c_str());
-					Assert::Fail();
+					message = std::string(e.what());
 				}
+				failMessage(message);
+
 			}
 
 			TEST_METHOD(GetExampleTest)
 			{
+				std::string message;
 				try {
 					DataInterface* data = new MySQL();
 					std::vector<Test> test = data->getAllTests();
@@ -95,15 +96,14 @@ namespace UnitTests
 				}
 				catch (sql::SQLException& e)
 				{
-					std::string message = std::string(e.what());
-					Logger::WriteMessage(message.c_str());
-					Assert::Fail();
-
+					message = std::string(e.what());
 				}
+				failMessage(message);
 			}
 
 			TEST_METHOD(GetTeacherTest)
 			{
+				std::string message;
 				try {
 					DataInterface* data = new MySQL();
 					User* user = data->getUser("user", "root");
@@ -121,13 +121,13 @@ namespace UnitTests
 				}
 				catch (sql::SQLException& e)
 				{
-					std::string message = std::string(e.what());
-					Logger::WriteMessage(message.c_str());
-					Assert::Fail();
+					message = std::string(e.what());
 				}
+				failMessage(message);
 			}
 			TEST_METHOD(GetAssignedTests)
 			{
+				std::string message;
 				try {
 					DataInterface* data = new MySQL();
 					User* user = data->getUser("admin", "admin");
@@ -141,13 +141,13 @@ namespace UnitTests
 				}
 				catch (sql::SQLException& e)
 				{
-					std::string message = std::string(e.what());
-					Logger::WriteMessage(message.c_str());
-					Assert::Fail();
+					message = std::string(e.what());
 				}
+				failMessage(message);
 			}
 			TEST_METHOD(TestDAM)
 			{
+				std::string message;
 				try {
 					DataInterface* data = new MySQL();
 					User* user = data->getUser("admin", "admin");
@@ -194,10 +194,9 @@ namespace UnitTests
 				}
 				catch (sql::SQLException& e)
 				{
-					std::string message = std::string(e.what());
-					Logger::WriteMessage(message.c_str());
-					Assert::Fail();
+					message = std::string(e.what());
 				}
+				failMessage(message);
 			}
 
 
