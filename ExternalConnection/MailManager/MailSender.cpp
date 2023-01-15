@@ -1,10 +1,6 @@
 #include "ecpch.h"
 #include "MailSender.h"
 
-EmailWrapper::MailSender::MailSender()
-{
-}
-
 void EmailWrapper::MailSender::sendToGroup(Sender& sender, SimplifiedMessage smplMsg, Group& group)
 {
 	message msg;
@@ -29,9 +25,6 @@ void EmailWrapper::MailSender::sendToUser(Sender& sender, SimplifiedMessage smpl
 
 	std::string name_surnameRecipent = user.getName() + " " + user.getSurname();
 	msg.add_recipient(mail_address(name_surnameRecipent, user.getEmail()));
-
-	/*mailio::smtps connection(smtpServer, smtpPort);
-	connection.authenticate(sender.getEmailLogin(),sender.getEmailPassword(), smtps::auth_method_t::LOGIN);*/
 
 	mailio::smtp connection(smtpServer, smtpPort);
 	connection.authenticate(sender.getEmailLogin(), sender.getEmailPassword(), mailio::smtp::auth_method_t::NONE);

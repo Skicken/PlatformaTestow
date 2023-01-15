@@ -6,6 +6,12 @@ Group::Group(const std::string& name, const std::vector<User>& users): name(name
 {
 }
 
+Group::Group(const std::string& id, const std::string& name, const std::vector<User>& users): ID(id),
+	name(name),
+	users(users)
+{
+}
+
 Group::Group(const Group& other): ID(other.ID),
                                   name(other.name),
                                   users(other.users)
@@ -36,11 +42,6 @@ Group& Group::operator=(Group&& other) noexcept
 	name = std::move(other.name);
 	users = std::move(other.users);
 	return *this;
-}
-
-Group::Group(const std::string& id, const std::string& name): ID(id),
-                                                              name(name)
-{
 }
 
 void Group::setName(const std::string& name)

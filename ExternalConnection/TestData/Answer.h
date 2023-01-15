@@ -1,10 +1,14 @@
 #pragma once
+namespace ExternalData
+{
+	class TestGetter;
+	class MySQL;
+}
 class Answer
 {
 	public:
 		std::string getID() const;
 		std::string getAnswer() const;
-		Answer(const std::string& id, const std::string& answer);
 		Answer(const std::string& answer);
 		Answer(const char* answer);
 		Answer(const Answer& other);
@@ -14,5 +18,9 @@ class Answer
 	private:
 		std::string ID;
 		std::string answer;
+		Answer(const std::string& id, const std::string& answer);
+
+		friend class ExternalData::MySQL;
+		friend class ExternalData::TestGetter;
 };
 

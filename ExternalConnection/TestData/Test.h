@@ -1,13 +1,16 @@
 #pragma once
 #include "Question.h"
 
+namespace ExternalData
+{
+	class MySQL;
+	class TestGetter;
+}
 class Test
 {
 
-
 	public:
-		Test(const std::string& test_id, const std::string& test_name, const std::string& description,
-			bool randomize_questions, const std::vector<Question>& questions);
+
 		Test(const std::string& test_name, const std::string& description, bool randomize_questions,
 			const std::vector<Question>& questions);
 
@@ -33,5 +36,10 @@ class Test
 		std::string description;
 		bool randomizeQuestions;
 		std::vector<Question> questions;
+		Test(const std::string& test_id, const std::string& test_name, const std::string& description,
+			bool randomize_questions, const std::vector<Question>& questions);
+		friend class ExternalData::MySQL;
+		friend class ExternalData::TestGetter;
+
 };
 

@@ -1,6 +1,23 @@
 #include "ecpch.h"
 #include "user.h"
 
+
+User::User(const std::string& name, const std::string& surname, const std::string& email, UserType type): name(name),
+	surname(surname),
+	email(email),
+	type(type)
+{
+}
+
+User::User(const std::string& name, const std::string& surname, const std::string& email, UserType type,
+           const std::string& id): name(name),
+                                   surname(surname),
+                                   email(email),
+                                   type(type),
+                                   ID(id)
+{
+}
+
 User::User(const User& other): name(other.name),
                                surname(other.surname),
                                email(other.email),
@@ -62,23 +79,7 @@ bool User::setEmail(const std::string& email)
 	return true;
 }
 
-User::~User() = default;
 
-User::User(const std::string& name, const std::string& surname, const std::string& 
-           email, const std::string& uuid): name(name),
-                                            surname(surname),
-                                            email(email),
-                                            ID(uuid)
-{
-}
-
-User::User(const std::string& name, const std::string& surname, const std::string& email) :   name(name),
-							surname(surname),
-							email(email)
-
-{
-
-}
 std::string User::getID() const
 {
 	return ID;

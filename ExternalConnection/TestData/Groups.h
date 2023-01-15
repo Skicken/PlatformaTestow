@@ -1,15 +1,19 @@
 #pragma once
 #include "users/user.h"
 
+namespace ExternalData
+{
+	class MySQL;
+}
 class Group
 {
-	public:
+public:
+
 	Group(const Group& other);
 	Group(Group&& other) noexcept;
 	Group& operator=(const Group& other);
 	Group& operator=(Group&& other) noexcept;
 
-	Group(const std::string& id, const std::string& name);
 	Group(const std::string& name, const std::vector<User>& users);
 
 	void setName(const std::string& name);
@@ -22,6 +26,9 @@ class Group
 		std::string ID;
 		std::string name;
 		std::vector<User> users;
+		Group(const std::string& id, const std::string& name, const std::vector<User>& users);
+		friend class ExternalData::MySQL;
+
 
 };
 

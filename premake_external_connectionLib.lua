@@ -1,7 +1,29 @@
 outputdir = "%{cfg.buildcfg}"
 include("premake/scripts/mysql_premake5.lua")
 include("premake/scripts/mailio_premake5.lua")
+function configuration()
+    filter "configurations:Debug"
+        staticruntime "off"
+        runtime "Debug"
+        defines "DEBUG"
+        symbols "on"
 
+
+    filter "configurations:Release"
+        staticruntime "off"
+        runtime "Release"
+        defines "RELEASE"
+        defines "NDEBUG"
+        optimize "on"
+
+    filter "configurations:Dist"
+        staticruntime "off"
+        runtime "Release"
+        kind "WindowedApp"
+        defines "DIST"
+        defines "NDEBUG"
+        optimize "on"
+end
 project "ExternalConnection"
     location "ExternalConnection"
     kind "StaticLib"
@@ -21,7 +43,8 @@ project "ExternalConnection"
     }
     link_mysql();
     link_mailio();
-
+    configuration();
+    
 project "ExternalConnectionUnitTests"
     location "ExternalConnectionUnitTests"
     kind "SharedLib"
@@ -51,15 +74,31 @@ project "ExternalConnectionUnitTests"
     links
     {
         "%{cfg.buildcfg}/ExternalConnection.lib",
-        "mysqlcppconn-static.lib",
-
     }
     link_mysql();
     link_mailio();
 
+    filter "configurations:Debug"
+        staticruntime "off"
+        runtime "Debug"
+        defines "DEBUG"
+        symbols "on"
+        links
+        {
+            "mysqlcppconn-staticd.lib",
+        }
+    filter "configurations:Release"
+        staticruntime "off"
+        runtime "Release"
+        defines "RELEASE"
+        defines "NDEBUG"
+        optimize "on"
+        links
+        {
+            "mysqlcppconn-static.lib"
+        }
 
 
-    
 
 
 

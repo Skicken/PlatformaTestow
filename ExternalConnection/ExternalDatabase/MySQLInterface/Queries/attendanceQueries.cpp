@@ -1,5 +1,6 @@
 #include <ecpch.h>
-#include "Data/MySQLInterface/SQL.h"
+#include "ExternalDatabase/MySQLInterface/SQL.h"
+#include "ExternalDatabase/MySQLInterface/Helpers/UserFactory.h"
 
 
 namespace ExternalData
@@ -9,12 +10,18 @@ namespace ExternalData
 		const std::string query = "INSERT INTO `attendance_list`(`GROUP_ID`, `USER_ID`, `attendance_date`) VALUES (?,?,CURRENT_DATE())";
 		connection_shared connection = getConnection();
 		statement_unique insertQuery(connection->prepareStatement(query));
-
-		for(const auto& user:list.getPresentUsers())
+		try
 		{
-			insertQuery->setString(1, list.getGroup().getID());
-			insertQuery->setString(2, user.getID());
-			insertQuery->execute();
+			for (const auto& user : list.getPresentUsers())
+			{
+				insertQuery->setString(1, list.getGroup().getID());
+				insertQuery->setString(2, user.getID());
+				insertQuery->execute();
+			}
+		}
+		catch (DatabaseException& exception)
+		{
+			throw DatabaseException(ExceptionType::ENTRY_EXISTS, "Attendance list for this day already exists");
 		}
 
 	}
@@ -38,10 +45,12 @@ namespace ExternalData
 		statement->setString(2, Date);
 
 		result_shared result(statement->executeQuery());
+		const auto  factory = std::make_unique<UserFactory>();
 		while(result->next())
 		{
 			std::string userID = result->getString(1);
-			list.setUserPresent(userID);
+			User user = factory->getUserFromID(connection, userID);
+			list.setUserPresent(user);
 		}
 		return list;
 	}

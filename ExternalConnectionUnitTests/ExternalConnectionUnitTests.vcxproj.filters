@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="DataContainersTests">
+      <UniqueIdentifier>{E8453E12-54A7-1B20-DD14-62D2497552DF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExceptionTests">
+      <UniqueIdentifier>{07CB36A0-F398-2AA6-DC2C-9BCCC899060B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DataContainersTests\AttendanceUnit.cpp">
+      <Filter>DataContainersTests</Filter>
+    </ClCompile>
+    <ClCompile Include="DataContainersTests\EmailUnit.cpp">
+      <Filter>DataContainersTests</Filter>
+    </ClCompile>
+    <ClCompile Include="DataContainersTests\GroupUnit.cpp">
+      <Filter>DataContainersTests</Filter>
+    </ClCompile>
+    <ClCompile Include="DataContainersTests\HomeworkUnit.cpp">
+      <Filter>DataContainersTests</Filter>
+    </ClCompile>
+    <ClCompile Include="DataContainersTests\TestsUnit.cpp">
+      <Filter>DataContainersTests</Filter>
+    </ClCompile>
+    <ClCompile Include="DataContainersTests\UserUnit.cpp">
+      <Filter>DataContainersTests</Filter>
+    </ClCompile>
+    <ClCompile Include="ExceptionTests\ConnectionUnit.cpp">
+      <Filter>ExceptionTests</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+</Project>

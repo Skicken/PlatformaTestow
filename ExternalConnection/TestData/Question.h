@@ -1,5 +1,12 @@
 #pragma once
 #include "Answer.h"
+
+namespace ExternalData
+{
+	class TestGetter;
+	class MySQL;
+}
+
 class Question
 {
 
@@ -11,8 +18,7 @@ class Question
 		std::vector<Answer>& getAnswers();
 		void setAnswers(const std::vector<Answer>& answers);
 		Question(const std::string& question, const std::vector<Answer>& answers, const Answer& correct_answer);
-		Question(const std::string& question_id, const std::string& question, const std::vector<Answer>& answers,
-			const Answer& correct_answer);
+
 
 
 		Question(const Question& other);
@@ -23,10 +29,15 @@ class Question
 		Answer getCorrectAnswer() const;
 		void setCorrectAnswer(const Answer& correct_answer);
 	private:
+		Question(const std::string& question_id, const std::string& question, const std::vector<Answer>& answers,
+			const Answer& correct_answer);
 		std::string QuestionID;
 		std::string question;
 		std::vector<Answer> answers;
 		Answer correctAnswer;
+		friend class ExternalData::MySQL;
+		friend class ExternalData::TestGetter;
+
 	
 };
 

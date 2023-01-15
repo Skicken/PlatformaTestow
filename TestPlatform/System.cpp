@@ -37,7 +37,7 @@ void System::initVariables()
 
 bool System::LoginUser(std::string username, std::string password)
 {
-    this->user = std::unique_ptr<User>{ dataInterface->getUser(username,password) };
+    this->user = dataInterface->getUser(username,password);
     return this->user != nullptr;
 }
 

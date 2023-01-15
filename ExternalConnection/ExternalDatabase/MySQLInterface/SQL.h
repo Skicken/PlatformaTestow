@@ -1,5 +1,6 @@
 #pragma once
 #include "../DataInterface.h"
+#include "DatabaseException.h"
 namespace ExternalData
 {
 	const std::string ID_GEN = "UNHEX(REPLACE(UUID(), '-', ''))";
@@ -17,7 +18,7 @@ namespace ExternalData
 			connection_shared getConnection();
 		public:
 			MySQL();
-			~MySQL();
+			~MySQL() override;
 			std::string getUniqueID();
 			std::string getCurrentDate();
 			virtual std::vector<Test> getAllTests() override;
@@ -29,7 +30,7 @@ namespace ExternalData
 			virtual void deleteUser(User& user) override;
 			virtual void modifyUser(User& user, std::string login, std::string password) override;
 			virtual std::vector<Test> getStudentAvailableTest(std::string STUDENT_ID) override;
-			virtual User* getUser(std::string login, std::string password) override;
+			virtual std::shared_ptr<User> getUser(std::string login, std::string password) override;
 			virtual void modifyUser(User& user) override;
 
 			std::vector<User> getAllUsers() override;
@@ -46,10 +47,10 @@ namespace ExternalData
 			void deleteTestResult(TestCommit& result) override;
 
 			void addHomework(Group& group, Homework& homework) override;
-			std::vector<Homework> getAllHomeworks() override;
+			std::vector<Homework> getAllHomework() override;
 			void commitHomework(std::string StudentID, HomeworkCommit& homework) override;
-			std::vector<HomeworkCommit> getCommitedHomeworks(std::string STUDENT_ID) override;
-			std::vector<HomeworkCommit> getCommitedHomeworks(Homework homework) override;
+			std::vector<HomeworkCommit> getCommitHomework(std::string STUDENT_ID) override;
+			std::vector<HomeworkCommit> getCommitHomework(Homework homework) override;
 			void deleteHomework(Homework& homework) override;
 	};
 }

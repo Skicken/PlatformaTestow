@@ -1,6 +1,6 @@
 #include "ecpch.h"
-#include "Data/MySQLInterface/SQL.h"
-#include "Data/MySQLInterface/Helpers/UserFactory.h"
+#include "ExternalDatabase/MySQLInterface/Helpers/UserFactory.h"
+#include "ExternalDatabase/MySQLInterface/SQL.h"
 
 namespace ExternalData
 {
@@ -17,8 +17,15 @@ namespace ExternalData
 		stat->setString(4, user.getSurname());
 		stat->setString(5, UserFactory::EnumToString(user.getType()));
 		stat->setString(6, user.getEmail());
-
-		stat->execute();
+		try
+		{
+			stat->execute();
+		}
+		catch (sql::SQLException& exception)
+		{
+			throw DatabaseException(ExceptionType::ENTRY_EXISTS, "User with such login exists");
+		}
+		
 
 	}
 	void MySQL::deleteUser(User& user)
@@ -42,11 +49,10 @@ namespace ExternalData
 		stat->setString(5, UserFactory::EnumToString(user.getType()));
 		stat->setString(6, user.getEmail());
 		stat->setString(7, user.getID());
-
 		stat->execute();
 
 	}
-	User* MySQL::getUser(std::string login, std::string password)
+	std::shared_ptr<User> MySQL::getUser(std::string login, std::string password)
 	{
 		const std::string query = "select name,surname,email,ID,accountType from users where login = ? and password = MD5(?)";
 		connection_shared connection = this->getConnection();
@@ -79,6 +85,7 @@ namespace ExternalData
 		stat->setString(3, UserFactory::EnumToString(user.getType()));
 		stat->setString(4, user.getEmail());
 		stat->setString(5, user.getID());
+
 		stat->execute();
 
 	}
@@ -88,8 +95,9 @@ namespace ExternalData
 		std::string query = "select name, surname, email, ID, accountType from users";
 		statement_unique statement(connection->prepareStatement(query));
 		result_shared result(statement->executeQuery());
+
 		std::vector<User> users;
-		std::unique_ptr<UserFactory> userFactory;
+		const std::unique_ptr<UserFactory> userFactory;
 		while(result->next())
 		{
 			users.push_back(userFactory->getUserFromRow(result));

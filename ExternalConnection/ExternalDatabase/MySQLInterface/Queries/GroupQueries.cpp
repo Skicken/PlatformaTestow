@@ -1,6 +1,6 @@
 #include <ecpch.h>
-#include "Data/MySQLInterface/SQL.h"
-#include "Data/MySQLInterface/Helpers/UserFactory.h"
+#include "ExternalDatabase/MySQLInterface/SQL.h"
+#include "ExternalDatabase/MySQLInterface/Helpers/UserFactory.h"
 
 namespace ExternalData
 {
@@ -35,9 +35,8 @@ namespace ExternalData
 		while(result->next())
 		{
 			std::string groupID = result->getString(1);
-			Group group(groupID, result->getString(2));
 			std::vector<User> users = getGroupUsers(groupID);
-			group.setUsers(users);
+			Group group(groupID, result->getString(2),users);
 			groups.push_back(group);
 		}
 		return groups;
@@ -54,12 +53,12 @@ namespace ExternalData
 	{
 		connection_shared connection = getConnection();
 
-		std::unique_ptr<UserFactory> userFactory;
+		const std::unique_ptr<UserFactory> userFactory;
 		std::vector<User> users;
-		std::string getUsersQuery = "select name, surname, email, ID, accountType from users inner join user_groups on user_groups.USER_ID = users.id where user_groups.GROUP_ID = ?";
+		const std::string getUsersQuery = "select name, surname, email, ID, accountType from users inner join user_groups on user_groups.USER_ID = users.id where user_groups.GROUP_ID = ?";
 		const statement_unique getUsers(connection->prepareStatement(getUsersQuery));
 		getUsers->setString(1, groupID);
-		result_shared usersResult(getUsers->executeQuery());
+		const result_shared usersResult(getUsers->executeQuery());
 		while (usersResult->next())
 		{
 			users.push_back(userFactory->getUserFromRow(usersResult));

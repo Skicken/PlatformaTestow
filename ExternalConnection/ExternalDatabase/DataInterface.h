@@ -5,10 +5,8 @@
 #include "users/user.h"
 #include "TestData/Test.h"
 #include "TestData/TestCommit.h"
-#include "users/teacher.h"
-#include "users/Admin.h"
 
-class Homework;
+
 
 namespace ExternalData
 {
@@ -28,7 +26,7 @@ namespace ExternalData
 			virtual void addTest(Test& test,std::string OWNER_ID) = 0;
 
 			virtual std::vector<User> getAllUsers() = 0;
-			virtual User* getUser(std::string login, std::string password) = 0;
+			virtual std::shared_ptr<User> getUser(std::string login, std::string password) = 0;
 			virtual void addUser(User& user, std::string login, std::string password) = 0;
 			virtual void deleteUser(User& user) = 0;
 			virtual void modifyUser(User& user, std::string login, std::string password) = 0;
@@ -47,11 +45,11 @@ namespace ExternalData
 			virtual AttendanceList getAttendanceList(Group& group, std::string& Date) = 0;
 
 			virtual void addHomework(Group& group, Homework& homework) = 0;
-			virtual std::vector<Homework> getAllHomeworks() = 0;
+			virtual std::vector<Homework> getAllHomework() = 0;
 			virtual void commitHomework(std::string StudentID, HomeworkCommit& homework) = 0;
 
-			virtual std::vector<HomeworkCommit> getCommitedHomeworks(std::string STUDENT_ID) = 0;
-			virtual std::vector<HomeworkCommit> getCommitedHomeworks(Homework homework) = 0;
+			virtual std::vector<HomeworkCommit> getCommitHomework(std::string STUDENT_ID) = 0;
+			virtual std::vector<HomeworkCommit> getCommitHomework(Homework homework) = 0;
 
 			virtual void deleteHomework(Homework& homework) = 0;
 

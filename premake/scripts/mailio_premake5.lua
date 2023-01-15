@@ -49,7 +49,7 @@ function link_mailio()
     }
     libdirs
     {
-        MAILIO_DIR.."/Release"
+        MAILIO_DIR.."/%{cfg.buildcfg}"
     }
     links
     {

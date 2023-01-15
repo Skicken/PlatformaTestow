@@ -1,5 +1,5 @@
 #include <ecpch.h>
-#include "Data/MySQLInterface/SQL.h"
+#include "ExternalDatabase/MySQLInterface/SQL.h"
 #include "TestData/Homework.h"
 
 namespace ExternalData {
@@ -13,7 +13,7 @@ namespace ExternalData {
 		statement->execute();
 
 	}
-	std::vector<Homework> MySQL::getAllHomeworks()
+	std::vector<Homework> MySQL::getAllHomework()
 	{
 		connection_shared connection = getConnection();
 		const std::string query = "SELECT `ID`,`QUESTION` FROM `homework`";
@@ -39,10 +39,9 @@ namespace ExternalData {
 		statement->setString(3, homework.getAnswer());
 		statement->execute();
 
-
 	}
 
-	std::vector<HomeworkCommit> MySQL::getCommitedHomeworks(std::string STUDENT_ID)
+	std::vector<HomeworkCommit> MySQL::getCommitHomework(std::string STUDENT_ID)
 	{
 		connection_shared connection = getConnection();
 		const std::string query = "SELECT `HOMEWORK_ID`, homework.QUESTION,`ANSWER`, `DATE` FROM `user_homework` INNER JOIN homework on user_homework.HOMEWORK_ID = homework.ID WHERE USER_ID = ?";
@@ -59,7 +58,7 @@ namespace ExternalData {
 		return homeworkCommit;
 
 	}
-	std::vector<HomeworkCommit> MySQL::getCommitedHomeworks(Homework homework)
+	std::vector<HomeworkCommit> MySQL::getCommitHomework(Homework homework)
 	{
 		connection_shared connection = getConnection();
 		const std::string query = "SELECT `HOMEWORK_ID`, homework.QUESTION,`ANSWER`, `DATE` FROM `user_homework` INNER JOIN homework on user_homework.HOMEWORK_ID = homework.ID WHERE HOMEWORK_ID = ?";

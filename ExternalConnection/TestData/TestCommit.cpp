@@ -1,6 +1,7 @@
 #include "ecpch.h"
 #include "TestCommit.h"
 
+
 std::string TestCommit::getID() const
 {
 	return ID;
@@ -16,10 +17,14 @@ std::map<std::string, std::string> TestCommit::getQuestionAnswer() const
 	return givenQuestionAnswer;
 }
 
-TestCommit::TestCommit(const Test& testRef) :test(testRef),questionList(test.getQuestions()),
-currentQuestion(questionList.begin())
+TestCommit::TestCommit(const Test& testRef) :test(testRef),questionList(test.getQuestions())
 {
-
+	if (testRef.getRandomize())
+	{
+		auto rng = std::default_random_engine{};
+		std::shuffle(std::begin(questionList), std::end(questionList), rng);
+	}
+	currentQuestion = questionList.begin();
 }
 
 

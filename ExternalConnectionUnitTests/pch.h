@@ -4,12 +4,16 @@
 #include <pch.h>
 #include <ExternalConnection.h>
 #include "CppUnitTest.h"
-inline void failMessage(std::string& message)
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace ExternalData;
+using namespace EmailWrapper;
+
+inline void failMessage(const std::string& message)
 {
 	if (!message.empty())
 	{
-		Microsoft::VisualStudio::CppUnitTestFramework::Logger::WriteMessage(message.c_str());
-		Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+		Logger::WriteMessage(message.c_str());
+		Assert::Fail();
 	}
 }
 #endif 

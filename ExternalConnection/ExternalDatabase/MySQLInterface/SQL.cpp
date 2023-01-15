@@ -3,8 +3,15 @@
 namespace ExternalData {
 	std::shared_ptr<sql::Connection> MySQL::getConnection()
 	{
-		connection_shared connection = connection_shared((driver->connect(serverIP, "root", "")));
-		connection->setSchema("data");
+		connection_shared connection;
+		try
+		{
+			connection = connection_shared((driver->connect(serverIP, "root", "")));
+			connection->setSchema("data");
+		}
+		catch (sql::SQLException& exception) {
+			throw DatabaseException(ExceptionType::CANNOT_CONNECT, "cannot connect to database");
+		}
 		return connection;
 	}
 
@@ -38,7 +45,9 @@ namespace ExternalData {
 		driver(sql::mysql::get_driver_instance())
 	{
 	}
-	MySQL::~MySQL() {}
+	MySQL::~MySQL()
+	{
+	}
 
 
 

@@ -23,22 +23,9 @@ namespace ExternalData
 		}
 		return "";
 	}
-	User* UserFactory::createUserFrom(const std::string& name, const std::string& surname, const std::string& email, const std::string& id, const std::string& type)
+	std::shared_ptr<User> UserFactory::createUserFrom(const std::string& name, const std::string& surname, const std::string& email, const std::string& id, const std::string& type)
 	{
-		UserType value = StringToEnum(type);
-		switch (value)
-		{
-			case UserType::STUDENT:
-				return new Student(name, surname, email, id);
-			case UserType::TEACHER:
-				return new Teacher(name, surname, email, id);
-			case UserType::ADMIN:
-				return new Admin(name, surname, email, id);
-			default:
-				return new Student(name, surname, email, id);
-
-		}
-
+		return std::make_shared<User>(User(name, surname, email, StringToEnum(type), id));
 	}
 
 	User UserFactory::getUserFromRow(result_shared result)
@@ -50,5 +37,15 @@ namespace ExternalData
 			result->getString(4),
 			result->getString(5));
 		return user;
+	}
+
+	User UserFactory::getUserFromID(connection_shared connection, std::string ID)
+	{
+		std::string query = "select name, surname, email, ID, accountType from users where ID = ?";
+		statement_unique statement(connection->prepareStatement(query));
+		statement->setString(1, ID);
+		const result_shared result(statement->executeQuery());
+		if (!result->next()) throw DatabaseException(ExceptionType::CANNOT_FIND, "Cannot find user with specified id");
+		return getUserFromRow(result);
 	}
 }

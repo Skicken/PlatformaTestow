@@ -1,6 +1,6 @@
 #include "ecpch.h"
-#include "Data/MySQLInterface/SQL.h"
-#include "Data/MySQLInterface/Helpers/TestFactory.h"
+#include "ExternalDatabase/MySQLInterface/SQL.h"
+#include "ExternalDatabase/MySQLInterface/Helpers/TestGetter.h"
 
 namespace ExternalData
 {
@@ -32,7 +32,8 @@ namespace ExternalData
 		const std::string getTestResultQuery = "SELECT `ID`, `USER_ID`, `TEST_ID` FROM `users_test_taken`";
 		statement_unique getTestResult(connection->prepareStatement(getTestResultQuery));
 		result_shared testResult(getTestResult->executeQuery());
-		TestFactory testFactory(connection);
+
+		TestGetter testFactory(connection);
 		std::vector<TestCommit> results;
 		while(testResult->next())
 		{
@@ -40,11 +41,11 @@ namespace ExternalData
 			const std::string getTestQuery = "SELECT `ID`, `name`, `description`,`randomize` FROM `tests` WHERE `ID` = ?";
 			statement_unique getTest(connection->prepareStatement(getTestQuery));
 			getTest->setString(1, testResult->getString(3));
-
 			result_shared getTesto(getTest->executeQuery());
-
 			if (getTesto->next());
 			Test test = testFactory.getTestFromRow(getTesto);
+
+
 			std::map<std::string, std::string> givenQuestionAnswer;
 
 			std::string getGivenQuestionAnswerQuery = "SELECT `QUESTION_ID`, `ANSWER_ID` FROM `user_answer` WHERE `TAKEN_TEST_ID` = ?";

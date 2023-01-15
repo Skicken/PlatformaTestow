@@ -1,6 +1,6 @@
 #pragma once
 #include "TestData/Groups.h"
-#include "TestData/SimplifiedMessage.h"
+#include "SimplifiedMessage.h"
 #include "users/Sender.h"
 
 namespace EmailWrapper
@@ -14,7 +14,7 @@ namespace EmailWrapper
 	class MailSender
 	{
 		public:
-		MailSender();
+		MailSender() = default;
 		void sendToGroup(Sender& sender, SimplifiedMessage smplMsg, Group& group);
 		void sendToUser(Sender& sender, SimplifiedMessage smplMsg, User& user);
 		private:
