@@ -79,8 +79,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\ExternalConnection;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -89,8 +89,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Debug\ExternalConnection.lib;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-staticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\ExternalConnection;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -98,8 +98,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\ExternalConnection;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -112,8 +112,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Release\ExternalConnection.lib;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\ExternalConnection;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -121,8 +121,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ptpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;STATIC_CONCPP;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\ExternalConnection;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_DESKTOP;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WIN32;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\vendor\raylib\src;..\vendor\raylib\src\external;..\vendor\raylib\src\external\glfw\include;..\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -135,8 +135,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Dist\ExternalConnection.lib;raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;mailio.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\vendor\ExternalConnection;..\vendor\raylib\bin;..\vendor\spdlog\bin;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\raylib\bin;..\vendor\spdlog\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

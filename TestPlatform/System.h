@@ -6,9 +6,9 @@
 class System
 {
 	static System* instance;
-	std::shared_ptr<User> user;
+	//std::shared_ptr<User> user;
 	std::unique_ptr<View> currentView;
-	std::shared_ptr <ExternalData::DataInterface> dataInterface;
+	//std::shared_ptr <ExternalData::DataInterface> dataInterface;
 
 	bool isRun;
 public:
@@ -24,6 +24,6 @@ public:
 	bool isRunning();
 
 	static System* getInstance();
-	static std::shared_ptr<User> const getLoggedUser();
-	static std::shared_ptr <ExternalData::DataInterface> const getDataInterface();
+	//static std::shared_ptr<User> const getLoggedUser();
+	//static std::shared_ptr <ExternalData::DataInterface> const getDataInterface();
 };

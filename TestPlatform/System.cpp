@@ -32,13 +32,14 @@ void System::initVariables()
     this->isRun = true;
     this->instance = this;
     this->currentView = std::make_unique<LoginView>();
-    this->dataInterface = std::make_unique<ExternalData::MySQL>();
+    //this->dataInterface = std::make_unique<ExternalData::MySQL>();
 }
 
 bool System::LoginUser(std::string username, std::string password)
 {
-    this->user = dataInterface->getUser(username,password);
-    return this->user != nullptr;
+    //this->user = dataInterface->getUser(username,password);
+   // return this->user != nullptr;
+    return true;
 }
 
 bool System::isRunning()
@@ -51,12 +52,12 @@ System* System::getInstance()
     return instance;
 }
 
-std::shared_ptr<User> const System::getLoggedUser()
-{
-    return getInstance()->user;
-}
+//std::shared_ptr<User> const System::getLoggedUser()
+//{
+//    return getInstance()->user;
+//}
 
-std::shared_ptr <ExternalData::DataInterface> const System::getDataInterface()
-{
-    return getInstance()->dataInterface;
-}
+//std::shared_ptr <ExternalData::DataInterface> const System::getDataInterface()
+//{
+//    return getInstance()->dataInterface;
+//}

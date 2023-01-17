@@ -12,13 +12,6 @@ outputdir = "%{cfg.buildcfg}"
 
 include ("premake/scripts/raylib_premake5.lua");
 include("premake/scripts/spdlog_premake5.lua")
-include("premake/scripts/mysql_premake5.lua")
-include("premake/scripts/mailio_premake5.lua")
-if not haveMailoDependencies() or not haveMysqlDependencies()
-then
-    error("Incorrect setup!")
-    exit(0)
-end
 
 
 project "TestPlatform"
@@ -38,20 +31,9 @@ project "TestPlatform"
     includedirs
     {
         "%{prj.name}",  
-        "ExternalConnection",      
-    }
-    libdirs
-    {
-        "vendor/ExternalConnection"
-    }
-    links
-    {
-        "%{cfg.buildcfg}/ExternalConnection.lib"
     }
     link_raylib();
     link_spdlog();
-    link_mysql();
-    link_mailio();
 
 
 
@@ -64,11 +46,7 @@ filter "configurations:Debug"
         runtime "Debug"
         defines "DEBUG"
         symbols "on"
-        links
-        {
-            "mysqlcppconn-staticd.lib",
 
-        }
         
 
 filter "configurations:Release"
@@ -77,11 +55,7 @@ filter "configurations:Release"
         defines "RELEASE"
         defines "NDEBUG"
         optimize "on"
-        links
-        {
-            "mysqlcppconn-static.lib",
 
-        }
 filter "configurations:Dist"
     staticruntime "off"
     runtime "Release"
@@ -89,10 +63,7 @@ filter "configurations:Dist"
     defines "DIST"
     defines "NDEBUG"
     optimize "on"
-    links
-    {
-        "mysqlcppconn-static.lib",
-    }
+
 
 include("premake_external_connectionLib.lua")
 print("Everything is setup correctly!")
