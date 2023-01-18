@@ -141,8 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="MainMenus\MainMenu.h" />
-    <ClInclude Include="MainMenus\StudentMenu.h" />
+    <ClInclude Include="Views\TeacherView.h" />
+    <ClInclude Include="Views\SelectList.h" />
+    <ClInclude Include="Views\QuestionView.h" />
+    <ClInclude Include="UI\Text.h" />
+    <ClInclude Include="UI\Button.h" />
+    <ClInclude Include="Views\StudentMenu.h" />
+    <ClInclude Include="Utilities\Mouse.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Utilities\Logger.h" />
     <ClInclude Include="Views\LoginView.h" />
@@ -150,9 +155,14 @@
     <ClInclude Include="ptpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Views\TeacherView.cpp" />
+    <ClCompile Include="Views\SelectList.cpp" />
+    <ClCompile Include="Views\QuestionView.cpp" />
+    <ClCompile Include="UI\Text.cpp" />
+    <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
-    <ClCompile Include="MainMenus\MainMenu.cpp" />
-    <ClCompile Include="MainMenus\StudentMenu.cpp" />
+    <ClCompile Include="Views\StudentMenu.cpp" />
+    <ClCompile Include="Utilities\Mouse.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Utilities\Logger.cpp" />
     <ClCompile Include="Views\LoginView.cpp" />

@@ -13,10 +13,13 @@ class TestCommit
 		std::string getID() const;
 		Test getTest() const;
 		std::map<std::string, std::string> getQuestionAnswer() const;
-		TestCommit(const Test& testRef);
+		TestCommit(const Test testRef);
 		Question getCurrentQuestion() const;
 		bool getNextQuestion();
-		void setAnswerForQuestion(Answer& answer);
+		void setAnswerForQuestion(Answer answer);
+		TestCommit(const TestCommit& other);
+		int calculatePercentage();
+
 	private:
 		std::string ID;
 		Test test;

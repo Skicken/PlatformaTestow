@@ -2,27 +2,7 @@
 #include "UserFactory.h"
 namespace ExternalData
 {
-	UserType UserFactory::StringToEnum(std::string value)
-	{
-		if (value == "student")
-			return UserType::STUDENT;
-		else if (value == "teacher")
-			return UserType::TEACHER;
-		else
-			return UserType::ADMIN;
-	}
-	std::string UserFactory::EnumToString(UserType type)
-	{
-		switch (type) {
-		case UserType::STUDENT:
-			return "student";
-		case UserType::TEACHER:
-			return "teacher";
-		case UserType::ADMIN:
-			return "admin";
-		}
-		return "";
-	}
+
 	std::shared_ptr<User> UserFactory::createUserFrom(const std::string& name, const std::string& surname, const std::string& email, const std::string& id, const std::string& type)
 	{
 		return std::make_shared<User>(User(name, surname, email, StringToEnum(type), id));

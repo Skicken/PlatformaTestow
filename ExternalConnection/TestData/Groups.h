@@ -7,8 +7,7 @@ namespace ExternalData
 }
 class Group
 {
-public:
-
+	public:
 	Group(const Group& other);
 	Group(Group&& other) noexcept;
 	Group& operator=(const Group& other);

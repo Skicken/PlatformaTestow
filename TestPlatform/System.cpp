@@ -2,7 +2,6 @@
 #include "System.h"
 
 System* System::instance;
-MainMenu* System::menu;
 System::System()
 {
     initVariables();
@@ -11,13 +10,15 @@ System::System()
 System::~System()
 {
     CloseWindow();
-    delete menu;
 }
 void System::update()
 {
     assert(currentView != nullptr);
     this->currentView->update();
     isRun = !WindowShouldClose();
+
+    mouse.update();
+    updateFullscreen();
 
 }
 void System::render()
@@ -44,26 +45,24 @@ void System::initVariables()
     this->instance = this;
     this->currentView = std::make_unique<LoginView>();
     this->dataInterface = std::make_unique<ExternalData::MySQL>();
+
     this->setView(new LoginView());
     //Init raylib 
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);    
     InitWindow(GetScreenWidth(), GetScreenWidth(), appName.c_str());
     SetTargetFPS(30);
 }
 
-bool System::LoginUser(std::string username, std::string password)
+void System::LoginUser(std::string username, std::string password)
 {
     this->user = dataInterface->getUser(username,password);
-    if (this->user != nullptr)
-    {
-       this->menu = getMainMenu();
-    }
-    return this->user != nullptr;
+    if (this->user == nullptr) return;
+
+    this->setMenuView();
+    this->setView(new StudentMenu());
 }
 
 bool System::LogoutUser()
 {
-    delete menu;
     this->user = nullptr;
     return true;
 }
@@ -88,15 +87,34 @@ std::shared_ptr <ExternalData::DataInterface> const System::getDataInterface()
     return getInstance()->dataInterface;
 }
 
-MainMenu* System::getMainMenu()
+Mouse System::getMouseState()
 {
-    switch (this->user->getType())
+    return instance->mouse;
+}
+
+void System::updateFullscreen()
+{
+    if (IsKeyPressed(KEY_ENTER) && (IsKeyDown(KEY_LEFT_ALT) || IsKeyDown(KEY_RIGHT_ALT)))
+    {
+        int display = GetCurrentMonitor();
+        if (IsWindowFullscreen())
+        {
+            SetWindowSize(800, 450);
+        }
+        else
+        {
+            SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
+        }
+        ToggleFullscreen();
+    }
+}
+
+void System::setMenuView()
+{
+    switch (user->getType())
     {
         case UserType::STUDENT:
-        case UserType::TEACHER:
-        case UserType::ADMIN:
-            break;
+            setView(new StudentMenu());
 
     }
-    return new StudentMenu();
 }

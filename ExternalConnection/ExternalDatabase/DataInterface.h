@@ -10,7 +10,8 @@
 
 namespace ExternalData
 {
-	
+	extern UserType StringToEnum(std::string value);
+	extern std::string EnumToString(UserType type);
 	class DataInterface
 	{
 		public:

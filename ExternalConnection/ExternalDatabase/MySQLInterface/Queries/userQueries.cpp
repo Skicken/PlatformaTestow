@@ -15,7 +15,7 @@ namespace ExternalData
 		stat->setString(2, password);
 		stat->setString(3, user.getName());
 		stat->setString(4, user.getSurname());
-		stat->setString(5, UserFactory::EnumToString(user.getType()));
+		stat->setString(5, EnumToString(user.getType()));
 		stat->setString(6, user.getEmail());
 		try
 		{
@@ -46,7 +46,7 @@ namespace ExternalData
 		stat->setString(2, password);
 		stat->setString(3, user.getName());
 		stat->setString(4, user.getSurname());
-		stat->setString(5, UserFactory::EnumToString(user.getType()));
+		stat->setString(5, EnumToString(user.getType()));
 		stat->setString(6, user.getEmail());
 		stat->setString(7, user.getID());
 		stat->execute();
@@ -82,7 +82,7 @@ namespace ExternalData
 		statement_unique stat(connection->prepareStatement(query));
 		stat->setString(1, user.getName());
 		stat->setString(2, user.getSurname());
-		stat->setString(3, UserFactory::EnumToString(user.getType()));
+		stat->setString(3, EnumToString(user.getType()));
 		stat->setString(4, user.getEmail());
 		stat->setString(5, user.getID());
 

@@ -17,7 +17,7 @@ std::map<std::string, std::string> TestCommit::getQuestionAnswer() const
 	return givenQuestionAnswer;
 }
 
-TestCommit::TestCommit(const Test& testRef) :test(testRef),questionList(test.getQuestions())
+TestCommit::TestCommit(const Test testRef) :test(testRef),questionList(test.getQuestions())
 {
 	if (testRef.getRandomize())
 	{
@@ -42,10 +42,33 @@ Question TestCommit::getCurrentQuestion() const
 
 bool TestCommit::getNextQuestion()
 {
-	++currentQuestion;
-	return currentQuestion != test.getQuestions().end();
+	if(currentQuestion!=test.getQuestions().end())
+		currentQuestion++;
+	return currentQuestion == test.getQuestions().end();
 }
-void TestCommit::setAnswerForQuestion(Answer& answer)
+void TestCommit::setAnswerForQuestion(Answer answer)
 {
-	givenQuestionAnswer[(*currentQuestion).getQuestionID()] = answer.getID();
+	givenQuestionAnswer[getCurrentQuestion().getQuestionID()] = answer.getID();
+}
+
+TestCommit::TestCommit(const TestCommit& other):
+	test(other.test)
+{
+	this->ID = other.ID;
+	this->currentQuestion = other.currentQuestion;
+	this->givenQuestionAnswer = other.givenQuestionAnswer;
+	this->test = other.test;
+}
+
+int TestCommit::calculatePercentage()
+{
+	int score = 0;
+	for(auto question:questionList)
+	{
+		if(question.getCorrectAnswer().getID() == givenQuestionAnswer[question.getQuestionID()])
+		{
+			score++;
+		}
+	}
+	return score * 100 / questionList.size();
 }
