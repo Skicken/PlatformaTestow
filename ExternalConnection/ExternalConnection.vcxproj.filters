@@ -29,6 +29,9 @@
     <ClInclude Include="ExternalDatabase\DataInterface.h">
       <Filter>ExternalDatabase</Filter>
     </ClInclude>
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\QuestionInserter.h">
+      <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\TestGetter.h">
       <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
     </ClInclude>
@@ -72,12 +75,14 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
-    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\QuestionInserter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DatabaseException.cpp" />
     <ClCompile Include="ExternalDatabase\DataInterface.cpp">
       <Filter>ExternalDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\QuestionInserter.cpp">
+      <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\TestGetter.cpp">
       <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
@@ -140,6 +145,5 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
-    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\QuestionInserter.cpp" />
   </ItemGroup>
 </Project>

@@ -93,6 +93,10 @@ filter "configurations:Dist"
     {
         "mysqlcppconn-static.lib",
     }
+    libdirs
+    {
+        MAILIO_DIR.."/Release"
+    }
 
 include("premake_external_connectionLib.lua")
 print("Everything is setup correctly!")

@@ -20,6 +20,8 @@
       <Filter>Views</Filter>
     </ClInclude>
     <ClInclude Include="ptpch.h" />
+    <ClInclude Include="MainMenus\MainMenu.h" />
+    <ClInclude Include="MainMenus\StudentMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint.cpp" />
@@ -34,5 +36,7 @@
       <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="ptpch.cpp" />
+    <ClCompile Include="MainMenus\MainMenu.cpp" />
+    <ClCompile Include="MainMenus\StudentMenu.cpp" />
   </ItemGroup>
 </Project>
