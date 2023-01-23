@@ -44,7 +44,7 @@ namespace ExternalData
 			virtual void addAttendanceList(AttendanceList& list) = 0;
 			virtual void deleteAttendanceList(AttendanceList& list) = 0;
 			virtual AttendanceList getAttendanceList(Group& group, std::string& Date) = 0;
-
+			virtual std::vector<AttendanceList> getGroupAttendanceList(Group& group) = 0;
 			virtual void addHomework(Group& group, Homework& homework) = 0;
 			virtual std::vector<Homework> getAllHomework() = 0;
 			virtual void commitHomework(std::string StudentID, HomeworkCommit& homework) = 0;
@@ -53,6 +53,8 @@ namespace ExternalData
 			virtual std::vector<HomeworkCommit> getCommitHomework(Homework homework) = 0;
 
 			virtual void deleteHomework(Homework& homework) = 0;
+			virtual std::vector<Homework> getAllAvailableHomework(std::string USER_ID) = 0;
+			virtual std::string getCurrentDate() = 0;
 
 	};
 }

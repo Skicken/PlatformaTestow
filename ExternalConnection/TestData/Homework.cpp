@@ -2,7 +2,19 @@
 #include "Homework.h"
 
 
+HomeworkCommit::HomeworkCommit(const std::string& id, const std::string& question, const std::string& answer,
+	const std::string& deliver_date, const User& user): ID(id),
+	                                                    Question(question),
+	                                                    Answer(answer),
+	                                                    DeliverDate(deliver_date),
+	                                                    user(user)
+{
+}
 
+User HomeworkCommit::getUser() const
+{
+	return user;
+}
 
 std::string HomeworkCommit::getID() const
 {
@@ -24,13 +36,7 @@ std::string HomeworkCommit::getDeliveryDate() const
 	return DeliverDate;
 }
 
-HomeworkCommit::HomeworkCommit(const std::string& id, const std::string& question, const std::string& answer,
-                               const std::string& deliver_date): ID(id),
-                                                                 Question(question),
-                                                                 Answer(answer),
-                                                                 DeliverDate(deliver_date)
-{
-}
+
 
 HomeworkCommit::HomeworkCommit(Homework& homework, const std::string& answer)
 {

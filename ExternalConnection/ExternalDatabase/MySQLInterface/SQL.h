@@ -20,7 +20,7 @@ namespace ExternalData
 			MySQL();
 			~MySQL() override;
 			std::string getUniqueID();
-			std::string getCurrentDate();
+			std::string getCurrentDate() override;
 			virtual std::vector<Test> getAllTests() override;
 			virtual std::vector<Test> getTeacherTests(std::string OWNER_ID) override;
 			virtual void modifyTest(Test& test, std::string OWNER_ID) override;
@@ -52,5 +52,7 @@ namespace ExternalData
 			std::vector<HomeworkCommit> getCommitHomework(std::string STUDENT_ID) override;
 			std::vector<HomeworkCommit> getCommitHomework(Homework homework) override;
 			void deleteHomework(Homework& homework) override;
+			std::vector<Homework> getAllAvailableHomework(std::string USER_ID) override;
+			std::vector<AttendanceList> getGroupAttendanceList(Group& group) override;
 	};
 }

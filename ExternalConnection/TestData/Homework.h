@@ -1,4 +1,5 @@
 #pragma once
+#include "users/user.h"
 
 
 namespace ExternalData
@@ -23,8 +24,8 @@ class Homework
 };
 class HomeworkCommit
 {
-public:
-
+	public:
+	User getUser() const;
 	std::string getID() const;
 	std::string getQuestion() const;
 	std::string getAnswer() const;
@@ -36,8 +37,9 @@ public:
 		std::string Question;
 		std::string Answer;
 		std::string DeliverDate;
+		User user;
 		HomeworkCommit(const std::string& id, const std::string& question, const std::string& answer,
-			const std::string& deliver_date);
+			const std::string& deliver_date, const User& user);
 		friend class ExternalData::MySQL;
 
 };

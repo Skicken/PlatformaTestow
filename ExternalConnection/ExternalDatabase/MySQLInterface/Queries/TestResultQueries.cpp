@@ -29,8 +29,9 @@ namespace ExternalData
 	std::vector<TestCommit> MySQL::getTestResults(std::string STUDENT_ID)
 	{
 		connection_shared connection = getConnection();
-		const std::string getTestResultQuery = "SELECT `ID`, `USER_ID`, `TEST_ID` FROM `users_test_taken`";
+		const std::string getTestResultQuery = "SELECT `ID`, `USER_ID`, `TEST_ID` FROM `users_test_taken` where USER_ID = ?";
 		statement_unique getTestResult(connection->prepareStatement(getTestResultQuery));
+		getTestResult->setString(1, STUDENT_ID);
 		result_shared testResult(getTestResult->executeQuery());
 
 		TestGetter testFactory(connection);

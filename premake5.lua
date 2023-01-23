@@ -38,7 +38,8 @@ project "TestPlatform"
     includedirs
     {
         "%{prj.name}",  
-        "ExternalConnection",      
+        "ExternalConnection",
+        "vendor/raygui/src"      
     }
     libdirs
     {

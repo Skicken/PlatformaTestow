@@ -10,15 +10,26 @@ namespace ExternalData
 class TestCommit
 {
 	public:
-		std::string getID() const;
-		Test getTest() const;
-		std::map<std::string, std::string> getQuestionAnswer() const;
-		TestCommit(const Test testRef);
-		Question getCurrentQuestion() const;
-		bool getNextQuestion();
-		void setAnswerForQuestion(Answer answer);
-		TestCommit(const TestCommit& other);
-		int calculatePercentage();
+	TestCommit(const TestCommit& other);
+
+	TestCommit(TestCommit&& other) noexcept;
+
+	TestCommit& operator=(const TestCommit& other);
+
+	TestCommit& operator=(TestCommit&& other) noexcept;
+
+	std::string getID() const;
+	Test getTest() const;
+	std::map<std::string, std::string> getQuestionAnswer() const;
+	TestCommit(const Test testRef);
+	Question getCurrentQuestion() const;
+	bool getNextQuestion();
+	bool getPreviousQuestion();
+	void setAnswerForQuestion(Answer answer);
+	Answer getCurrentQuestionAnswer();
+	int getCurrentQuestionAnswerIndex();
+	int calculatePercentage();
+	float getProgress();
 
 	private:
 		std::string ID;

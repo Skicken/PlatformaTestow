@@ -2,9 +2,7 @@
 
 #include <Views/View.h>
 #include <Views/LoginView.h>
-#include "Views/StudentMenu.h"
-#include "Utilities/Mouse.h"
-#include "Views/QuestionView.h"
+#include "Views/StudentViews/StudentMenu.h"
 class System
 {
 	public:
@@ -23,10 +21,8 @@ class System
 	static System* getInstance();
 	static std::shared_ptr<User> const getLoggedUser();
 	static std::shared_ptr <ExternalData::DataInterface> const getDataInterface();
-	static Mouse getMouseState();
 
 	private:
-	Mouse mouse;
 	void initVariables();
 	static System* instance;
 	std::shared_ptr<User> user;

@@ -2,6 +2,47 @@
 #include "TestCommit.h"
 
 
+TestCommit::TestCommit(const TestCommit& other): ID(other.ID),
+                                                 test(other.test),
+                                                 questionList(other.questionList),
+                                                 givenQuestionAnswer(other.givenQuestionAnswer),
+                                                 currentQuestion(questionList.begin())
+{
+
+}
+
+TestCommit::TestCommit(TestCommit&& other) noexcept: ID(std::move(other.ID)),
+                                                     test(std::move(other.test)),
+                                                     questionList(std::move(other.questionList)),
+                                                     givenQuestionAnswer(std::move(other.givenQuestionAnswer)),
+                                                     currentQuestion(questionList.begin())
+{
+}
+
+TestCommit& TestCommit::operator=(const TestCommit& other)
+{
+	if (this == &other)
+		return *this;
+	ID = other.ID;
+	test = other.test;
+	questionList = other.questionList;
+	givenQuestionAnswer = other.givenQuestionAnswer;
+	currentQuestion = questionList.begin();
+	return *this;
+}
+
+TestCommit& TestCommit::operator=(TestCommit&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	ID = std::move(other.ID);
+	test = std::move(other.test);
+	questionList = std::move(other.questionList);
+	givenQuestionAnswer = std::move(other.givenQuestionAnswer);
+	currentQuestion = questionList.begin();
+	return *this;
+}
+
 std::string TestCommit::getID() const
 {
 	return ID;
@@ -42,33 +83,62 @@ Question TestCommit::getCurrentQuestion() const
 
 bool TestCommit::getNextQuestion()
 {
-	if(currentQuestion!=test.getQuestions().end())
-		currentQuestion++;
-	return currentQuestion == test.getQuestions().end();
+	if(currentQuestion!= questionList.end())
+		++currentQuestion;
+	return currentQuestion != questionList.end();
 }
+
+bool TestCommit::getPreviousQuestion()
+{
+	if (currentQuestion != questionList.begin())
+		--currentQuestion;
+	return currentQuestion != questionList.begin();
+}
+
 void TestCommit::setAnswerForQuestion(Answer answer)
 {
 	givenQuestionAnswer[getCurrentQuestion().getQuestionID()] = answer.getID();
 }
 
-TestCommit::TestCommit(const TestCommit& other):
-	test(other.test)
+Answer TestCommit::getCurrentQuestionAnswer()
 {
-	this->ID = other.ID;
-	this->currentQuestion = other.currentQuestion;
-	this->givenQuestionAnswer = other.givenQuestionAnswer;
-	this->test = other.test;
+	for (auto& answer : currentQuestion->getAnswers())
+	{
+		if (answer.getID() == givenQuestionAnswer[getCurrentQuestion().getQuestionID()])
+			return answer;
+	}
+	return Answer("");
 }
+
+int TestCommit::getCurrentQuestionAnswerIndex()
+{
+	int i = 0;
+	for (auto& answer : currentQuestion->getAnswers())
+	{
+		if (answer.getID() == givenQuestionAnswer[getCurrentQuestion().getQuestionID()])
+			return i;
+		i++;
+	}
+	return 0;
+}
+
 
 int TestCommit::calculatePercentage()
 {
+	assert(questionList.size() > 0);
 	int score = 0;
-	for(auto question:questionList)
+	for(auto &question:questionList)
 	{
 		if(question.getCorrectAnswer().getID() == givenQuestionAnswer[question.getQuestionID()])
 		{
-			score++;
+			++score;
 		}
 	}
 	return score * 100 / questionList.size();
+}
+
+float TestCommit::getProgress()
+{
+	const int index = currentQuestion - questionList.begin() + 1;
+	return static_cast<float>(index * 100 / questionList.size());
 }

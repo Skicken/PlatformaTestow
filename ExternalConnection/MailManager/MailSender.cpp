@@ -13,8 +13,8 @@ void EmailWrapper::MailSender::sendToGroup(Sender& sender, SimplifiedMessage smp
 	}
 	msg.add_recipient(mgroup);
 
-	mailio::smtps connection(smtpServer, smtpPort);
-	connection.authenticate(sender.getEmailLogin(), sender.getEmailPassword(), smtps::auth_method_t::LOGIN);
+	mailio::smtp connection(smtpServer, smtpPort);
+	connection.authenticate(sender.getEmailLogin(), sender.getEmailPassword(), mailio::smtp::auth_method_t::NONE);
 	connection.submit(msg);
 }
 

@@ -1,6 +1,8 @@
 #include "ptpch.h"
 #include "System.h"
 
+#include "Views/TeacherView/TeacherView.h"
+
 System* System::instance;
 System::System()
 {
@@ -13,11 +15,12 @@ System::~System()
 }
 void System::update()
 {
+
     assert(currentView != nullptr);
     this->currentView->update();
+
     isRun = !WindowShouldClose();
 
-    mouse.update();
     updateFullscreen();
 
 }
@@ -36,6 +39,7 @@ void System::render()
 
 void System::setView(View* view)
 {
+    currentView.release();
     this->currentView = std::unique_ptr<View>{ view };
 }
 
@@ -49,21 +53,27 @@ void System::initVariables()
     this->setView(new LoginView());
     //Init raylib 
     InitWindow(GetScreenWidth(), GetScreenWidth(), appName.c_str());
+
     SetTargetFPS(30);
+    LoginUser("user", "user");
 }
 
 void System::LoginUser(std::string username, std::string password)
 {
     this->user = dataInterface->getUser(username,password);
-    if (this->user == nullptr) return;
+    if (this->user == nullptr)
+    {
+        INFO("User not exists");
+        return;
+    }
 
     this->setMenuView();
-    this->setView(new StudentMenu());
 }
 
 bool System::LogoutUser()
 {
     this->user = nullptr;
+    setView(new LoginView());
     return true;
 }
 
@@ -87,24 +97,10 @@ std::shared_ptr <ExternalData::DataInterface> const System::getDataInterface()
     return getInstance()->dataInterface;
 }
 
-Mouse System::getMouseState()
-{
-    return instance->mouse;
-}
-
 void System::updateFullscreen()
 {
-    if (IsKeyPressed(KEY_ENTER) && (IsKeyDown(KEY_LEFT_ALT) || IsKeyDown(KEY_RIGHT_ALT)))
+    if (IsKeyReleased(KEY_F11))
     {
-        int display = GetCurrentMonitor();
-        if (IsWindowFullscreen())
-        {
-            SetWindowSize(800, 450);
-        }
-        else
-        {
-            SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
-        }
         ToggleFullscreen();
     }
 }
@@ -115,6 +111,12 @@ void System::setMenuView()
     {
         case UserType::STUDENT:
             setView(new StudentMenu());
+            break;
+		case UserType::TEACHER:
+            setView(new TeacherMenu());
+        break;
+		default:
+			setView(new TeacherMenu());
 
     }
 }

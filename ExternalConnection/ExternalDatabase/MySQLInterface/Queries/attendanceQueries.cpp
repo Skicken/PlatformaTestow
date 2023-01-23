@@ -7,19 +7,25 @@ namespace ExternalData
 {
 	void MySQL::addAttendanceList(AttendanceList& list)
 	{
-		const std::string query = "INSERT INTO `attendance_list`(`GROUP_ID`, `USER_ID`, `attendance_date`) VALUES (?,?,CURRENT_DATE())";
+		const std::string query = "INSERT INTO `attendance_list`(`GROUP_ID`, `USER_ID`, `attendance_date`) VALUES (?,?,?)";
 		connection_shared connection = getConnection();
 		statement_unique insertQuery(connection->prepareStatement(query));
+		std::string date = "";
+		if (list.getDate().empty()) date = getCurrentDate();
+		else date = list.getDate();
+
 		try
 		{
 			for (const auto& user : list.getPresentUsers())
 			{
 				insertQuery->setString(1, list.getGroup().getID());
 				insertQuery->setString(2, user.getID());
+				insertQuery->setString(3, date);
+
 				insertQuery->execute();
 			}
 		}
-		catch (DatabaseException& exception)
+		catch (sql::SQLException& exception)
 		{
 			throw DatabaseException(ExceptionType::ENTRY_EXISTS, "Attendance list for this day already exists");
 		}
@@ -53,6 +59,21 @@ namespace ExternalData
 			list.setUserPresent(user);
 		}
 		return list;
+	}
+	std::vector<AttendanceList> MySQL::getGroupAttendanceList(Group& group)
+	{
+		std::vector<AttendanceList> attendance;
+		connection_shared connection = getConnection();
+		std::string query = "SELECT DISTINCT `attendance_date` FROM `attendance_list` WHERE `GROUP_ID` = ?";
+		statement_unique statement(connection->prepareStatement(query));
+		statement->setString(1, group.getID());
+		result_shared result(statement->executeQuery());
+		while (result->next()) {
+			std::string Date = result->getString(1);
+			attendance.push_back(getAttendanceList(group, Date));
+		}
+		return attendance;
+
 	}
 
 

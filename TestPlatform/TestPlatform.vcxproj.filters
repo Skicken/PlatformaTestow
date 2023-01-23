@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{83755900-6F01-880B-D8AF-880BC45A880B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{010A8043-6D74-34BA-B6B2-E55F225C120F}</UniqueIdentifier>
     </Filter>
@@ -16,17 +19,25 @@
     <ClInclude Include="Views\LoginView.h">
       <Filter>Views</Filter>
     </ClInclude>
+    <ClInclude Include="Views\StudentViews\QuestionView.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Views\StudentViews\StudentMenu.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Views\TeacherView\TeacherView.h">
+      <Filter>Views</Filter>
+    </ClInclude>
     <ClInclude Include="Views\View.h">
       <Filter>Views</Filter>
     </ClInclude>
     <ClInclude Include="ptpch.h" />
-    <ClInclude Include="Views\StudentMenu.h" />
-    <ClInclude Include="Utilities\Mouse.h" />
-    <ClInclude Include="UI\Button.h" />
-    <ClInclude Include="UI\Text.h" />
-    <ClInclude Include="Views\QuestionView.h" />
-    <ClInclude Include="Views\SelectList.h" />
-    <ClInclude Include="Views\TeacherView.h" />
+    <ClInclude Include="Views\StudentViews\TestView.h" />
+    <ClInclude Include="Utilities\Helper.h" />
+    <ClInclude Include="Views\Mail.h" />
+    <ClInclude Include="Views\StudentViews\HomeworkView.h" />
+    <ClInclude Include="Views\TeacherView\AttendanceView.h" />
+    <ClInclude Include="Views\TeacherView\TestResultsTeacher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint.cpp" />
@@ -37,16 +48,24 @@
     <ClCompile Include="Views\LoginView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="Views\StudentViews\QuestionView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\StudentViews\StudentMenu.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Views\TeacherView\TeacherView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
     <ClCompile Include="Views\View.cpp">
       <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="ptpch.cpp" />
-    <ClCompile Include="Views\StudentMenu.cpp" />
-    <ClCompile Include="Utilities\Mouse.cpp" />
-    <ClCompile Include="UI\Button.cpp" />
-    <ClCompile Include="UI\Text.cpp" />
-    <ClCompile Include="Views\QuestionView.cpp" />
-    <ClCompile Include="Views\SelectList.cpp" />
-    <ClCompile Include="Views\TeacherView.cpp" />
+    <ClCompile Include="Views\StudentViews\TestView.cpp" />
+    <ClCompile Include="Utilities\Helper.cpp" />
+    <ClCompile Include="Views\Mail.cpp" />
+    <ClCompile Include="Views\StudentViews\HomeworkView.cpp" />
+    <ClCompile Include="Views\TeacherView\AttendanceView.cpp" />
+    <ClCompile Include="Views\TeacherView\TestResultsTeacher.cpp" />
   </ItemGroup>
 </Project>
