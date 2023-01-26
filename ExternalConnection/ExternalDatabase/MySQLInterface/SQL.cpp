@@ -1,5 +1,8 @@
 #include "ecpch.h"
 #include "SQL.h"
+
+#include "Helpers/Utilities.h"
+
 namespace ExternalData {
 	std::shared_ptr<sql::Connection> MySQL::getConnection()
 	{
@@ -18,14 +21,7 @@ namespace ExternalData {
 	std::string MySQL::getUniqueID()
 	{
 		connection_shared connection = getConnection();
-		const std::string query = "Select " + ID_GEN;
-		statement_unique statement(connection->prepareStatement(query));
-		result_unique result(statement->executeQuery());
-		if (result->next())
-		{
-			return result->getString(1);
-		}
-		return "";
+		return Utilities::generateID(connection);
 	}
 
 	std::string MySQL::getCurrentDate()

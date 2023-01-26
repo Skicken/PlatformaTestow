@@ -14,6 +14,23 @@ namespace ExternalData {
 		statement->execute();
 
 	}
+	std::vector<Homework> MySQL::getHomeworkForGroup(std::string GROUP_ID)
+	{
+		connection_shared connection = getConnection();
+		const std::string query = "SELECT `ID`,`QUESTION` FROM `homework` WHERE GROUP_ID = ?";
+		statement_unique statement(connection->prepareStatement(query));
+		statement->setString(1, GROUP_ID);
+		result_unique result(statement->executeQuery());
+		std::vector<Homework> homework;
+		while (result->next())
+		{
+			homework.push_back(Homework(result->getString(1), result->getString(2)));
+		}
+		return homework;
+	}
+
+	
+
 	std::vector<Homework> MySQL::getAllHomework()
 	{
 		connection_shared connection = getConnection();

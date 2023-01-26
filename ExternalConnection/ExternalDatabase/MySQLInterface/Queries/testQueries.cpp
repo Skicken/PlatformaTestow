@@ -51,7 +51,7 @@ namespace ExternalData
 		testQuery->setString(5, test.getDescription());
 		testQuery->execute();
 
-		const auto  inserter = std::make_unique<QuestionInserter>(connection);
+		const auto  inserter = std::make_shared<QuestionInserter>(connection);
 		inserter->insertQuestions(testID, test.getQuestions());
 
 	}
@@ -105,5 +105,52 @@ namespace ExternalData
 		}
 		return tests;
 
+	}
+	void MySQL::assignTest(Group& group, Test& test)
+	{
+		connection_shared connection = this->getConnection();
+		const std::string query = "INSERT INTO `assigned_tests`(`TEST_ID`, `GROUP_ID`) VALUES (?,?)";
+		statement_unique stat(connection->prepareStatement(query));
+
+		stat->setString(1, group.getID());
+		stat->setString(2, test.getTestID());
+		try
+		{
+			stat->execute();
+		}
+		catch (sql::SQLException& exception)
+		{
+			throw DatabaseException(ExceptionType::ENTRY_EXISTS, "Test is already assigned");
+		}
+	}
+
+	void MySQL::deassignTest(Group& group, Test& test)
+	{
+		connection_shared connection = this->getConnection();
+		const std::string query = "DELETE FROM `assigned_tests` WHERE `TEST_ID` = ? and `GROUP_ID` = ?";
+		statement_unique stat(connection->prepareStatement(query));
+
+		stat->setString(1, group.getID());
+		stat->setString(2, test.getTestID());
+		stat->execute();
+	}
+
+	std::vector<Test> MySQL::getAllAssignedTests(Group& group,User& owner)
+	{
+		connection_shared connection = this->getConnection();
+		const auto factory = std::make_unique<TestGetter>(connection);
+
+		const std::string query = "SELECT `TEST_ID`FROM `assigned_tests` INNER JOIN TESTS ON TESTS.ID = TEST_ID WHERE `GROUP_ID` = ? and TESTS.OWNER_ID = ?";
+		statement_unique stat(connection->prepareStatement(query));
+		stat->setString(1, group.getID());
+		stat->setString(2, owner.getID());
+		std::shared_ptr<sql::ResultSet> result(stat->executeQuery());
+
+		std::vector<Test> tests;
+		while (result->next())
+		{
+			tests.push_back(factory->getTestFromID(connection,result->getString(1)));
+		}
+		return tests;
 	}
 }

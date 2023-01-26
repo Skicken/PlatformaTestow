@@ -2,6 +2,7 @@
 #include "System.h"
 
 #include "Views/TeacherView/TeacherView.h"
+#include "Views/TeacherView/AdminView/AdminView.h"
 
 System* System::instance;
 System::System()
@@ -115,6 +116,9 @@ void System::setMenuView()
 		case UserType::TEACHER:
             setView(new TeacherMenu());
         break;
+		case UserType::ADMIN:
+            setView(new AdminView());
+		break;
 		default:
 			setView(new TeacherMenu());
 

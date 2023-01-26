@@ -9,10 +9,9 @@ namespace ExternalData
 
 class Question
 {
-
 	public:
-
-		std::string getQuestionID() const;
+	Question(const std::string& question);
+	std::string getQuestionID() const;
 		std::string getQuestionName() const;
 		void setQuestion(const std::string& question);
 		std::vector<Answer>& getAnswers();

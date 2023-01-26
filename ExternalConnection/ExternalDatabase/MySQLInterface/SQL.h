@@ -54,5 +54,9 @@ namespace ExternalData
 			void deleteHomework(Homework& homework) override;
 			std::vector<Homework> getAllAvailableHomework(std::string USER_ID) override;
 			std::vector<AttendanceList> getGroupAttendanceList(Group& group) override;
+			std::vector<Homework> getHomeworkForGroup(std::string GROUP_ID) override;
+			void assignTest(Group& group, Test& test) override;
+			void deassignTest(Group& group, Test& test) override;
+			virtual std::vector<Test> getAllAssignedTests(Group& group, User& owner) override;
 	};
 }

@@ -64,6 +64,10 @@ void Question::setCorrectAnswer(const Answer& correct_answer)
 	correctAnswer = correct_answer;
 }
 
+Question::Question(const std::string& question): question(question),correctAnswer("")
+{
+}
+
 std::string Question::getQuestionID() const
 {
 	return QuestionID;

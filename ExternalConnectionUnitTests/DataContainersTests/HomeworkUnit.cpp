@@ -48,7 +48,7 @@ namespace UnitTests
 
 				HomeworkCommit commit(dataHomework[0], "I think it is 4");
 
-				std::shared_ptr<User> user = data->getUser("user", "root");
+				std::shared_ptr<User> user = data->getUser("user", "user");
 				data->commitHomework(user->getID(), commit);
 				std::vector<HomeworkCommit> dataCommit = data->getCommitHomework(user->getID());
 

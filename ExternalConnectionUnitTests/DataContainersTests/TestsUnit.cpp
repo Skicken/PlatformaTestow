@@ -31,7 +31,7 @@ namespace UnitTests
 			std::string message;
 			try {
 				DataInterface* data = new MySQL();
-				std::shared_ptr<User> user = data->getUser("user", "root");
+				std::shared_ptr<User> user = data->getUser("user", "user");
 
 
 

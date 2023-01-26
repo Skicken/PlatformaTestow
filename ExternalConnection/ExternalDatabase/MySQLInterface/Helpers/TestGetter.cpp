@@ -48,6 +48,17 @@ namespace ExternalData
 		);
 		return test;
 	}
+
+	Test TestGetter::getTestFromID(connection_shared connection, std::string ID)
+	{
+		const std::string query = "select ID,name,description,randomize from tests where ID = ?";
+		statement_unique stat(connection->prepareStatement(query));
+		stat->setString(1, ID);
+		std::shared_ptr<sql::ResultSet> result(stat->executeQuery());
+		if (result->next()) return getTestFromRow(result);
+		throw DatabaseException(ExceptionType::CANNOT_FIND, "cannot find test with defined ID");
+	}
+
 	Question TestGetter::getQuestionFromRow(std::shared_ptr<sql::ResultSet> result)
 	{
 		const std::string questionID = result->getString(1);
@@ -55,8 +66,9 @@ namespace ExternalData
 		statement_unique correctAnswer(connection->prepareStatement(correctAnswerQuery));
 		correctAnswer->setString(1, questionID);
 		result_shared resultAnswer(correctAnswer->executeQuery());
-		resultAnswer->next();
-		Answer correct = getAnswerFromRow(resultAnswer);
+		Answer correct("");
+		if(resultAnswer->next())
+			correct = getAnswerFromRow(resultAnswer);
 	
 		const std::vector<Answer> answers = getAnswers(questionID);
 		Question question(

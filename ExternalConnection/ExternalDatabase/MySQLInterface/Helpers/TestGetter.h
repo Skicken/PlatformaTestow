@@ -18,9 +18,8 @@ namespace ExternalData
 
 		public:
 		Test getTestFromRow(std::shared_ptr<sql::ResultSet> result);
+		Test getTestFromID(connection_shared connection,std::string ID);
 
 
-		void insertQuestions(std::string testID,std::vector<Question>& questions);
-		void insertAnswers(std::string questionID,std::string correctAnswerName, std::vector<Answer>& answers);
 	};
 }

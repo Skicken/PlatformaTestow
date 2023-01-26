@@ -75,6 +75,7 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DatabaseException.cpp" />
@@ -145,5 +146,6 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.cpp" />
   </ItemGroup>
 </Project>

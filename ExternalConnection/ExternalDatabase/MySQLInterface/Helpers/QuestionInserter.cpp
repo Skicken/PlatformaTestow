@@ -1,5 +1,8 @@
 #include "ecpch.h"
 #include "QuestionInserter.h"
+
+#include "Utilities.h"
+
 namespace ExternalData {
 	QuestionInserter::QuestionInserter(const connection_shared& connection): connection(connection)
 	{
@@ -27,13 +30,7 @@ namespace ExternalData {
 			}
 			else
 			{
-				insertQuestion->setString(1, question.getQuestionName());
-				insertQuestion->execute();
-				getQuestionID->setString(1, question.getQuestionName());
-				result_unique re_result(getQuestionID->executeQuery());
-				if (!re_result->next()) throw sql::SQLException("could not fetch question ID");
-
-				questionID = re_result->getString(1);
+				questionID = Utilities::generateID(connection);
 			}
 			insertAnswers(questionID, question.getCorrectAnswer().getAnswer(), question.getAnswers());
 
@@ -71,7 +68,7 @@ namespace ExternalData {
 				getAnswerID->setString(1, answer.getAnswer());
 
 				result_unique re_result(getAnswerID->executeQuery());
-				if (!re_result->next()) throw sql::SQLException("could not fetch answer ID");
+				if (!re_result->next()) throw DatabaseException(ExceptionType::CANNOT_FIND, "could not fetch answer ID");
 				AnswerID = re_result->getString(1);
 			}
 			insertQuestionAnswer->setString(1, questionID);
@@ -80,7 +77,8 @@ namespace ExternalData {
 		}
 		getAnswerID->setString(1, correctAnswerName);
 		result_unique result(getAnswerID->executeQuery());
-		if (!result->next()) throw sql::SQLException("could not fetch correct answer ID");
+
+		if (!result->next()) throw DatabaseException(ExceptionType::CANNOT_FIND,"could not fetch correct answer ID");
 		const std::string correctAnswerID = result->getString(1);
 
 		std::string correctAnswerQuery = "INSERT IGNORE INTO `correct_question_answer`(`QUESTION_ID`, `ANSWER_ID`) VALUES (?,?)";

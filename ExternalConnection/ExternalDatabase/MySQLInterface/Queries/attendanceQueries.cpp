@@ -21,7 +21,6 @@ namespace ExternalData
 				insertQuery->setString(1, list.getGroup().getID());
 				insertQuery->setString(2, user.getID());
 				insertQuery->setString(3, date);
-
 				insertQuery->execute();
 			}
 		}
@@ -76,5 +75,5 @@ namespace ExternalData
 
 	}
 
-
+	
 }
