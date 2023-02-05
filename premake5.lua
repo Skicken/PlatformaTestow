@@ -38,7 +38,8 @@ project "TestPlatform"
     includedirs
     {
         "%{prj.name}",  
-        "ExternalConnection",      
+        "ExternalConnection",
+        "vendor/raygui/src"      
     }
     libdirs
     {
@@ -92,6 +93,10 @@ filter "configurations:Dist"
     links
     {
         "mysqlcppconn-static.lib",
+    }
+    libdirs
+    {
+        MAILIO_DIR.."/Release"
     }
 
 include("premake_external_connectionLib.lua")

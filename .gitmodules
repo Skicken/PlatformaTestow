@@ -8,3 +8,6 @@
 [submodule "vendor/mailio"]
 	path = vendor/mailio
 	url = https://github.com/karastojko/mailio.git
+[submodule "vendor/raygui"]
+	path = vendor/raygui
+	url = https://github.com/raysan5/raygui

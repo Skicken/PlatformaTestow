@@ -10,7 +10,7 @@ function haveMysqlDependencies()
 
     if os.getenv("MYSQL_DEBUG_ROOT") ~= nil
     then
-        MY_SQL_DEBUG = os.getenv("OPENSSL_ROOT")
+        MY_SQL_DEBUG = os.getenv("MYSQL_DEBUG_ROOT")
     end
     if not os.isdir(MY_SQL)
     then

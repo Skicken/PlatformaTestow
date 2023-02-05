@@ -2,39 +2,18 @@
 #include "Question.h"
 
 
-
-Question& Question::operator=(const Question& other)
+Answer Question::getCorrectAnswer() const
 {
-	if (this == &other)
-		return *this;
-	QuestionID = other.QuestionID;
-	question = other.question;
-	answers = other.answers;
-	return *this;
+	return correctAnswer;
 }
 
-Question& Question::operator=(Question&& other) noexcept
+void Question::setCorrectAnswer(const Answer& correct_answer)
 {
-	if (this == &other)
-		return *this;
-	QuestionID = std::move(other.QuestionID);
-	question = std::move(other.question);
-	answers = std::move(other.answers);
-	return *this;
+	correctAnswer = correct_answer;
 }
 
-
-Question::Question(const std::string& question, const std::vector<Answer>& answers, const Answer& correct_answer): question(question),
-	answers(answers),
-	correctAnswer(correct_answer)
-{
-}
-
-Question::Question(const std::string& question_id, const std::string& question, const std::vector<Answer>& answers,
-	const Answer& correct_answer): QuestionID(question_id),
-	                               question(question),
-	                               answers(answers),
-	                               correctAnswer(correct_answer)
+Question::Question(const std::string& question_id, const std::string& question, const std::vector<Answer> answers,
+	const Answer& correct_answer):QuestionID(question_id),question(question),answers(answers),correctAnswer(correct_answer)
 {
 }
 
@@ -52,16 +31,34 @@ Question::Question(Question&& other) noexcept: QuestionID(std::move(other.Questi
 {
 }
 
-
-
-Answer Question::getCorrectAnswer() const
+Question& Question::operator=(const Question& other)
 {
-	return correctAnswer;
+	if (this == &other)
+		return *this;
+	QuestionID = other.QuestionID;
+	question = other.question;
+	answers = other.answers;
+	correctAnswer = other.correctAnswer;
+	return *this;
 }
 
-void Question::setCorrectAnswer(const Answer& correct_answer)
+Question& Question::operator=(Question&& other) noexcept
 {
-	correctAnswer = correct_answer;
+	if (this == &other)
+		return *this;
+	QuestionID = std::move(other.QuestionID);
+	question = std::move(other.question);
+	answers = std::move(other.answers);
+	correctAnswer = std::move(other.correctAnswer);
+	return *this;
+}
+
+Question::Question(const std::string& question): question(question),correctAnswer("")
+{
+}
+
+Question::Question(const std::string& question, const std::vector<Answer> answers, const Answer& correct_answer): question(question),answers(answers),correctAnswer(correct_answer)
+{
 }
 
 std::string Question::getQuestionID() const
@@ -84,7 +81,7 @@ std::vector<Answer>& Question::getAnswers()
 	return answers;
 }
 
-void Question::setAnswers(const std::vector<Answer>& answers)
+void Question::setAnswers(const std::vector<Answer> answers)
 {
 	this->answers = answers;
 }

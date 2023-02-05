@@ -2,7 +2,8 @@
 class View
 {
 	public:
-		virtual void update() = 0;
-		virtual void render() = 0;
+	virtual ~View() = default;
+	virtual void update() = 0;
+	virtual void render() = 0;
 };
 
