@@ -1,6 +1,7 @@
 #include "ptpch.h"
 #include "System.h"
 
+
 #include "Views/TeacherView/TeacherView.h"
 #include "Views/TeacherView/AdminView/AdminView.h"
 
@@ -52,11 +53,10 @@ void System::initVariables()
     this->dataInterface = std::make_unique<ExternalData::MySQL>();
 
     this->setView(new LoginView());
-    //Init raylib 
-    InitWindow(GetScreenWidth(), GetScreenWidth(), appName.c_str());
+    //Init raylib
 
+    InitWindow(GetScreenWidth(), GetScreenWidth(), appName.c_str());
     SetTargetFPS(30);
-    LoginUser("user", "user");
 }
 
 void System::LoginUser(std::string username, std::string password)

@@ -15,7 +15,7 @@ namespace ExternalData
 	class DataInterface
 	{
 		public:
-		virtual ~DataInterface() = default;
+			virtual ~DataInterface() = default;
 
 			virtual std::vector<Test> getAllTests() = 0;
 			virtual std::vector<Test> getTeacherTests(std::string OWNER_ID) = 0;
@@ -58,6 +58,9 @@ namespace ExternalData
 			virtual std::vector<Test> getAllAssignedTests(Group& group,User& owner) = 0;
 			virtual void assignTest(Group& group, Test& test) = 0;
 			virtual void deassignTest(Group& group, Test& test) = 0;
+			virtual void addUserToGroup(User& user, Group& group) = 0;
+			virtual void removeUserFromGroup(User& user, Group& group) = 0;
+
 
 	};
 }

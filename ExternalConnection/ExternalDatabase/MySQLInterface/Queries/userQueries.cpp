@@ -1,13 +1,16 @@
 #include "ecpch.h"
 #include "ExternalDatabase/MySQLInterface/Helpers/UserFactory.h"
 #include "ExternalDatabase/MySQLInterface/SQL.h"
+#include "ExternalDatabase/MySQLInterface/Helpers/UserValidator.h"
 
 namespace ExternalData
 {
 	void MySQL::addUser(User& user, std::string login, std::string password)
 	{
-		const std::string query = "INSERT INTO users VALUES ("+ID_GEN+", ?, MD5(?), ?,?,?,?)";
+		std::string error = UserValidator::validateUser(user, login, password);
+		if (!error.empty()) throw DatabaseException(ExceptionType::INVALID_QUERY, error);
 
+		const std::string query = "INSERT INTO users VALUES ("+ID_GEN+", ?, MD5(?), ?,?,?,?)";
 		connection_shared connection = this->getConnection();
 		statement_unique stat(connection->prepareStatement(query));
 
@@ -39,6 +42,9 @@ namespace ExternalData
 	}
 	void MySQL::modifyUser(User& user, std::string login, std::string password)
 	{
+		std::string error = UserValidator::validateUser(user, login, password);
+		if (!error.empty()) throw DatabaseException(ExceptionType::INVALID_QUERY, error);
+
 		const std::string query = "UPDATE `users` SET login=?,password=MD5(?),name=?,surname=?,accountType=?,email=? WHERE ID = ?";
 		connection_shared connection = this->getConnection();
 		statement_unique stat(connection->prepareStatement(query));

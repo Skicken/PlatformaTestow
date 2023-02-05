@@ -12,6 +12,10 @@ Group::Group(const std::string& id, const std::string& name, const std::vector<U
 {
 }
 
+Group::Group(const std::string& name): name(name)
+{
+}
+
 Group::Group(const Group& other): ID(other.ID),
                                   name(other.name),
                                   users(other.users)

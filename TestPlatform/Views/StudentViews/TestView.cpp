@@ -3,6 +3,8 @@
 #include "QuestionView.h"
 #include <raygui.h>
 
+#include "Utilities/ClassToStringFormatter.h"
+
 TestView::TestView()
 {
     refresh();
@@ -44,10 +46,7 @@ void TestView::refresh()
     availableTests = System::getDataInterface()->
         getStudentAvailableTest(System::getLoggedUser()->getID());
     commitedTests = System::getDataInterface()->getTestResults(System::getLoggedUser()->getID());
-    auto lambda = [](TestCommit& commit)
-    {
-        return std::string(commit.getTest().getTestName() + " " + std::to_string(commit.calculatePercentage())) + "%";
-    };
+
     availableTestString = Helper::ListToStringSeparated<Test>(availableTests, &Test::getTestName);
-    commitedTestString = Helper::ListToStringSeparated<TestCommit>(commitedTests, lambda);
+    commitedTestString = Helper::ListToStringSeparated<TestCommit>(commitedTests, ClassToStringFormatter::testCommitToString);
 }

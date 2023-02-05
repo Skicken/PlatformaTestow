@@ -8,7 +8,18 @@ class ManageTestsView : public View
 	void render() override;
     ManageTestsView();
 	private:
+        void questionRemove();
+        void testAssign();
         void updateTest();
+        void refreshData();
+        void testAdd();
+        void testRemove();
+        void questionAdd();
+        void answerAdd();
+        void answerRemove();
+        void setCorrectAnswer();
+        void testDeassign();
+        void tabInput();
 	std::vector<Group> groups;
     std::vector<Test> assignedTests;
 
@@ -20,36 +31,40 @@ class ManageTestsView : public View
     bool testSelected = false;
     bool questionSelected = false;
     bool answerSelected = false;
+    bool assignedSelected = false;
+	bool menuButton = false;
+    int selectedGroupIndex = 0;
+    int selectedAssignedTestIndex = 0;
+    int selectedTestIndex = 0;
+    int selectedQuestionIndex = 0;
+    int selectedAnswerIndex = 0;
+    bool testNameInputEdit = false;
+    char testNameInput[128] = "";
+    bool questionNameInputEdit = false;
+    char questionNameInput[128] = "";
 
+     bool* const tabIndex[3] = { &testNameInputEdit,&questionNameInputEdit,&answerNameInputEdit };
+    int currentTabIndex = 0;
 
-	bool Button000Pressed = false;
+    bool deassignTestButton = false;
+    bool addTestButton = false;
+    bool assignTestButton = false;
+    bool removeTestButton = false;
+    bool addQuestionButton = false;
+    bool removeQuestionButton = false;
+    bool addAnswerButton = false;
+    bool setCorrectAnswerButton = false;
+    bool removeAnswerButton = false;
+    bool answerNameInputEdit = false;
+    char answerNameInput[128] = "";
+    bool updateTestButton = false;
+
     int ListView001ScrollIndex = 0;
-    int ListView001Active = 0;
     int ListView002ScrollIndex = 0;
-    int ListView002Active = 0;
     int ListView003ScrollIndex = 0;
-    int ListView003Active = 0;
     int ListView004ScrollIndex = 0;
-    int ListView004Active = 0;
     int ListView005ScrollIndex = 0;
-    int ListView005Active = 0;
-    bool TextBox007EditMode = false;
-    char TextBox007Text[128] = "SAMPLE TEXT";
-    bool TextBox008EditMode = false;
-    char TextBox008Text[128] = "SAMPLE TEXT";
-    bool Button008Pressed = false;
-    bool Button009Pressed = false;
-    bool Button010Pressed = false;
-    bool Button012Pressed = false;
-    bool Button013Pressed = false;
-    bool Button014Pressed = false;
-    bool Button015Pressed = false;
-    bool Button016Pressed = false;
-    bool Button017Pressed = false;
-    bool TextBox018EditMode = false;
-    char TextBox018Text[128] = "SAMPLE TEXT";
-    bool Button019Pressed = false;
-    bool validateTest();
+
     Rectangle layoutRecs[20] = {
         { 24, 48, 216, 48 },
         { 24, 120, 216, 672 },
@@ -70,7 +85,7 @@ class ManageTestsView : public View
         { 1552, 808, 104, 56 },
         { 1696, 808, 104, 56 },
         { 1440, 56, 336, 40 },
-		{ 600, 888, 360, 32 },
+		{ 600, 888, 360, 56 },
 
     };
 };

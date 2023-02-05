@@ -12,11 +12,11 @@ class LoginView:
 	private:
 	bool showIncorrect;
 	std::string errorMessage;
-    bool Button001Pressed = false;
-    bool TextBox001EditMode = false;
-    char TextBox001Text[128] = "";
-    bool TextBox002EditMode = false;
-    char TextBox002Text[128] = "";
+    bool loginButton = false;
+    bool loginEdit = false;
+    char loginInput[128] = "";
+    bool passwordEdit = false;
+    char passwordInput[128] = "";
 
     Rectangle layoutRecs[5] = {
 	    {768, 644, 240, 48},

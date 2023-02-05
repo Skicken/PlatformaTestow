@@ -9,10 +9,11 @@ namespace ExternalData
 class Test
 {
 
-	public:
-
+public:
+		Test() = default;
+		explicit Test(const std::string& test_name);
 		Test(const std::string& test_name, const std::string& description, bool randomize_questions,
-			const std::vector<Question>& questions);
+			const std::vector<Question> questions);
 
 		std::string getTestID() const;
 		std::string getTestName() const;

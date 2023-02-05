@@ -6,7 +6,7 @@ namespace ExternalData
 	{
 		public:
 		DatabaseException(ExceptionType type, const std::string& message);
-		~DatabaseException() noexcept override;
+		~DatabaseException() override;
 		char const* what() const override;
 		ExceptionType getType() const;
 

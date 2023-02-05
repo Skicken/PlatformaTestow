@@ -3,44 +3,38 @@
 #include <System.h>
 #include <raygui.h>
 
-QuestionView::QuestionView(std::shared_ptr<TestCommit> commit, bool preview): testCommit(commit),
+QuestionView::QuestionView(std::shared_ptr<TestCommit> commit, bool preview): testCommit(commit),currentQuestion(testCommit->getCurrentQuestion()),
 	preview(preview)
 {
-	ProgressBar000Value = commit->getProgress();
-
+	progressBarValue = commit->getProgress();
+	selectedAnswer = false;
+	INFO(progressBarValue)
 }
 
-QuestionView::QuestionView(std::shared_ptr<TestCommit> commit): testCommit(commit)
+QuestionView::QuestionView(std::shared_ptr<TestCommit> commit): testCommit(commit), currentQuestion(testCommit->getCurrentQuestion())
 {
-
-	ProgressBar000Value = commit->getProgress();
+	currentQuestion = testCommit->getCurrentQuestion();
+	progressBarValue = commit->getProgress();
 	preview = false;
+	selectedAnswer = false;
+	INFO(progressBarValue)
+
 }
+
 
 void QuestionView::update()
 {
-	if (Button002Pressed && ListView005Active>=0 && ListView005Active< testCommit->getCurrentQuestion().getAnswers().size())
+	if((nextQuestionButton || previousQuestionButton) && selectedAnswer && !preview)
 	{
-		INFO("Set Answer for question {}", testCommit->getCurrentQuestion().getAnswers()[ListView005Active].getAnswer())
-		if(!preview) testCommit->setAnswerForQuestion(
-			testCommit->getCurrentQuestion().getAnswers()[ListView005Active]
-		);
-
-		if (testCommit->getNextQuestion())
-		{
-
-			INFO("Going to next question")
-			System::getInstance()->setView(new QuestionView(testCommit,preview));
-		}
-		else
-		{
-			INFO("Going to Main Menu")
-
-				//commit test result;
-			if(!preview)System::getDataInterface()->commitTestResult(*testCommit,
-					System::getInstance()->getLoggedUser()->getID());
-			System::getInstance()->setMenuView();
-		}
+		testCommit->setAnswerForQuestion(testCommit->getCurrentQuestion().getAnswers()[selectedAnswerIndex]);
+	}
+	if (nextQuestionButton && selectedAnswer)
+	{
+		goToNextQuestion();
+	}
+	else if(previousQuestionButton && selectedAnswer)
+	{
+		goToPreviousQuestion();
 	}
 	
 }
@@ -50,23 +44,53 @@ void QuestionView::render()
     DrawText(testCommit->getCurrentQuestion().getQuestionName().c_str(), 288, 216, 40, GRAY);
 
 	if (preview) {
-		ListView005Active = testCommit->getCurrentQuestionAnswerIndex();
+		selectedAnswerIndex = testCommit->getCurrentQuestionAnswerIndex();
 		GuiListView(layoutRecs[4],
 			Helper::ListToStringSeparated(testCommit->getCurrentQuestion().getAnswers(), &Answer::getAnswer).c_str(),
-			&ListView005ScrollIndex, ListView005Active);
+			&ListView005ScrollIndex, selectedAnswerIndex);
 		DrawText("Test Preview", 288, 150, 20, GREEN);
 	}
 	else
 	{
-		ListView005Active = GuiListView(layoutRecs[4],
+		selectedAnswerIndex = GuiListView(layoutRecs[4],
 			Helper::ListToStringSeparated(testCommit->getCurrentQuestion().getAnswers(), &Answer::getAnswer).c_str(),
-			&ListView005ScrollIndex, ListView005Active);
+			&ListView005ScrollIndex, selectedAnswerIndex);
+	}
+	selectedAnswer = selectedAnswerIndex >= 0 && selectedAnswerIndex < testCommit->getCurrentQuestion().getAnswers().size();
+    progressBarValue = GuiProgressBar(layoutRecs[0], NULL, NULL, progressBarValue, 0, 1);
+
+	if(testCommit->isLastQuestion())
+		nextQuestionButton = GuiButton(layoutRecs[1], "Finish Test");
+	else
+		nextQuestionButton = GuiButton(layoutRecs[1], "Next Question");
+	std::string percent = std::to_string(testCommit->getProgress() * 100);
+	percent = percent.substr(0, 5);
+	const std::string progressLabel = "Progress Bar " + percent +" %";
+    GuiLabel(layoutRecs[2], progressLabel.c_str());
+    previousQuestionButton = GuiButton(layoutRecs[3], "Previous Question");
+}
+void QuestionView::goToPreviousQuestion()
+{
+
+	if (testCommit->getPreviousQuestion())
+	{
+		System::getInstance()->setView(new QuestionView(testCommit, preview));
+		return;
 	}
 
+}
 
-    ProgressBar000Value = GuiProgressBar(layoutRecs[0], NULL, NULL, ProgressBar000Value, 0, 1);
-    Button002Pressed = GuiButton(layoutRecs[1], "Next Question");
-	const std::string progressLabel = "Progress Bar " + std::to_string(testCommit->getProgress());
-    GuiLabel(layoutRecs[2], progressLabel.c_str());
-    Button004Pressed = GuiButton(layoutRecs[3], "Previous Question");
+void QuestionView::goToNextQuestion()
+{
+	if (testCommit->getNextQuestion())
+	{
+		System::getInstance()->setView(new QuestionView(testCommit, preview));
+		return;
+	}
+	if (!preview) {
+		System::getDataInterface()->commitTestResult(*testCommit,
+			System::getInstance()->getLoggedUser()->getID());
+	}
+	System::getInstance()->setMenuView();
+	
 }

@@ -10,28 +10,28 @@
 
 void TeacherMenu::update()
 {
-   if(Button003Pressed)
+   if(logoutButton)
    {
        System::getInstance()->LogoutUser();
    }
-	if(Button004Pressed)
+	if(attendanceListButton)
    {
         System::getInstance()->setView(new AttendanceView());
 
    }
-   if (Button005Pressed)
+   if (sendMailButton)
    {
        System::getInstance()->setView(new Mail());
    }
-	if(Button002Pressed)
+	if(testResultsButton)
 	{
         System::getInstance()->setView(new TestResultsTeacher());
 	}
-    if(Button001Pressed)
+    if(manageHomeworksButton)
     {
         System::getInstance()->setView(new ManageHomeworkView());
     }
-    if(Button000Pressed)
+    if(manageTestsButton)
     {
         System::getInstance()->setView(new ManageTestsView());
     }
@@ -39,12 +39,12 @@ void TeacherMenu::update()
 
 void TeacherMenu::render()
 {
-    Button000Pressed = GuiButton(layoutRecs[0], "Manage Tests");
-    Button001Pressed = GuiButton(layoutRecs[1], "Manage Homeworks");
-    Button002Pressed = GuiButton(layoutRecs[2], "Test Results");
-    Button003Pressed = GuiButton(layoutRecs[3], "Logout");
-    Button004Pressed = GuiButton(layoutRecs[4], "Attendance List");
-    Button005Pressed = GuiButton(layoutRecs[5], "Send Mail");
+    manageTestsButton = GuiButton(layoutRecs[0], "Manage Tests");
+    manageHomeworksButton = GuiButton(layoutRecs[1], "Manage Homeworks");
+    testResultsButton = GuiButton(layoutRecs[2], "Test Results");
+    logoutButton = GuiButton(layoutRecs[3], "Logout");
+    attendanceListButton = GuiButton(layoutRecs[4], "Attendance List");
+    sendMailButton = GuiButton(layoutRecs[5], "Send Mail");
 
     DrawText("Welcome", 24, 32, 40, GREEN);
     std::string name_surname = System::getLoggedUser()->getName() + "  " + System::getLoggedUser()->getSurname();

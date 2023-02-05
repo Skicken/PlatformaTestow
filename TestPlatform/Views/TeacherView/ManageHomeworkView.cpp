@@ -3,69 +3,63 @@
 #include <raygui.h>
 
 #include "System.h"
+#include "Utilities/ClassToStringFormatter.h"
+
 ManageHomeworkView::ManageHomeworkView()
 {
     refreshData();
 }
 void ManageHomeworkView::update()
 {
-    if (Button001Pressed) System::getInstance()->setMenuView();
-    if(LabelButton004Pressed && homeworkSelected)
+    if (menuButton) System::getInstance()->setMenuView();
+    if(deleteHomeworkButton && homeworkSelected)
     {
-        System::getDataInterface()->deleteHomework(allHomeworks[ListView002Active]);
+        System::getDataInterface()->deleteHomework(allHomeworks[selectedHomeworkIndex]);
 
         refreshData();
     }
-    if(Button003Pressed && groupSelected)
+    if(addHomeworkButton && groupSelected)
     {
-        Homework home(TextBox000Text);
-    	System::getDataInterface()->addHomework(groups[ListView008Active],home);
+        Homework home(homeworkNameInput);
+    	System::getDataInterface()->addHomework(groups[selectedGroupIndex],home);
         refreshData();
     }
 }
 
 void ManageHomeworkView::render()
 {
-    if (GuiTextBox(layoutRecs[0], TextBox000Text, 128, TextBox000EditMode)) TextBox000EditMode = !TextBox000EditMode;
+    if (GuiTextBox(layoutRecs[0], homeworkNameInput, 128, homeworkNameEdit)) homeworkNameEdit = !homeworkNameEdit;
 
-    int previous = ListView008Active;
-    ListView008Active = GuiListView(layoutRecs[8], Helper::ListToStringSeparated(groups,&Group::getName).c_str(), &ListView008ScrollIndex, ListView008Active);
-    groupSelected = ListView008Active >= 0 && ListView008Active < groups.size();
+    int previous = selectedGroupIndex;
+    selectedGroupIndex = GuiListView(layoutRecs[8], Helper::ListToStringSeparated(groups,&Group::getName).c_str(), &ListView008ScrollIndex, selectedGroupIndex);
+    groupSelected = selectedGroupIndex >= 0 && selectedGroupIndex < groups.size();
     if (groupSelected) {
-        if (previous != ListView008Active) allHomeworks = System::getDataInterface()->getHomeworkForGroup(groups[ListView008Active].getID());
-        INFO(allHomeworks.size());
-        ListView002Active = GuiListView(layoutRecs[2], Helper::ListToStringSeparated(allHomeworks, &Homework::getQuestion).c_str(), &ListView002ScrollIndex, ListView002Active);
-        homeworkSelected = ListView002Active >= 0 && ListView002Active < allHomeworks.size();
+        if (previous != selectedGroupIndex) allHomeworks = System::getDataInterface()->getHomeworkForGroup(groups[selectedGroupIndex].getID());
+        selectedHomeworkIndex = GuiListView(layoutRecs[2], Helper::ListToStringSeparated(allHomeworks, &Homework::getQuestion).c_str(), &ListView002ScrollIndex, selectedHomeworkIndex);
+        homeworkSelected = selectedHomeworkIndex >= 0 && selectedHomeworkIndex < allHomeworks.size();
     }
 
-    auto lambda1 = [](User& user)
-    {
-        return user.getName() + " " + user.getSurname();
-    };
-     previous = ListView005Active;
-    ListView005Active = GuiListView(layoutRecs[5], Helper::ListToStringSeparated(users, lambda1 ).c_str(), &ListView005ScrollIndex, ListView005Active);
-    userSelected = ListView005Active >= 0 && ListView005Active < users.size();
-    auto lambda2 = [](HomeworkCommit& commit)
-    {
-        return commit.getDeliveryDate() + " : " + commit.getQuestion();
-    };
+     previous = selectedUserIndex;
+     selectedUserIndex = GuiListView(layoutRecs[5],
+         Helper::ListToStringSeparated(users,ClassToStringFormatter::userToString).c_str(), &ListView005ScrollIndex, selectedUserIndex);
+    userSelected = selectedUserIndex >= 0 && selectedUserIndex < users.size();
     if (userSelected)
     {
-        if (previous != ListView005Active) commits = System::getDataInterface()->getCommitHomework(users[ListView005Active].getID());
-        ListView006Active = GuiListView(layoutRecs[6], Helper::ListToStringSeparated(commits, lambda2).c_str(), &ListView006ScrollIndex, ListView006Active);
+        if (previous != selectedUserIndex) commits = System::getDataInterface()->getCommitHomework(users[selectedUserIndex].getID());
+        selectedHomeworkCommitIndex = GuiListView(layoutRecs[6], Helper::ListToStringSeparated(commits, ClassToStringFormatter::homeworkCommitToString).c_str(), &ListView006ScrollIndex, selectedHomeworkCommitIndex);
 
     }
-    homeworkCommitSelected = ListView006Active >= 0 && ListView006Active < commits.size() && userSelected;
+    homeworkCommitSelected = selectedHomeworkCommitIndex >= 0 && selectedHomeworkCommitIndex < commits.size() && userSelected;
 
     if (homeworkCommitSelected)
     {
-        std::string answerHomework = commits[ListView006Active].getAnswer();
-        GuiTextBoxMulti(layoutRecs[7], const_cast<char*>(answerHomework.c_str()), 128, TextmultiBox007EditMode);
+        std::string answerHomework = commits[selectedHomeworkCommitIndex].getAnswer();
+        GuiTextBoxMulti(layoutRecs[7], const_cast<char*>(answerHomework.c_str()), 128, viewHomeworkEdit);
     }
 
-    Button001Pressed = GuiButton(layoutRecs[1], "Menu");
-    Button003Pressed = GuiButton(layoutRecs[3], "Add Homework");
-    LabelButton004Pressed = GuiButton(layoutRecs[4], "Delete Homework");
+    menuButton = GuiButton(layoutRecs[1], "Menu");
+    addHomeworkButton = GuiButton(layoutRecs[3], "Add Homework");
+    deleteHomeworkButton = GuiButton(layoutRecs[4], "Delete Homework");
 }
 
 
@@ -75,7 +69,8 @@ void ManageHomeworkView::refreshData()
     groups = System::getDataInterface()->getAllGroups();
     users = System::getDataInterface()->getAllUsers();
     if(groups.size()>0)
-    allHomeworks = System::getDataInterface()->getHomeworkForGroup(groups[ListView008Active].getID());
+    allHomeworks = System::getDataInterface()->getHomeworkForGroup(groups[selectedGroupIndex].getID());
     if(users.size()>0)
-        commits = System::getDataInterface()->getCommitHomework(users[ListView005Active].getID());
+        commits = System::getDataInterface()->getCommitHomework(users[selectedUserIndex].getID());
 }
+

@@ -13,12 +13,12 @@ public:
     TeacherMenu();
 	private:
        //----------------------------------------------------------------------------------
-    bool Button000Pressed = false;
-    bool Button001Pressed = false;
-    bool Button002Pressed = false;
-    bool Button003Pressed = false;
-    bool Button004Pressed = false;
-    bool Button005Pressed = false;
+    bool manageTestsButton = false;
+    bool manageHomeworksButton = false;
+    bool testResultsButton = false;
+    bool logoutButton = false;
+    bool attendanceListButton = false;
+    bool sendMailButton = false;
 
     Rectangle layoutRecs[6] = {
         { 24, 144, 240, 48 },

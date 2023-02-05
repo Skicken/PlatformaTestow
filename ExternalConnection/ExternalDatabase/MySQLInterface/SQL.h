@@ -58,5 +58,7 @@ namespace ExternalData
 			void assignTest(Group& group, Test& test) override;
 			void deassignTest(Group& group, Test& test) override;
 			virtual std::vector<Test> getAllAssignedTests(Group& group, User& owner) override;
+			void addUserToGroup(User& user, Group& group) override;
+			void removeUserFromGroup(User& user, Group& group) override;
 	};
 }

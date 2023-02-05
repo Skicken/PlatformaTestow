@@ -2,45 +2,52 @@
 #include "ExternalDatabase/MySQLInterface/SQL.h"
 #include "ExternalDatabase/MySQLInterface/Helpers/TestGetter.h"
 #include "ExternalDatabase/MySQLInterface/Helpers/QuestionInserter.h"
+#include "ExternalDatabase/MySQLInterface/Helpers/TestValidator.h"
 
 namespace ExternalData
 {
 
-	void MySQL::modifyTest(Test& test, std::string OWNER_ID)
+	void MySQL:: modifyTest(Test& test, std::string OWNER_ID)
 	{
+		std::string error;
+		if (!(error = TestValidator::validTest(test)).empty())throw  DatabaseException(ExceptionType::INVALID_QUERY, error);
+
 		deleteTest(test);
 		addTest(test,OWNER_ID);
 	}
 	void MySQL::deleteTest(Test& test)
 	{
 		const connection_shared connection = getConnection();
-		const std::string deleteQuestionAnswerQuery= "DELETE FROM `question_answers` WHERE `QUESTION_ID` = ?";
-		statement_unique deleteQuestionAnswer(connection->prepareStatement(deleteQuestionAnswerQuery));
 
-		const std::string deleteCorrectAnswerQuery = "DELETE FROM `correct_question_answer` WHERE `QUESTION_ID` = ?";
-		statement_unique deleteCorrectAnswer(connection->prepareStatement(deleteCorrectAnswerQuery));
-
+		const std::string deleteQuestionQuery = "DELETE FROM `questions` WHERE `ID` = ?";
+		statement_unique deleteQuestion(connection->prepareStatement(deleteQuestionQuery));
 		const std::string deleteTestQuery = "DELETE FROM `tests` WHERE `ID` = ?";
 		statement_unique deleteTest(connection->prepareStatement(deleteTestQuery));
 
 		for(auto &question:test.getQuestions())
 		{
-			deleteCorrectAnswer->setString(1, question.getQuestionID());
-			deleteCorrectAnswer->execute();
-
-			deleteQuestionAnswer->setString(1, question.getQuestionID());
-			deleteQuestionAnswer->execute();
-
+			if (!question.getQuestionID().empty())
+			{
+				deleteQuestion->setString(1, question.getQuestionID());
+				deleteQuestion->execute();
+			}
 		}
 		deleteTest->setString(1, test.getTestID());
-		deleteTest->execute();
+		try
+		{
+			deleteTest->execute();
+		}
+		catch(sql::SQLException &exception)
+		{
+			std::cout << exception.what();
+		}
 
 	}
 	void MySQL::addTest(Test& test, std::string OWNER_ID)
 	{
+
 		connection_shared connection = getConnection();
 		std::string testID = getUniqueID();
-
 		const std::string query = "INSERT INTO `tests`(`ID`, `OWNER_ID`, `name`, `randomize`, `description`) VALUES (?,?,?,?,?)";
 		statement_unique testQuery(connection->prepareStatement(query));
 
@@ -112,16 +119,11 @@ namespace ExternalData
 		const std::string query = "INSERT INTO `assigned_tests`(`TEST_ID`, `GROUP_ID`) VALUES (?,?)";
 		statement_unique stat(connection->prepareStatement(query));
 
-		stat->setString(1, group.getID());
-		stat->setString(2, test.getTestID());
-		try
-		{
-			stat->execute();
-		}
-		catch (sql::SQLException& exception)
-		{
-			throw DatabaseException(ExceptionType::ENTRY_EXISTS, "Test is already assigned");
-		}
+		stat->setString(1, test.getTestID());
+		stat->setString(2, group.getID());
+		stat->execute();
+		
+
 	}
 
 	void MySQL::deassignTest(Group& group, Test& test)
@@ -130,8 +132,8 @@ namespace ExternalData
 		const std::string query = "DELETE FROM `assigned_tests` WHERE `TEST_ID` = ? and `GROUP_ID` = ?";
 		statement_unique stat(connection->prepareStatement(query));
 
-		stat->setString(1, group.getID());
-		stat->setString(2, test.getTestID());
+		stat->setString(1, test.getTestID());
+		stat->setString(2, group.getID());
 		stat->execute();
 	}
 

@@ -18,7 +18,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ManageUsersView.h" />
+    <ClInclude Include="Views\TeacherView\AdminView\ManageUsersView.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Utilities\Helper.h">
       <Filter>Utilities</Filter>
@@ -66,10 +66,11 @@
       <Filter>Views</Filter>
     </ClInclude>
     <ClInclude Include="ptpch.h" />
+    <ClInclude Include="Utilities\ClassToStringFormatter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint.cpp" />
-    <ClCompile Include="ManageUsersView.cpp" />
+    <ClCompile Include="Views\TeacherView\AdminView\ManageUsersView.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Utilities\Helper.cpp">
       <Filter>Utilities</Filter>
@@ -117,5 +118,6 @@
       <Filter>Views</Filter>
     </ClCompile>
     <ClCompile Include="ptpch.cpp" />
+    <ClCompile Include="Utilities\ClassToStringFormatter.cpp" />
   </ItemGroup>
 </Project>

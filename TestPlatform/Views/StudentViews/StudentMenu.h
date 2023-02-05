@@ -12,10 +12,10 @@ class StudentMenu :
 	    virtual void render() override;
 	    StudentMenu();
 	private:
-    bool Button000Pressed = false;
-    bool Button001Pressed = false;
-    bool Button002Pressed = false;
-    bool Button003Pressed = false;
+    bool testsButton = false;
+    bool homeworkButton = false;
+    bool sendMailButton = false;
+    bool logoutButton = false;
 
     Rectangle layoutRecs[4] = {
         { 24, 144, 240, 48 },

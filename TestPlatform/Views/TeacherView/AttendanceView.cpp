@@ -3,6 +3,7 @@
 #include <raygui.h>
 
 #include "System.h"
+#include "Utilities/ClassToStringFormatter.h"
 
 AttendanceView::AttendanceView()
 {
@@ -11,39 +12,39 @@ AttendanceView::AttendanceView()
 
 void AttendanceView::update()
 {
-    if(Button007Pressed)
+    if(menuButton)
     {
         System::getInstance()->setMenuView();
     }
-    if(Button004Pressed && isGroupSelected && newAttendanceList==nullptr)
+    if(addAttendanceListButton && groupSelected && newAttendanceList==nullptr)
     {
-        newAttendanceList = std::make_unique<AttendanceList>(groups[ListView000Active], System::getDataInterface()->getCurrentDate());
+        newAttendanceList = std::make_unique<AttendanceList>(groups[selectedGroupIndex], System::getDataInterface()->getCurrentDate());
         attendanceLists.push_back(*newAttendanceList);
-        ListView001Active = attendanceLists.size()-1;
+        selectedAttendanceListIndex = attendanceLists.size()-1;
     }
-    if(Button005Pressed && ListView002Active >= 0 && ListView002Active < groupUsers.size())
+    if(addUserToPresentButton && selectedUserIndex >= 0 && selectedUserIndex < groupUsers.size())
     {
-        attendanceLists[ListView001Active].setUserPresent(
-            groupUsers[ListView002Active]
+        attendanceLists[selectedAttendanceListIndex].setUserPresent(
+            groupUsers[selectedUserIndex]
         );
     }
-    if (Button006Pressed && ListView003Active >= 0 && ListView003Active < attendanceLists[ListView001Active].getPresentUsers().size())
+    if (removeUserFromPresentButton && selectedPresentUserIndex >= 0 && selectedPresentUserIndex < attendanceLists[selectedAttendanceListIndex].getPresentUsers().size())
     {
-        attendanceLists[ListView001Active].removeUserPresent(
-            attendanceLists[ListView001Active].getPresentUsers()[ListView003Active]
+        attendanceLists[selectedAttendanceListIndex].removeUserPresent(
+            attendanceLists[selectedAttendanceListIndex].getPresentUsers()[selectedPresentUserIndex]
         );
     }
-    if(Button008Pressed && isDateSelected && isGroupSelected)
+    if(commitAttendanceButton && dateSelected && groupSelected)
     {
         try {
-            System::getDataInterface()->addAttendanceList(attendanceLists[ListView001Active]);
+            System::getDataInterface()->addAttendanceList(attendanceLists[selectedAttendanceListIndex]);
         }
         catch(ExternalData::DatabaseException &exception)
         {
 	        if(exception.getType()==ExternalData::ExceptionType::ENTRY_EXISTS)
 	        {
-                System::getDataInterface()->deleteAttendanceList(attendanceLists[ListView001Active]);
-                System::getDataInterface()->addAttendanceList(attendanceLists[ListView001Active]);
+                System::getDataInterface()->deleteAttendanceList(attendanceLists[selectedAttendanceListIndex]);
+                System::getDataInterface()->addAttendanceList(attendanceLists[selectedAttendanceListIndex]);
 	        }
         }
         refreshData();
@@ -53,51 +54,44 @@ void AttendanceView::update()
 
 void AttendanceView::render()
 {
-    lastGroup = ListView000Active;
-    ListView000Active = GuiListView(layoutRecs[0], 
+    lastGroup = selectedGroupIndex;
+    selectedGroupIndex = GuiListView(layoutRecs[0], 
         Helper::ListToStringSeparated(groups,&Group::getName).c_str()
-        , &ListView000ScrollIndex, ListView000Active);
+        , &ListView000ScrollIndex, selectedGroupIndex);
 
-    isGroupSelected = ListView000Active >= 0 && ListView000Active < groups.size();
-    if(lastGroup!= ListView000Active && isGroupSelected)
+    groupSelected = selectedGroupIndex >= 0 && selectedGroupIndex < groups.size();
+    if(lastGroup!= selectedGroupIndex && groupSelected)
     {
-        attendanceLists = System::getDataInterface()->getGroupAttendanceList(groups[ListView000Active]);
+        attendanceLists = System::getDataInterface()->getGroupAttendanceList(groups[selectedGroupIndex]);
     }
 
-    auto lambda = [](AttendanceList & list)
-    {
-        return list.getDate();
-    };
-    if(isGroupSelected)
-    ListView001Active = GuiListView(layoutRecs[1], 
-        Helper::ListToStringSeparated(attendanceLists, lambda).c_str(), &ListView001ScrollIndex, ListView001Active);
-    isDateSelected = ListView001Active >= 0 && ListView001Active < attendanceLists.size();
-    auto lambda1 = [](User& user)
-    {
-        return user.getName()+" "+user.getSurname();
-    };
+    if(groupSelected)
+    selectedAttendanceListIndex = GuiListView(layoutRecs[1], 
+        Helper::ListToStringSeparated(attendanceLists, ClassToStringFormatter::attendanceListToString).c_str(), &ListView001ScrollIndex, selectedAttendanceListIndex);
+    dateSelected = selectedAttendanceListIndex >= 0 && selectedAttendanceListIndex < attendanceLists.size();
 
-    if(isDateSelected && isGroupSelected)
+
+    if(dateSelected && groupSelected)
     {
 
-        groupUsers = attendanceLists[ListView001Active].getGroup().getUsers();
-        ListView002Active = GuiListView(layoutRecs[2], 
-            Helper::ListToStringSeparated(groupUsers,lambda1).c_str()
+        groupUsers = attendanceLists[selectedAttendanceListIndex].getGroup().getUsers();
+        selectedUserIndex = GuiListView(layoutRecs[2], 
+            Helper::ListToStringSeparated(groupUsers,ClassToStringFormatter::userToString).c_str()
 
-            , &ListView002ScrollIndex, ListView002Active);
+            , &ListView002ScrollIndex, selectedUserIndex);
     }
-    if (isDateSelected && isGroupSelected)
+    if (dateSelected && groupSelected)
     {
-        AttendanceList list = attendanceLists[ListView001Active];
+        AttendanceList list = attendanceLists[selectedAttendanceListIndex];
         std::vector<User> presentUsers = list.getPresentUsers();
-        ListView003Active = GuiListView(layoutRecs[3], Helper::ListToStringSeparated(presentUsers, lambda1).c_str()
-            , &ListView003ScrollIndex, ListView003Active);
+        selectedPresentUserIndex = GuiListView(layoutRecs[3], Helper::ListToStringSeparated(presentUsers, ClassToStringFormatter::userToString).c_str()
+            , &ListView003ScrollIndex, selectedPresentUserIndex);
     }
-    Button004Pressed = GuiButton(layoutRecs[4], "New Attendance List");
-    Button005Pressed = GuiButton(layoutRecs[5], "Add to present");
-    Button006Pressed = GuiButton(layoutRecs[6], "Remove from present");
-    Button007Pressed = GuiButton(layoutRecs[7], "Menu");
-    Button008Pressed = GuiButton({ 1536, 768, 216, 40 }, "Commit AttentanceList");
+    addAttendanceListButton = GuiButton(layoutRecs[4], "New Attendance List");
+    addUserToPresentButton = GuiButton(layoutRecs[5], "Add to present");
+    removeUserFromPresentButton = GuiButton(layoutRecs[6], "Remove from present");
+    menuButton = GuiButton(layoutRecs[7], "Menu");
+    commitAttendanceButton = GuiButton({ 1536, 768, 216, 40 }, "Commit AttentanceList");
 
 
 }
@@ -105,7 +99,7 @@ void AttendanceView::render()
 void AttendanceView::refreshData()
 {
     groups = System::getDataInterface()->getAllGroups();
-    attendanceLists = System::getDataInterface()->getGroupAttendanceList(groups[ListView000Active]);
-    groupUsers = groups[ListView000Active].getUsers();
+    attendanceLists = System::getDataInterface()->getGroupAttendanceList(groups[selectedGroupIndex]);
+    groupUsers = groups[selectedGroupIndex].getUsers();
 
 }

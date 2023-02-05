@@ -65,6 +65,28 @@ namespace ExternalData
 		}
 		return users;
 	}
+	void MySQL::addUserToGroup(User& user, Group& group)
+	{
+		connection_shared connection = this->getConnection();
+		const std::string query = "INSERT INTO `user_groups`(`USER_ID`, `GROUP_ID`) VALUES (?,?)";
+		statement_unique stat(connection->prepareStatement(query));
+
+		stat->setString(1, user.getID());
+		stat->setString(2, group.getID());
+		stat->execute();
+
+	}
+	void MySQL::removeUserFromGroup(User& user, Group& group)
+	{
+		connection_shared connection = this->getConnection();
+		const std::string query = "DELETE FROM `user_groups` WHERE `USER_ID` = ? and `GROUP_ID` = ?";
+		statement_unique stat(connection->prepareStatement(query));
+
+		stat->setString(1, user.getID());
+		stat->setString(2, group.getID());
+		stat->execute();
+
+	}
 
 
 }

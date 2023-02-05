@@ -38,6 +38,9 @@
     <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\UserFactory.h">
       <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.h">
+      <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="ExternalDatabase\MySQLInterface\SQL.h">
       <Filter>ExternalDatabase\MySQLInterface</Filter>
     </ClInclude>
@@ -75,7 +78,8 @@
     <ClInclude Include="users\user.h">
       <Filter>users</Filter>
     </ClInclude>
-    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.h" />
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\TestValidator.h" />
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\UserValidator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DatabaseException.cpp" />
@@ -89,6 +93,9 @@
       <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\UserFactory.cpp">
+      <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.cpp">
       <Filter>ExternalDatabase\MySQLInterface\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="ExternalDatabase\MySQLInterface\Queries\GroupQueries.cpp">
@@ -146,6 +153,7 @@
     <ClCompile Include="users\user.cpp">
       <Filter>users</Filter>
     </ClCompile>
-    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.cpp" />
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\TestValidator.cpp" />
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\UserValidator.cpp" />
   </ItemGroup>
 </Project>

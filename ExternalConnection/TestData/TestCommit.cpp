@@ -81,6 +81,11 @@ Question TestCommit::getCurrentQuestion() const
 	return *currentQuestion;
 }
 
+bool TestCommit::isLastQuestion()
+{
+	return currentQuestion == questionList.end();
+}
+
 bool TestCommit::getNextQuestion()
 {
 	if(currentQuestion!= questionList.end())
@@ -123,7 +128,7 @@ int TestCommit::getCurrentQuestionAnswerIndex()
 }
 
 
-int TestCommit::calculatePercentage()
+float TestCommit::calculatePercentage()
 {
 	assert(questionList.size() > 0);
 	int score = 0;
@@ -134,11 +139,13 @@ int TestCommit::calculatePercentage()
 			++score;
 		}
 	}
-	return score * 100 / questionList.size();
+	float size = questionList.size();
+	return static_cast<float>(score) * 100 / size;
 }
 
 float TestCommit::getProgress()
 {
-	const int index = currentQuestion - questionList.begin() + 1;
-	return static_cast<float>(index * 100 / questionList.size());
+	const float index = currentQuestion - questionList.begin() + 1;
+	const float size = questionList.size();
+	return index/size;
 }

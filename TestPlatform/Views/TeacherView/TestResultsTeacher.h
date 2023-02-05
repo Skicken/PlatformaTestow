@@ -11,12 +11,10 @@ class TestResultsTeacher : public View
 
 	private:
         int ListView000ScrollIndex = 0;
-        int ListView000Active = 0;
-        bool Button001Pressed = false;
-        int ListView002ScrollIndex = 0;
-        int ListView002Active = 0;
+        bool menuButton = false;
+        int selectedUserIndex = 0;
         int ListView003ScrollIndex = 0;
-        int ListView003Active = 0;
+        int selectedTestCommitIndex = 0;
 		std::vector<Group> groups;
 		std::vector<User> groupUsers;
 		std::vector<TestCommit> userCommits;
@@ -26,10 +24,13 @@ class TestResultsTeacher : public View
 
 		Rectangle layoutRecs[4] = {
 	        { 104, 120, 336, 768 },
-	        { 48, 24, 240, 48 },
-	        { 552, 120, 336, 768 },
+			{ 24, 48, 216, 48 },
+			{ 552, 120, 336, 768 },
 	        { 1032, 120, 336, 768 },
 	    };
+
+		int ListView002ScrollIndex = 0;
+		int selectedGroupIndex = 0;
 
 };  
 

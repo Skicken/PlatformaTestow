@@ -8,6 +8,7 @@ namespace ExternalData
 class Group
 {
 	public:
+	Group(const std::string& name);
 	Group(const Group& other);
 	Group(Group&& other) noexcept;
 	Group& operator=(const Group& other);

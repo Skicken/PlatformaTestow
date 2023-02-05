@@ -3,147 +3,234 @@
 #include <raygui.h>
 #include "System.h"
 
+
 void ManageTestsView::update()
 {
-    if (Button000Pressed) System::getInstance()->setMenuView();
-
-    if(Button019Pressed)
-    {
+    if (menuButton)
+        System::getInstance()->setMenuView();
+    if (updateTestButton)
         updateTest();
-    }
-    if(questionSelected && Button015Pressed)
-    {
-        questionAnswers.push_back(TextBox018Text);
-        if (questionAnswers.size() <= 1)
-            testQuestions[ListView004Active].setCorrectAnswer(questionAnswers[0]);
-        testQuestions[ListView004Active].setAnswers(questionAnswers);
-        teacherTests[ListView003Active].setQuestions(testQuestions);
-
-    }
-    if (answerSelected && Button016Pressed)
-    {
-        testQuestions[ListView004Active].setCorrectAnswer(questionAnswers[ListView005Active]);
-        teacherTests[ListView003Active].setQuestions(testQuestions);
-
-    }
-    if (answerSelected && Button017Pressed)
-    {
-        questionAnswers.erase(questionAnswers.begin() + ListView005Active);
-        testQuestions[ListView004Active].setAnswers(questionAnswers);
-        teacherTests[ListView003Active].setQuestions(testQuestions);
-    }
-    if(testSelected && Button013Pressed)
-    {
-        Question question(TextBox008Text);
-        testQuestions.push_back(question);
-        teacherTests[ListView003Active].setQuestions(testQuestions);
-
-    }
-    if (questionSelected && Button014Pressed)
-    {
-        testQuestions.erase(testQuestions.begin() + ListView004Active);
-        teacherTests[ListView003Active].setQuestions(testQuestions);
-
-
-    }
-
-
+    if (questionSelected && (addAnswerButton || (answerNameInputEdit && IsKeyPressed(KEY_ENTER))))
+        answerAdd();
+    if (answerSelected && setCorrectAnswerButton)
+        setCorrectAnswer();
+    if (answerSelected && removeAnswerButton)
+        answerRemove();
+    if (testSelected && (addQuestionButton || (questionNameInputEdit && IsKeyPressed(KEY_ENTER) )))
+        questionAdd();
+    if (questionSelected && removeQuestionButton)
+        questionRemove();
+    if (addTestButton || (testNameInputEdit && IsKeyPressed(KEY_ENTER)))
+        testAdd();
+    if (removeTestButton && testSelected)
+        testRemove();
+    if (assignTestButton && testSelected && groupSelected && !teacherTests[selectedTestIndex].getTestID().empty())
+        testAssign();
+    if (deassignTestButton && assignedSelected)
+        testDeassign();
+    tabInput();
 }
 
 void ManageTestsView::render()
 {
 
-    Button000Pressed = GuiButton(layoutRecs[0], "Menu");
+    menuButton = GuiButton(layoutRecs[0], "Menu");
 
-    int previous = ListView001Active;
-    ListView001Active = GuiListView(layoutRecs[1], Helper::ListToStringSeparated(groups,&Group::getName).c_str(), &ListView001ScrollIndex, ListView001Active);
-    groupSelected = ListView001Active >= 0 && ListView001Active < groups.size();
+    int previous = selectedGroupIndex;
+    selectedGroupIndex = GuiListView(layoutRecs[1], Helper::ListToStringSeparated(groups,&Group::getName).c_str(), &ListView001ScrollIndex, selectedGroupIndex);
+    groupSelected = selectedGroupIndex >= 0 && selectedGroupIndex < groups.size();
 
     if (groupSelected)
-    {   if(previous!= ListView001Active)
-        assignedTests = System::getDataInterface()->getAllAssignedTests(groups[ListView001Active], *System::getLoggedUser());
+    {   if(previous!= selectedGroupIndex)
+        assignedTests = System::getDataInterface()->getAllAssignedTests(groups[selectedGroupIndex], *System::getLoggedUser());
 
-        ListView002Active = GuiListView(layoutRecs[2], Helper::ListToStringSeparated(assignedTests, &Test::getTestName).c_str(), &ListView002ScrollIndex, ListView002Active);
+        selectedAssignedTestIndex = GuiListView(layoutRecs[2], Helper::ListToStringSeparated(assignedTests, &Test::getTestName).c_str(), &ListView002ScrollIndex, selectedAssignedTestIndex);
+        deassignTestButton = GuiButton(layoutRecs[9], "Remove Test Assignment");
+
     }
-
+    assignedSelected = selectedAssignedTestIndex >= 0 && selectedAssignedTestIndex < assignedTests.size() && groupSelected;
     
 
-    ListView003Active = GuiListView(layoutRecs[3], Helper::ListToStringSeparated(teacherTests, &Test::getTestName).c_str(), &ListView003ScrollIndex, ListView003Active);
-    testSelected = ListView003Active >= 0 && ListView003Active < teacherTests.size();
+    selectedTestIndex = GuiListView(layoutRecs[3], Helper::ListToStringSeparated(teacherTests, &Test::getTestName).c_str(), &ListView003ScrollIndex, selectedTestIndex);
+    testSelected = selectedTestIndex >= 0 && selectedTestIndex < teacherTests.size();
 
 
     if (testSelected)
     {
-        testQuestions = teacherTests[ListView003Active].getQuestions();
-        ListView004Active = GuiListView(layoutRecs[4], Helper::ListToStringSeparated(testQuestions, &Question::getQuestionName).c_str(), &ListView004ScrollIndex, ListView004Active);
+        testQuestions = teacherTests[selectedTestIndex].getQuestions();
+        selectedQuestionIndex = GuiListView(layoutRecs[4], Helper::ListToStringSeparated(testQuestions, &Question::getQuestionName).c_str(), &ListView004ScrollIndex, selectedQuestionIndex);
     }
-    questionSelected = ListView004Active >= 0 && ListView004Active < testQuestions.size() && testSelected;
+    questionSelected = selectedQuestionIndex >= 0 && selectedQuestionIndex < testQuestions.size() && testSelected;
     if (questionSelected)
     {
-        questionAnswers = testQuestions[ListView004Active].getAnswers();
-        ListView005Active = GuiListView(layoutRecs[5], Helper::ListToStringSeparated(questionAnswers, &Answer::getAnswer).c_str(), &ListView005ScrollIndex, ListView005Active);
+        questionAnswers = testQuestions[selectedQuestionIndex].getAnswers();
+        selectedAnswerIndex = GuiListView(layoutRecs[5], Helper::ListToStringSeparated(questionAnswers, &Answer::getAnswer).c_str(), &ListView005ScrollIndex, selectedAnswerIndex);
     }
-    answerSelected = ListView005Active >= 0 && ListView005Active < questionAnswers.size() && questionSelected;
+    answerSelected = selectedAnswerIndex >= 0 && selectedAnswerIndex < questionAnswers.size() && questionSelected;
 
 
     if(questionSelected)
-    GuiDummyRec(layoutRecs[6], testQuestions[ListView004Active].getCorrectAnswer().getAnswer().c_str());
+    GuiDummyRec(layoutRecs[6], testQuestions[selectedQuestionIndex].getCorrectAnswer().getAnswer().c_str());
 
     //TEST
-    if (GuiTextBox(layoutRecs[7], TextBox007Text, 128, TextBox007EditMode)) TextBox007EditMode = !TextBox007EditMode;
+    if (GuiTextBox(layoutRecs[7], testNameInput, 128, testNameInputEdit)) testNameInputEdit = !testNameInputEdit;
 
 
-    Button008Pressed = GuiButton(layoutRecs[9], "Remove Test Assigment");
-    Button009Pressed = GuiButton(layoutRecs[10], "Add Test");
-    Button010Pressed = GuiButton(layoutRecs[11], "Assign Test");
-    Button012Pressed = GuiButton(layoutRecs[12], "Remove Test");
+    addTestButton = GuiButton(layoutRecs[10], "Add Test");
+    assignTestButton = GuiButton(layoutRecs[11], "Assign Test");
+    removeTestButton = GuiButton(layoutRecs[12], "Remove Test");
     if (testSelected)
     {
-        //Question
-        if (GuiTextBox(layoutRecs[8], TextBox008Text, 128, TextBox008EditMode)) TextBox008EditMode = !TextBox008EditMode;
-        Button013Pressed = GuiButton(layoutRecs[13], "Add Question");
-        Button014Pressed = GuiButton(layoutRecs[14], "Remove Question");
+        if (GuiTextBox(layoutRecs[8], questionNameInput, 128, questionNameInputEdit)) questionNameInputEdit = !questionNameInputEdit;
+        addQuestionButton = GuiButton(layoutRecs[13], "Add Question");
+        removeQuestionButton = GuiButton(layoutRecs[14], "Remove Question");
     }
     if (questionSelected)
     {
-        //Answer
-        if (GuiTextBox(layoutRecs[18], TextBox018Text, 128, TextBox018EditMode)) TextBox018EditMode = !TextBox018EditMode;
-        Button015Pressed = GuiButton(layoutRecs[15], "Add Answer");
-        Button016Pressed = GuiButton(layoutRecs[16], "Set Correct");
-        Button017Pressed = GuiButton(layoutRecs[17], "Remove Answer");
+        if (GuiTextBox(layoutRecs[18], answerNameInput, 128, answerNameInputEdit)) answerNameInputEdit = !answerNameInputEdit;
+        addAnswerButton = GuiButton(layoutRecs[15], "Add Answer");
+        setCorrectAnswerButton = GuiButton(layoutRecs[16], "Set Correct");
+        removeAnswerButton = GuiButton(layoutRecs[17], "Remove Answer");
     }
-    Button019Pressed = GuiButton(layoutRecs[19], "Update Test");
-
+    updateTestButton = GuiButton(layoutRecs[19], "Update Test");
 
 
 }
 
 ManageTestsView::ManageTestsView()
 {
-    groups = System::getDataInterface()->getAllGroups();
-    if (groups.size() > 0)
-        assignedTests = System::getDataInterface()->getAllAssignedTests(groups[ListView001Active], *System::getLoggedUser());
-    teacherTests = System::getDataInterface()->getTeacherTests(System::getLoggedUser()->getID());
-    if(teacherTests.size()>0)
-    {
-        testQuestions = teacherTests[ListView004Active].getQuestions();
-        if(testQuestions.size()>0)
-        {
-            questionAnswers = testQuestions[ListView005Active].getAnswers();
-        }
-    }
+    testNameInputEdit = true;
+    refreshData();
 }
+
+void ManageTestsView::questionRemove()
+{
+    testQuestions.erase(testQuestions.begin() + selectedQuestionIndex);
+    teacherTests[selectedTestIndex].setQuestions(testQuestions);
+}
+
 void ManageTestsView::updateTest()
 {
-    if(testSelected && validateTest())
+    if(testSelected)
     {
-        teacherTests[ListView003Active].setQuestions(testQuestions);
-        System::getDataInterface()->modifyTest(teacherTests[ListView003Active],
-            System::getLoggedUser()->getID());
+        teacherTests[selectedTestIndex].setQuestions(testQuestions);
+        Test& test = teacherTests[selectedTestIndex];
+        try
+        {
+            System::getDataInterface()->modifyTest(test,
+                System::getLoggedUser()->getID());
+            DrawText("Invalid test Data", 600, 960, 15, RED);
+
+        }catch(ExternalData::DatabaseException &exception)
+        {
+            INFO("{}", exception.what())
+        }
+        catch(sql::SQLException &exception)
+        {
+            ERROR(exception.what())
+        }
+        refreshData();
     }
 }
 
-bool ManageTestsView::validateTest()
+void ManageTestsView::refreshData()
 {
-    return true;
+    selectedGroupIndex = 0;
+    selectedAssignedTestIndex = 0;
+    selectedTestIndex = 0;
+    selectedQuestionIndex = 0;
+    selectedAnswerIndex = 0;
+
+    groups = System::getDataInterface()->getAllGroups();
+    if (!groups.empty())
+        assignedTests = System::getDataInterface()->getAllAssignedTests(groups[selectedGroupIndex], *System::getLoggedUser());
+    teacherTests = System::getDataInterface()->getTeacherTests(System::getLoggedUser()->getID());
+    if (!teacherTests.empty())
+    {
+        testQuestions = teacherTests[selectedQuestionIndex].getQuestions();
+        if (!testQuestions.empty())
+        {
+            questionAnswers = testQuestions[selectedAnswerIndex].getAnswers();
+        }
+    }
+}
+
+void ManageTestsView::testAdd()
+{
+    if (std::string(testNameInput).size() < 5) return;
+    Test test(testNameInput);
+    teacherTests.push_back(test);
+    memset(testNameInput, 0, sizeof testNameInput);
+    selectedTestIndex = teacherTests.size() - 1;
+
+
+}
+
+void ManageTestsView::testRemove()
+{
+    System::getDataInterface()->deleteTest(teacherTests[selectedTestIndex]);
+    refreshData();
+}
+
+void ManageTestsView::questionAdd()
+{
+    if (std::string(questionNameInput).size() < 5) return;
+    Question question(questionNameInput);
+    testQuestions.push_back(question);
+    teacherTests[selectedTestIndex].setQuestions(testQuestions);
+    selectedQuestionIndex = testQuestions.size() - 1;
+    memset(questionNameInput, 0, sizeof questionNameInput);
+
+}
+
+void ManageTestsView::answerAdd()
+{
+    if (std::string(answerNameInput).empty()) return;
+    questionAnswers.push_back(answerNameInput);
+    if (questionAnswers.size() <= 1) {
+        Answer correctAnswer = questionAnswers[0];
+        testQuestions[selectedQuestionIndex].setCorrectAnswer(correctAnswer);
+    }
+    testQuestions[selectedQuestionIndex].setAnswers(questionAnswers);
+    teacherTests[selectedTestIndex].setQuestions(testQuestions);
+    selectedAnswerIndex = questionAnswers.size() - 1;
+
+    memset(answerNameInput, 0, sizeof answerNameInput);
+
+}
+
+void ManageTestsView::answerRemove()
+{
+    questionAnswers.erase(questionAnswers.begin() + selectedAnswerIndex);
+    testQuestions[selectedQuestionIndex].setAnswers(questionAnswers);
+    teacherTests[selectedTestIndex].setQuestions(testQuestions);
+}
+
+void ManageTestsView::setCorrectAnswer()
+{
+    Answer correctAnswer = questionAnswers[selectedAnswerIndex];
+    testQuestions[selectedQuestionIndex].setCorrectAnswer(correctAnswer);
+    teacherTests[selectedTestIndex].setQuestions(testQuestions);
+}
+
+void ManageTestsView::testDeassign()
+{
+    System::getDataInterface()->deassignTest(groups[selectedGroupIndex], assignedTests[selectedAssignedTestIndex]);
+    assignedTests = System::getDataInterface()->getAllAssignedTests(groups[selectedGroupIndex], *System::getLoggedUser());
+}
+
+void ManageTestsView::tabInput()
+{
+    if(IsKeyPressed(KEY_TAB))
+    {
+        *tabIndex[currentTabIndex] = false;
+        ++currentTabIndex%=3;
+        *tabIndex[currentTabIndex] = true;
+    }
+}
+
+void ManageTestsView::testAssign()
+{
+    System::getDataInterface()->assignTest(groups[selectedGroupIndex], teacherTests[selectedTestIndex]);
+    assignedTests = System::getDataInterface()->getAllAssignedTests(groups[selectedGroupIndex], *System::getLoggedUser());
 }

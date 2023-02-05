@@ -61,11 +61,16 @@ void Test::setRandomize(bool randomize_questions)
 	randomizeQuestions = randomize_questions;
 }
 
+
+Test::Test(const std::string& test_name): TestName(test_name)
+{
+}
+
 Test::Test(const std::string& test_name, const std::string& description, bool randomize_questions,
-	const std::vector<Question>& questions): TestName(test_name),
-	                                         description(description),
-	                                         randomizeQuestions(randomize_questions),
-	                                         questions(questions)
+           const std::vector<Question> questions): TestName(test_name),
+                                                    description(description),
+                                                    randomizeQuestions(randomize_questions),
+                                                    questions(questions)
 {
 }
 

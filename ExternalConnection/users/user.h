@@ -5,13 +5,11 @@ namespace ExternalData
 	class MySQL;
 }
 
-enum class UserType { ADMIN, STUDENT, TEACHER };
+enum class UserType {  STUDENT = 0 , TEACHER = 1,ADMIN = 2};
 class User
 {
 	public:
 	User(const std::string& name, const std::string& surname, const std::string& email, UserType type);
-
-
 	User(const User& other);
 		User(User&& other) noexcept;
 		User& operator=(const User& other);

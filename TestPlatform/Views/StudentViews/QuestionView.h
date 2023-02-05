@@ -9,16 +9,21 @@ public:
 
 	QuestionView(std::shared_ptr<TestCommit> commit);
 
+	void goToPreviousQuestion();
 	virtual void update() override;
 	virtual void render() override;
 	private:
 	std::shared_ptr<TestCommit> testCommit;
+    void goToNextQuestion();
 
-    float ProgressBar000Value = 0.0f;
-    bool Button002Pressed = false;
-    bool Button004Pressed = false;
+    Question&  currentQuestion;
+    float progressBarValue = 0.0f;
+    bool nextQuestionButton = false;
+    bool previousQuestionButton = false;
+    int selectedAnswerIndex = 0;
+    bool selectedAnswer = false;
+
     int ListView005ScrollIndex = 0;
-    int ListView005Active = 0;
 
     bool preview = false;
 

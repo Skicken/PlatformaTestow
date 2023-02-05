@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>ecpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STATIC_CONCPP;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -88,7 +88,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\lib64\vs14\debug;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>ecpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STATIC_CONCPP;RELEASE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -112,7 +112,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\lib64\vs14\debug;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>ecpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STATIC_CONCPP;DIST;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\include;C:\Boost\Boost;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0-debug\include;C:\boost_1_81_0;C:\Program Files\OpenSSL-Win64\include;..\vendor\mailio;..\vendor\mailio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -134,7 +134,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>mailio.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\lib64\vs14\debug;C:\Program Files\MySQL\mysql-connector-c++-8.0.31-winx64\lib64\debug;C:\Boost\Boost\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\vs14\debug;C:\Program Files\MySQL\Connector C++ 8.0-debug\lib64\debug;C:\boost_1_81_0\libs;C:\Program Files\OpenSSL-Win64\libs;..\vendor\mailio\Dist;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -144,6 +144,7 @@
     <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\QuestionInserter.h" />
     <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\TestGetter.h" />
     <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\UserFactory.h" />
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.h" />
     <ClInclude Include="ExternalDatabase\MySQLInterface\SQL.h" />
     <ClInclude Include="MailManager\MailSender.h" />
     <ClInclude Include="MailManager\SimplifiedMessage.h" />
@@ -155,9 +156,10 @@
     <ClInclude Include="TestData\Test.h" />
     <ClInclude Include="TestData\TestCommit.h" />
     <ClInclude Include="ecpch.h" />
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\TestValidator.h" />
     <ClInclude Include="users\Sender.h" />
     <ClInclude Include="users\user.h" />
-    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.h" />
+    <ClInclude Include="ExternalDatabase\MySQLInterface\Helpers\UserValidator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DatabaseException.cpp" />
@@ -165,6 +167,7 @@
     <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\QuestionInserter.cpp" />
     <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\TestGetter.cpp" />
     <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\UserFactory.cpp" />
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.cpp" />
     <ClCompile Include="ExternalDatabase\MySQLInterface\Queries\GroupQueries.cpp" />
     <ClCompile Include="ExternalDatabase\MySQLInterface\Queries\HomeworkQueries.cpp" />
     <ClCompile Include="ExternalDatabase\MySQLInterface\Queries\TestResultQueries.cpp" />
@@ -184,9 +187,10 @@
     <ClCompile Include="ecpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\TestValidator.cpp" />
     <ClCompile Include="users\Sender.cpp" />
     <ClCompile Include="users\user.cpp" />
-    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\Utilities.cpp" />
+    <ClCompile Include="ExternalDatabase\MySQLInterface\Helpers\UserValidator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
